@@ -4,13 +4,17 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import reducers from 'reducers';
 
-const Root = (props) => {
-  const { children } = props;
-  return <Provider store={createStore(reducers, {})}>{children}</Provider>;
-};
+const Root = ({ initialState = {}, children }) => (
+  <Provider store={createStore(reducers, initialState)}>{children}</Provider>
+);
 
 Root.propTypes = {
   children: PropTypes.element.isRequired,
+  initialState: PropTypes.objectOf(PropTypes.any),
+};
+
+Root.defaultProps = {
+  initialState: {},
 };
 
 export default Root;
