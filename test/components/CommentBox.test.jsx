@@ -1,14 +1,16 @@
 import React from 'react';
 import { mount } from 'enzyme';
+import { createMemoryHistory } from 'history';
 import CommentBox from 'components/CommentBox';
 import Root from 'Root';
 
 let wrapped;
 
 beforeEach(() => {
+  const history = createMemoryHistory('/post');
   wrapped = mount(
     <Root>
-      <CommentBox />
+      <CommentBox history={history} />
     </Root>,
   );
 });

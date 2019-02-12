@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import * as actions from 'actions';
+import requireAuth from 'components/requireAuth';
 
 class CommentBox extends Component {
   state = {
@@ -25,14 +26,7 @@ class CommentBox extends Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <h4>Add a Comment</h4>
-        <textarea
-          onChange={this.handleChange}
-          value={comment}
-          name=""
-          id=""
-          cols="30"
-          rows="10"
-        />
+        <textarea onChange={this.handleChange} value={comment} name="" id="" cols="30" rows="10" />
         <div>
           <button type="submit">Submit Comment</button>
         </div>
@@ -48,4 +42,4 @@ CommentBox.propTypes = {
 export default connect(
   null,
   actions,
-)(CommentBox);
+)(requireAuth(CommentBox));
