@@ -5,7 +5,11 @@ import { connect } from 'react-redux';
 class CommentList extends Component {
   renderComments() {
     const { comments } = this.props;
-    return comments.map(comment => <li key={comment}>{comment}</li>);
+    return comments.map(comment => (
+      <li className="comment" key={comment}>
+        {comment}
+      </li>
+    ));
   }
 
   render() {

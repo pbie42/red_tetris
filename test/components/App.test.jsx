@@ -8,6 +8,18 @@ import CommentList from 'components/CommentList';
 
 let wrapped;
 
+it('shows a header with three LIs', () => {
+  wrapped = mount(
+    <Root>
+      <MemoryRouter initialEntries={['/']}>
+        <App />
+      </MemoryRouter>
+    </Root>,
+  );
+  expect(wrapped.find('li').length).toEqual(3);
+  wrapped.unmount();
+});
+
 it('shows a comment box', () => {
   wrapped = mount(
     <Root>

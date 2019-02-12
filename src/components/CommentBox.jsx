@@ -23,20 +23,34 @@ class CommentBox extends Component {
 
   render() {
     const { comment } = this.state;
+    const { fetchComments } = this.props;
     return (
-      <form onSubmit={this.handleSubmit}>
-        <h4>Add a Comment</h4>
-        <textarea onChange={this.handleChange} value={comment} name="" id="" cols="30" rows="10" />
-        <div>
-          <button type="submit">Submit Comment</button>
-        </div>
-      </form>
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <h4>Add a Comment</h4>
+          <textarea
+            onChange={this.handleChange}
+            value={comment}
+            name=""
+            id=""
+            cols="30"
+            rows="10"
+          />
+          <div>
+            <button type="submit">Submit Comment</button>
+          </div>
+        </form>
+        <button className="fetch-comments" type="submit" onClick={fetchComments}>
+          Fetch Comments
+        </button>
+      </div>
     );
   }
 }
 
 CommentBox.propTypes = {
   saveComment: PropTypes.func.isRequired,
+  fetchComments: PropTypes.func.isRequired,
 };
 
 export default connect(

@@ -25,7 +25,9 @@ const App = ({ auth, changeAuth }) => {
   const renderHeader = () => (
     <ul>
       <li>
-        <Link to="/">Home</Link>
+        <Link className="go-home" to="/">
+          Home
+        </Link>
       </li>
       <li>
         <Link to="/post">Post a Comment</Link>
