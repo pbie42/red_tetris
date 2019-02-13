@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Route, Link } from 'react-router-dom';
 import * as actions from 'actions';
-import CommentList from 'components/CommentList';
+import CommentList from 'components/comment_list/CommentList';
 import CommentBox from 'components/comment_box/CommentBox';
 
 const App = ({ auth, changeAuth }) => {
