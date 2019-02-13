@@ -3,7 +3,7 @@ import { mount } from 'enzyme';
 import { MemoryRouter } from 'react-router-dom';
 import Root from 'Root';
 import App from 'components/App';
-import CommentBox from 'components/CommentBox';
+import CommentBox from 'components/comment_box/CommentBox';
 import CommentList from 'components/CommentList';
 
 let wrapped;

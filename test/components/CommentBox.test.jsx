@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { createMemoryHistory } from 'history';
-import CommentBox from 'components/CommentBox';
+import CommentBox from 'components/comment_box/CommentBox';
 import Root from 'Root';
 
 let wrapped;
