@@ -1,26 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-class CommentList extends Component {
-  renderComments() {
-    const { comments } = this.props;
-    return comments.map(comment => (
-      <li className="comment" key={comment}>
-        {comment}
-      </li>
-    ));
-  }
+const CommentList = ({ comments }) => {
+  const renderComments = () => comments.map(comment => (
+    <li className="comment" key={comment}>
+      {comment}
+    </li>
+  ));
 
-  render() {
-    return (
-      <div>
-        <h4>Comment List</h4>
-        <ul>{this.renderComments()}</ul>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <h4>Comment List</h4>
+      <ul>{renderComments()}</ul>
+    </div>
+  );
+};
 
 CommentList.propTypes = {
   comments: PropTypes.arrayOf(PropTypes.string).isRequired,
