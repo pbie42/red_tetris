@@ -3,10 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as actions from 'client/actions';
 
-const CommentList = (props) => {
-  console.log('props', props);
-
-  const { comments, userCreate } = props;
+const CommentList = ({ comments, userCreate }) => {
   const renderComments = () => comments.map(comment => (
     <li className="comment" key={comment}>
       {comment}
@@ -18,7 +15,6 @@ const CommentList = (props) => {
       <button
         type="submit"
         onClick={() => {
-          console.log('getting here');
           userCreate('Paul');
         }}
       >

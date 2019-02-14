@@ -1,8 +1,8 @@
 // eslint-disable-next-line
-const USER_EXISTS = 'USER_EXISTS';
-const USER_SET = 'USER_SET';
+const PLAYER_EXISTS = 'PLAYER_EXISTS';
+const PLAYER_SET = 'PLAYER_SET';
 
 module.exports = {
-  USER_EXISTS,
-  USER_SET,
+  PLAYER_EXISTS,
+  PLAYER_SET,
 };

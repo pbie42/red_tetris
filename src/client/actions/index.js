@@ -25,15 +25,15 @@ export function changeAuth(isLoggedIn) {
 
 export function userCreate(username) {
   return {
-    type: types.USER_CREATE,
+    type: types.PLAYER_CREATE,
     payload: username,
-    channel: 'user',
+    channel: 'player',
   };
 }
 
 export function userSet(username) {
   return {
-    type: types.USER_SET,
+    type: types.PLAYER_SET,
     payload: username,
   };
 }

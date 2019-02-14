@@ -3,6 +3,6 @@ export const CHANGE_AUTH = 'CHANGE_AUTH';
 export const FETCH_COMMENTS = 'FETCH_COMMENTS';
 
 // -------------------------------------------------------------------------USER
-export const USER_CREATE = 'USER_CREATE';
-export const USER_SET = 'USER_SET';
-export const USER_EXISTS = 'USER_EXISTS';
+export const PLAYER_CREATE = 'PLAYER_CREATE';
+export const PLAYER_SET = 'PLAYER_SET';
+export const PLAYER_EXISTS = 'PLAYER_EXISTS';

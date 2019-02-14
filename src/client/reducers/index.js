@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 import commentsReducer from 'client/reducers/comments';
 import authReducer from 'client/reducers/auth';
-import userReducer from 'client/reducers/user';
+import playerReducer from 'client/reducers/player';
 
 export default combineReducers({
   comments: commentsReducer,
   auth: authReducer,
-  user: userReducer,
+  player: playerReducer,
 });
