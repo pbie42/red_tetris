@@ -1,3 +1,4 @@
+// eslint-disable-next-line consistent-return
 export default ({ dispatch }) => next => (action) => {
   if (!action.payload || !action.payload.then) {
     return next(action);
@@ -7,5 +8,4 @@ export default ({ dispatch }) => next => (action) => {
     const newAction = { ...action, payload: response };
     dispatch(newAction);
   });
-  return null;
 };

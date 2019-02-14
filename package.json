@@ -58,6 +58,7 @@
     "resolve": "1.8.1",
     "sass-loader": "7.1.0",
     "socket.io": "^2.2.0",
+    "socket.io-client": "^2.2.0",
     "style-loader": "0.23.0",
     "terser-webpack-plugin": "1.1.0",
     "tv4": "^1.3.0",
@@ -69,6 +70,8 @@
   },
   "scripts": {
     "start": "node scripts/start.js",
+    "serve": "node src/server/app.js",
+    "testserver": "nodemon src/server/app.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
     "coverage": "node scripts/test.js --coverage",
@@ -87,7 +90,8 @@
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-jsx-a11y": "^6.2.1",
-    "eslint-plugin-react": "^7.12.4"
+    "eslint-plugin-react": "^7.12.4",
+    "nodemon": "^1.18.10"
   },
   "jest": {
     "collectCoverageFrom": [

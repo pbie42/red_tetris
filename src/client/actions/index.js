@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { CHANGE_AUTH, FETCH_COMMENTS, SAVE_COMMENT } from 'client/actions/types';
+import * as types from 'client/actions/types';
 
 export function saveComment(comment) {
   return {
-    type: SAVE_COMMENT,
+    type: types.SAVE_COMMENT,
     payload: comment,
   };
 }
@@ -11,14 +11,29 @@ export function saveComment(comment) {
 export function fetchComments() {
   const response = axios.get('http://jsonplaceholder.typicode.com/comments');
   return {
-    type: FETCH_COMMENTS,
+    type: types.FETCH_COMMENTS,
     payload: response,
   };
 }
 
 export function changeAuth(isLoggedIn) {
   return {
-    type: CHANGE_AUTH,
+    type: types.CHANGE_AUTH,
     payload: isLoggedIn,
+  };
+}
+
+export function userCreate(username) {
+  return {
+    type: types.USER_CREATE,
+    payload: username,
+    channel: 'user',
+  };
+}
+
+export function userSet(username) {
+  return {
+    type: types.USER_SET,
+    payload: username,
   };
 }
