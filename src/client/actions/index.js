@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CHANGE_AUTH, FETCH_COMMENTS, SAVE_COMMENT } from 'actions/types';
+import { CHANGE_AUTH, FETCH_COMMENTS, SAVE_COMMENT } from 'client/actions/types';
 
 export function saveComment(comment) {
   return {

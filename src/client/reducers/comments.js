@@ -1,4 +1,4 @@
-import { FETCH_COMMENTS, SAVE_COMMENT } from 'actions/types';
+import { FETCH_COMMENTS, SAVE_COMMENT } from 'client/actions/types';
 
 const initialState = [];
 

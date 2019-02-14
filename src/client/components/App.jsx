@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Route, Link } from 'react-router-dom';
-import * as actions from 'actions';
-import CommentList from 'components/comment_list/CommentList';
-import CommentBox from 'components/comment_box/CommentBox';
+import * as actions from 'client/actions';
+import CommentList from 'client/components/comment_list/CommentList';
+import CommentBox from 'client/components/comment_box/CommentBox';
 
 const App = ({ auth, changeAuth }) => {
   const renderButton = () => {

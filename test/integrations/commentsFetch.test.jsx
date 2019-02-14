@@ -3,8 +3,8 @@ import moxios from 'moxios';
 import { mount } from 'enzyme';
 import { MemoryRouter } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
-import Root from 'Root';
-import App from 'components/App';
+import Root from 'client/components/Root';
+import App from 'client/components/App';
 import { Provider } from 'react-redux';
 
 beforeEach(() => {

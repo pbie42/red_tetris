@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import Root from 'Root';
-import CommentList from 'components/comment_list/CommentList';
+import Root from 'client/components/Root';
+import CommentList from 'client/components/comment_list/CommentList';
 
 let wrapped;
 

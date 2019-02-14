@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import requireAuth from 'components/requireAuth';
-import composeWithLogic from 'components/comment_box/withLogic';
+import requireAuth from 'client/components/requireAuth';
+import composeWithLogic from 'client/components/comment_box/withLogic';
 
 const CommentBox = ({
   comment, onChangeTextArea, onSubmit, resetTextArea, fetchComments,

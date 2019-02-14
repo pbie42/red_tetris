@@ -1,5 +1,5 @@
 import tv4 from 'tv4';
-import stateSchema from 'middlewares/stateSchema';
+import stateSchema from 'client/middlewares/stateSchema';
 
 export default ({ getState }) => next => (action) => {
   next(action);

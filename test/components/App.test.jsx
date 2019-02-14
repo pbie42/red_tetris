@@ -1,10 +1,10 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { MemoryRouter } from 'react-router-dom';
-import Root from 'Root';
-import App from 'components/App';
-import CommentBox from 'components/comment_box/CommentBox';
-import CommentList from 'components/comment_list/CommentList';
+import Root from 'client/components/Root';
+import App from 'client/components/App';
+import CommentBox from 'client/components/comment_box/CommentBox';
+import CommentList from 'client/components/comment_list/CommentList';
 
 let wrapped;
 
