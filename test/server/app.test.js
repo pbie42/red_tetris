@@ -69,7 +69,7 @@ describe('basic socket.io example', () => {
   });
   it('should communicate with waiting for socket.io handshakes', (done) => {
     // Emit sth from Client do Server
-    socket.emit('examlpe', 'some messages');
+    socket.emit('player', 'some messages');
     // Use timeout to wait for socket.io server handshakes
     setTimeout(() => {
       // Put your server side expect() here
