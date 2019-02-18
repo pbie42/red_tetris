@@ -1,15 +1,15 @@
 import { withStateHandlers } from 'recompose';
 
 const initialState = {
-  username: '',
+  localUsername: '',
 };
 
 const onChangeTextArea = () => event => ({
-  username: event.target.value,
+  localUsername: event.target.value,
 });
 
 const resetTextArea = () => () => ({
-  username: '',
+  localUsername: '',
 });
 
 const withTextFieldState = withStateHandlers(initialState, {

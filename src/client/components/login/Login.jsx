@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import composeWithLogic from 'client/components/login/withLogic';
+import checkForUsername from 'client/components/login/checkForUsername';
 
 function handleError(error) {
   if (error) return <h3>{error}</h3>;
@@ -8,12 +9,12 @@ function handleError(error) {
 }
 
 function Login({
-  username, onChangeTextArea, submitPlayer, resetTextArea, error,
+  localUsername, onChangeTextArea, submitPlayer, resetTextArea, error,
 }) {
   return (
     <div>
-      <input type="text" value={username} onChange={onChangeTextArea} />
-      <button type="submit" onClick={submitPlayer(username, resetTextArea)}>
+      <input type="text" value={localUsername} onChange={onChangeTextArea} />
+      <button type="submit" onClick={submitPlayer(localUsername, resetTextArea)}>
         Join
       </button>
       {handleError(error)}
@@ -23,10 +24,10 @@ function Login({
 
 Login.propTypes = {
   submitPlayer: PropTypes.func.isRequired,
-  username: PropTypes.string.isRequired,
+  localUsername: PropTypes.string.isRequired,
   error: PropTypes.string.isRequired,
   onChangeTextArea: PropTypes.func.isRequired,
   resetTextArea: PropTypes.func.isRequired,
 };
 
-export default composeWithLogic(Login);
+export default checkForUsername(composeWithLogic(Login));

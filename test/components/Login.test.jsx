@@ -1,5 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
+import { MemoryRouter, Redirect } from 'react-router-dom';
 import Login from 'client/components/login/Login';
 import Root from 'client/components/Root';
 
@@ -56,5 +57,24 @@ describe('the input', () => {
       </Root>,
     );
     expect(errorWrapped.find('h3').text()).toEqual('The username already exists');
+    errorWrapped.unmount();
+  });
+
+  it('redirects if username exists', () => {
+    const initialState = {
+      player: {
+        username: 'Tom',
+        error: '',
+      },
+    };
+    const redirectWrapper = mount(
+      <Root initialState={initialState}>
+        <MemoryRouter initialEntries={['/']}>
+          <Login />
+        </MemoryRouter>
+      </Root>,
+    );
+    expect(redirectWrapper.find(Redirect).length).toEqual(1);
+    redirectWrapper.unmount();
   });
 });

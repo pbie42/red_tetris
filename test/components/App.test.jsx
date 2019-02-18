@@ -5,7 +5,7 @@ import Root from 'client/components/Root';
 import App from 'client/components/App';
 import CommentBox from 'client/components/comment_box/CommentBox';
 import Login from 'client/components/login/Login';
-// import CommentList from 'client/components/comment_list/CommentList';
+import Lobby from 'client/components/lobby/Lobby';
 
 let wrapped;
 
@@ -30,5 +30,17 @@ it('shows the Login component', () => {
     </Root>,
   );
   expect(wrapped.find(Login).length).toEqual(1);
+  wrapped.unmount();
+});
+
+it('shows the Lobby component', () => {
+  wrapped = mount(
+    <Root>
+      <MemoryRouter initialEntries={['/lobby']}>
+        <App />
+      </MemoryRouter>
+    </Root>,
+  );
+  expect(wrapped.find(Lobby).length).toEqual(1);
   wrapped.unmount();
 });

@@ -6,7 +6,7 @@ import withHandlers from 'client/components/login/withHandlers';
 import withState from 'client/components/login/withState';
 
 function mapStateToProps(state) {
-  return { error: state.player.error };
+  return { error: state.player.error, username: state.player.username };
 }
 
 export default compose(
