@@ -1,10 +1,32 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
+import composeWithLogic from 'client/components/login/withLogic';
 
-function Login() {
-  return <div />;
+function handleError(error) {
+  if (error) return <h3>{error}</h3>;
+  return '';
 }
 
-Login.propTypes = {};
+function Login({
+  username, onChangeTextArea, submitPlayer, resetTextArea, error,
+}) {
+  return (
+    <div>
+      <input type="text" value={username} onChange={onChangeTextArea} />
+      <button type="submit" onClick={submitPlayer(username, resetTextArea)}>
+        Join
+      </button>
+      {handleError(error)}
+    </div>
+  );
+}
 
-export default Login;
+Login.propTypes = {
+  submitPlayer: PropTypes.func.isRequired,
+  username: PropTypes.string.isRequired,
+  error: PropTypes.string.isRequired,
+  onChangeTextArea: PropTypes.func.isRequired,
+  resetTextArea: PropTypes.func.isRequired,
+};
+
+export default composeWithLogic(Login);

@@ -4,21 +4,10 @@ import { MemoryRouter } from 'react-router-dom';
 import Root from 'client/components/Root';
 import App from 'client/components/App';
 import CommentBox from 'client/components/comment_box/CommentBox';
-import CommentList from 'client/components/comment_list/CommentList';
+import Login from 'client/components/login/Login';
+// import CommentList from 'client/components/comment_list/CommentList';
 
 let wrapped;
-
-it('shows a header with three LIs', () => {
-  wrapped = mount(
-    <Root>
-      <MemoryRouter initialEntries={['/']}>
-        <App />
-      </MemoryRouter>
-    </Root>,
-  );
-  expect(wrapped.find('li').length).toEqual(3);
-  wrapped.unmount();
-});
 
 it('shows a comment box', () => {
   wrapped = mount(
@@ -32,7 +21,7 @@ it('shows a comment box', () => {
   wrapped.unmount();
 });
 
-it('shows a comment list', () => {
+it('shows the Login component', () => {
   wrapped = mount(
     <Root>
       <MemoryRouter initialEntries={['/']}>
@@ -40,6 +29,6 @@ it('shows a comment list', () => {
       </MemoryRouter>
     </Root>,
   );
-  expect(wrapped.find(CommentList).length).toEqual(1);
+  expect(wrapped.find(Login).length).toEqual(1);
   wrapped.unmount();
 });

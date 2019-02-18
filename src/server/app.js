@@ -1,5 +1,5 @@
 const io = require('socket.io')();
-const { playerCreate } = require('./channels/player/utils');
+const { playerSocket } = require('./channels/player/playerSocket');
 
 let players = [];
 // const rooms = [];
@@ -14,14 +14,8 @@ io.on('connection', (socket) => {
   });
 
   socket.on('player', ({ payload, type }) => {
-    switch (type) {
-      case 'PLAYER_CREATE':
-        players = playerCreate(socket, payload, players);
-        break;
-
-      default:
-        break;
-    }
+    const { updatedPlayers } = playerSocket(socket, players, { payload, type });
+    players = updatedPlayers;
   });
 });
 

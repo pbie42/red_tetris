@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as actions from 'client/actions';
 
-const CommentList = ({ comments, userCreate }) => {
+const CommentList = ({ comments, playerCreate }) => {
   const renderComments = () => comments.map(comment => (
     <li className="comment" key={comment}>
       {comment}
@@ -15,7 +15,7 @@ const CommentList = ({ comments, userCreate }) => {
       <button
         type="submit"
         onClick={() => {
-          userCreate('Paul');
+          playerCreate('Paul');
         }}
       >
         Test
@@ -28,7 +28,7 @@ const CommentList = ({ comments, userCreate }) => {
 
 CommentList.propTypes = {
   comments: PropTypes.arrayOf(PropTypes.string).isRequired,
-  userCreate: PropTypes.func.isRequired,
+  playerCreate: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {

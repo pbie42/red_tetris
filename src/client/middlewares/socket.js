@@ -21,7 +21,10 @@ export default ({ dispatch }) => next => (action) => {
   socket.on('player', (event) => {
     switch (event.type) {
       case types.PLAYER_SET:
-        dispatch(actions.userSet(event.payload));
+        dispatch(actions.playerSet(event.payload));
+        break;
+      case types.PLAYER_EXISTS:
+        dispatch(actions.playerExists(event.payload));
         break;
 
       default:

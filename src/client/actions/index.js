@@ -23,7 +23,7 @@ export function changeAuth(isLoggedIn) {
   };
 }
 
-export function userCreate(username) {
+export function playerCreate(username) {
   return {
     type: types.PLAYER_CREATE,
     payload: username,
@@ -31,9 +31,16 @@ export function userCreate(username) {
   };
 }
 
-export function userSet(username) {
+export function playerSet(username) {
   return {
     type: types.PLAYER_SET,
+    payload: username,
+  };
+}
+
+export function playerExists(username) {
+  return {
+    type: types.PLAYER_EXISTS,
     payload: username,
   };
 }

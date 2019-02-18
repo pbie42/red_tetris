@@ -71,7 +71,7 @@
   "scripts": {
     "start": "node scripts/start.js",
     "serve": "node src/server/app.js",
-    "testserver": "nodemon src/server/app.js",
+    "devserve": "nodemon src/server/app.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
     "coverage": "node scripts/test.js --coverage",
