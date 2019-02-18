@@ -3,11 +3,13 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 
-const requireUsername = (ChildComponent) => {
+const requireUsername = (ChildComponent, redirectURL) => {
   function ComposedComponent(props) {
     const { username } = props;
     if (!username) {
-      return <Redirect to="/" />;
+      console.log('no username bruh');
+
+      return <Redirect to={redirectURL} />;
     }
     return <ChildComponent {...props} />;
   }

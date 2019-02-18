@@ -4,6 +4,9 @@ describe('playerSocket', () => {
   const mockSocket = {
     emit: jest.fn(),
     id: 1,
+    broadcast: {
+      emit: jest.fn(),
+    },
   };
   let players = [];
   const payload = 'Paul';

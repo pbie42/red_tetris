@@ -1,7 +1,9 @@
 import React from 'react';
-import requireUsername from 'client/components/lobby/requireUsername';
+import requireUsername from 'client/components/hoc/requireUsername';
 
 function Lobby() {
+  console.log('lobby created');
+
   return (
     <div>
       <h1>This is the lobby page</h1>
@@ -11,4 +13,4 @@ function Lobby() {
 
 Lobby.propTypes = {};
 
-export default requireUsername(Lobby);
+export default requireUsername(Lobby, '/');

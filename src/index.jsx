@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { Route, HashRouter } from 'react-router-dom';
 import Root from 'client/components/Root';
 import App from 'client/components/App';
 
 ReactDOM.render(
   <Root>
-    <BrowserRouter>
+    <HashRouter hashType="noslash">
       <Route path="/" component={App} />
-    </BrowserRouter>
+    </HashRouter>
   </Root>,
   document.querySelector('#root'),
 );
