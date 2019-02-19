@@ -7,26 +7,28 @@ import * as actions from 'client/actions';
 import { Redirect } from 'react-router-dom';
 
 const checkURL = (ChildComponent) => {
+  console.log('in check url');
+
   function ComposedComponent(props) {
-    const {
-      match, username, playerCreate, playerSet,
-    } = props;
+    console.log('in composed component');
+    console.log('props', props);
+    const { match, username } = props;
     const url = match.params.game;
-    const verified = verifyUrl(url);
-    if (verified) {
-      const { player } = parseUrl(url);
-      if (!username) {
-        console.log('no username');
-        playerCreate(player);
-        playerSet(player);
+    if (!verifyUrl(url)) {
+      if (username) {
+        console.log('redirecting to /lobby');
+        return <Redirect from="/:game" exact to="/lobby" />;
       }
-      setTimeout(() => {
-        console.log('timing out');
-      }, 1000);
-      return <ChildComponent {...props} />;
+      console.log('redirecting to /');
+      return <Redirect from="/:game" exact to="/" />;
     }
-    if (!username) return <Redirect to="/" />;
-    return <Redirect to="/lobby" />;
+    const { player, room } = parseUrl(url);
+    if (!username) {
+      console.log('redirecting to /setup');
+      return <Redirect from="/:game" exact to={{ pathname: '/setup', state: { player, room } }} />;
+    }
+    console.log('redirecting to /game');
+    return <ChildComponent {...props} />;
   }
 
   ComposedComponent.protoTypes = {

@@ -1,18 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Route } from 'react-router-dom';
-import * as actions from 'client/actions';
-import Login from 'client/components/login/Login';
-import Lobby from 'client/components/lobby/Lobby';
-import CommentBox from 'client/components/comment_box/CommentBox';
+import { Route, Switch } from 'react-router-dom';
+
 import Game from 'client/components/game/Game';
+import Lobby from 'client/components/lobby/Lobby';
+import Login from 'client/components/login/Login';
+import Setup from 'client/components/setup/Setup';
+import * as actions from 'client/actions';
 
 const App = () => (
   <div>
-    <Route path="/:game" component={Game} />
-    <Route path="/post" component={CommentBox} />
-    <Route path="/lobby" exact component={Lobby} />
-    <Route path="/" exact component={Login} />
+    <Switch>
+      <Route key="/login" path="/" exact component={Login} />
+      <Route key="/lobby" path="/lobby" exact component={Lobby} />
+      <Route key="/setup" path="/setup" exact component={Setup} />
+      <Route key="/:game" path="/:game" exact component={Game} />
+    </Switch>
   </div>
 );
 

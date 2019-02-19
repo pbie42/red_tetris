@@ -19,7 +19,7 @@ afterEach(() => {
   moxios.uninstall();
 });
 
-it('can fetch a list of comments and add them to the store', (done) => {
+xit('can fetch a list of comments and add them to the store', (done) => {
   const initialState = {
     comments: ['Comment 1', 'Comment 2'],
   };
