@@ -94,6 +94,11 @@
     "nodemon": "^1.18.10"
   },
   "jest": {
+    "coveragePathIgnorePatterns": [
+      "/src/index.jsx",
+      "/src/server/app.js",
+      "/src/client/components/comment_box"
+    ],
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,ts,tsx}",
       "!src/**/*.d.ts"

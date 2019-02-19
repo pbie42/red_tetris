@@ -4,14 +4,14 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import socketMiddleware from 'client/middlewares/socket';
 import async from 'client/middlewares/async';
-import stateValidator from 'client/middlewares/stateValidator';
+// import stateValidator from 'client/middlewares/stateValidator';
 import reducers from 'client/reducers';
 
 /* eslint-disable no-underscore-dangle */
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const enhancer = composeEnhancers(
-  applyMiddleware(async, stateValidator, socketMiddleware),
+  applyMiddleware(async, socketMiddleware),
   // other store enhancers if any
 );
 

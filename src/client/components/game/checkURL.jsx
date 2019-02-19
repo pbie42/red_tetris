@@ -7,27 +7,15 @@ import * as actions from 'client/actions';
 import { Redirect } from 'react-router-dom';
 
 const checkURL = (ChildComponent) => {
-  console.log('in check url');
-
   function ComposedComponent(props) {
-    console.log('in composed component');
-    console.log('props', props);
     const { match, username } = props;
     const url = match.params.game;
     if (!verifyUrl(url)) {
-      if (username) {
-        console.log('redirecting to /lobby');
-        return <Redirect from="/:game" exact to="/lobby" />;
-      }
-      console.log('redirecting to /');
+      if (username) return <Redirect from="/:game" exact to="/lobby" />;
       return <Redirect from="/:game" exact to="/" />;
     }
     const { player, room } = parseUrl(url);
-    if (!username) {
-      console.log('redirecting to /setup');
-      return <Redirect from="/:game" exact to={{ pathname: '/setup', state: { player, room } }} />;
-    }
-    console.log('redirecting to /game');
+    if (!username) return <Redirect from="/:game" exact to={{ pathname: '/setup', state: { player, room } }} />;
     return <ChildComponent {...props} />;
   }
 
