@@ -1,4 +1,4 @@
-import Player from 'server/channels/player/Player';
+import Player from 'server/classes/Player';
 import { playerCreate } from 'server/channels/player/utils';
 
 describe('playerCreate', () => {

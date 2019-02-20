@@ -44,8 +44,8 @@ module.exports = class Player {
   }
 
   getInfo() {
-    const { id, username } = this;
-    return { id, username };
+    const { id, username, board } = this;
+    return { id, username, board };
   }
 
   getUsername() {

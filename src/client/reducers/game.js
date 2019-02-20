@@ -1,22 +1,26 @@
 import * as types from 'client/actions/types';
 
 const initialState = {
-  username: '',
-  id: '',
   error: '',
+  id: '',
+  players: [],
+  queue: [],
+  roomName: '',
 };
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
-    case types.PLAYER_SET:
+    case types.GAME_SET:
+      console.log('reducer gameset', payload);
+
       return {
         ...state,
-        username: payload.username,
-        id: payload.id,
         error: '',
+        id: payload.id,
+        players: payload.players,
+        queue: payload.queue,
+        roomName: payload.roomName,
       };
-    case types.PLAYER_EXISTS:
-      return { ...state, error: `Sorry '${payload}' is taken` };
 
     default:
       return state;

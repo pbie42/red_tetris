@@ -1,4 +1,4 @@
-import Player from 'server/channels/player/Player';
+import Player from 'server/classes/Player';
 
 let player;
 function newBoard() {
@@ -50,7 +50,7 @@ describe('Player Class', () => {
   });
 
   it('can return the player info', () => {
-    expect(player.getInfo()).toEqual({ id: 1, username: 'Paul' });
+    expect(player.getInfo()).toEqual({ id: 1, username: 'Paul', board: newBoard() });
   });
 
   it('can update the board', () => {

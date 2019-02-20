@@ -1,17 +1,20 @@
 import playerReducer from 'client/reducers/player';
 import { PLAYER_SET, PLAYER_EXISTS } from 'client/actions/types';
 
+const initialState = {
+  error: '',
+  id: '',
+  username: '',
+};
+
 it('handles actions of type PLAYER_SET', () => {
+  const payload = { username: 'paul', id: '1' };
   const action = {
     type: PLAYER_SET,
-    payload: 'Paul',
-  };
-  const initialState = {
-    username: '',
-    error: '',
+    payload,
   };
   const newState = playerReducer(initialState, action);
-  expect(newState).toEqual({ username: 'Paul', error: '' });
+  expect(newState).toEqual({ username: 'paul', id: '1', error: '' });
 });
 
 it('handles actions of type PLAYER_EXISTS', () => {
@@ -19,12 +22,8 @@ it('handles actions of type PLAYER_EXISTS', () => {
     type: PLAYER_EXISTS,
     payload: 'Paul',
   };
-  const initialState = {
-    username: '',
-    error: '',
-  };
   const newState = playerReducer(initialState, action);
-  expect(newState).toEqual({ username: '', error: "Sorry 'Paul' is taken" });
+  expect(newState).toEqual({ username: '', id: '', error: "Sorry 'Paul' is taken" });
 });
 
 it('handles action with unknown type', () => {

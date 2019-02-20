@@ -31,4 +31,20 @@ export default ({ dispatch }) => next => (action) => {
         break;
     }
   });
+
+  socket.on('game', (event) => {
+    switch (event.type) {
+      case types.GAME_SET:
+        console.log('about to gameSet', event.payload);
+
+        dispatch(actions.gameSet(event.payload));
+        break;
+      case types.GAME_EXISTS:
+        dispatch(actions.gameExists(event.payload));
+        break;
+
+      default:
+        break;
+    }
+  });
 };
