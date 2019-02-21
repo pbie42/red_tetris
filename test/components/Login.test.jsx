@@ -74,6 +74,7 @@ describe('the input', () => {
         </MemoryRouter>
       </Root>,
     );
+    console.log('redirectWrapper.html()', redirectWrapper.html());
     expect(redirectWrapper.find(Redirect).length).toEqual(1);
     redirectWrapper.unmount();
   });

@@ -1,6 +1,6 @@
 import React from 'react';
 import composeWithLogic from 'client/components/lobby/withLogic';
-import requireUsername from 'client/components/hoc/requireUsername';
+import checkForGame from 'client/components/lobby/checkForGame';
 import PropTypes from 'prop-types';
 
 function Lobby(props) {
@@ -26,4 +26,4 @@ Lobby.propTypes = {
   resetGame: PropTypes.func.isRequired,
 };
 
-export default requireUsername(composeWithLogic(Lobby), '/');
+export default checkForGame(composeWithLogic(Lobby), '/');

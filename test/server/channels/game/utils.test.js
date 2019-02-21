@@ -18,14 +18,21 @@ describe('gameCreate', () => {
   let games = [];
   const roomName = '';
   const username = 'Paul';
+  const username2 = 'Jen';
   const player = new Player(mockSocket.id, username);
+  const player2 = new Player(mockSocket.id + 1, username2);
   const game = new Game(mockSocket.id, roomName, [player]);
   it('creates a new game if one does not exist', () => {
     games = gameCreate(mockIO, mockSocket, roomName, player, games);
     expect(games).toEqual([game]);
   });
 
-  it('does not create a new player if one already exists', () => {
+  it('adds a player to the game if it already exists', () => {
+    games = gameCreate(mockIO, mockSocket, roomName, player2, games);
+    expect(games).toEqual([game]);
+  });
+
+  it('does not add a player to an existing game if they are already in it', () => {
     games = gameCreate(mockIO, mockSocket, roomName, player, games);
     expect(games).toEqual([game]);
   });
