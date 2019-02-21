@@ -19,7 +19,11 @@ const requireLocationState = (ChildComponent) => {
   };
 
   function mapStateToProps(state) {
-    return { username: state.player.username };
+    return {
+      username: state.player.username,
+      playerID: state.player.id,
+      roomName: state.game.roomName,
+    };
   }
 
   return connect(

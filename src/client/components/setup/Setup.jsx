@@ -6,12 +6,14 @@ import { Redirect } from 'react-router-dom';
 
 function Setup(props) {
   console.log('props setup', props);
-  const { username, playerCreate, location } = props;
+  const {
+    username, playerID, roomName, playerCreate, location, gameCreate,
+  } = props;
   if (!username) {
     playerCreate(location.state.player);
-  } else {
-    return <Redirect to="/lobby" />;
-  }
+  } else if (!roomName) {
+    gameCreate(location.state.room, playerID);
+  } else return <Redirect to={{ pathname: `/${roomName}[${username}]` }} />;
 
   return (
     <div>
@@ -22,8 +24,11 @@ function Setup(props) {
 
 Setup.propTypes = {
   username: PropTypes.string.isRequired,
+  playerID: PropTypes.string.isRequired,
+  roomName: PropTypes.string.isRequired,
   location: ReactRouterPropTypes.location.isRequired,
   playerCreate: PropTypes.func.isRequired,
+  gameCreate: PropTypes.func.isRequired,
 };
 
 export default requireLocationState(Setup);

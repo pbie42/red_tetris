@@ -4,7 +4,6 @@ import requireUsername from 'client/components/hoc/requireUsername';
 import PropTypes from 'prop-types';
 
 function Lobby(props) {
-  console.log('lobby created', props);
   const {
     playerID, submitGame, onChangeTextArea, newRoomName, resetTextArea, resetGame,
   } = props;

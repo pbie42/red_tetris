@@ -57,13 +57,18 @@ it('redirects to login if no location state ', () => {
     </Root>,
   );
   expect(wrapped.find(Redirect).length).toEqual(1);
+  expect(wrapped.find(Redirect).prop('to')).toEqual('/');
 });
 
-it('redirects if username and location state exist ', () => {
+it('redirects to game if username and roomName state exist ', () => {
   const initialState = {
     player: {
       username: 'Paul',
+      id: '1',
       error: '',
+    },
+    game: {
+      roomName: 'Fun',
     },
   };
   const initialLocation = {
@@ -83,13 +88,20 @@ it('redirects if username and location state exist ', () => {
     </Root>,
   );
   expect(wrapped.find(Redirect).length).toEqual(1);
+  expect(wrapped.find(Redirect).prop('to')).toEqual({
+    pathname: `/${initialState.game.roomName}[${initialState.player.username}]`,
+  });
 });
 
-it('redirects if username exists but location state does not ', () => {
+it('redirects to lobby if username exists but location state does not ', () => {
   const initialState = {
     player: {
       username: 'Paul',
+      id: '1',
       error: '',
+    },
+    game: {
+      roomName: '',
     },
   };
   const initialLocation = {
@@ -105,4 +117,5 @@ it('redirects if username exists but location state does not ', () => {
     </Root>,
   );
   expect(wrapped.find(Redirect).length).toEqual(1);
+  expect(wrapped.find(Redirect).prop('to')).toEqual('/lobby');
 });
