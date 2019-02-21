@@ -10,6 +10,9 @@ const lobbyHandlers = withHandlers({
   submitGame: ({ gameCreate }) => (roomName, playerID, resetTextArea) => (event) => {
     handleSubmitGame(gameCreate, roomName, playerID, resetTextArea, event);
   },
+  resetGame: ({ gameReset }) => () => () => {
+    gameReset();
+  },
 });
 
 export default lobbyHandlers;

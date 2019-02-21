@@ -81,7 +81,7 @@ describe('the input', () => {
 
   it('submits and clears the text area', () => {
     expect(wrapped.find('input').prop('value')).toEqual('Fun');
-    wrapped.find('button').simulate('click');
+    wrapped.find('#game-submit').simulate('click');
     wrapped.update();
     expect(wrapped.find('input').prop('value')).toEqual('');
   });

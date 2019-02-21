@@ -4,8 +4,9 @@ export const FETCH_COMMENTS = 'FETCH_COMMENTS';
 
 // -------------------------------------------------------------------------Game
 export const GAME_CREATE = 'GAME_CREATE';
-export const GAME_SET = 'GAME_SET';
 export const GAME_EXISTS = 'GAME_EXISTS';
+export const GAME_RESET = 'GAME_SET';
+export const GAME_SET = 'GAME_SET';
 
 // -----------------------------------------------------------------------Player
 export const PLAYER_CREATE = 'PLAYER_CREATE';

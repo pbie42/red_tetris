@@ -1,5 +1,7 @@
 import { playerCreate, playerExists, playerSet } from 'client/actions/player/playerActions';
-import { gameCreate, gameExists, gameSet } from 'client/actions/game/gameActions';
+import {
+  gameCreate, gameExists, gameReset, gameSet,
+} from 'client/actions/game/gameActions';
 
 // function changeAuth(isLoggedIn) {
 //   return {
@@ -9,5 +11,5 @@ import { gameCreate, gameExists, gameSet } from 'client/actions/game/gameActions
 // }
 
 export {
-  playerCreate, playerExists, playerSet, gameCreate, gameExists, gameSet,
+  playerCreate, playerExists, playerSet, gameCreate, gameExists, gameReset, gameSet,
 };

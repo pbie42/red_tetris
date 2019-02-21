@@ -22,6 +22,10 @@ export default (state = initialState, { type, payload }) => {
         roomName: payload.roomName,
       };
 
+    case types.GAME_RESET:
+      console.log('reducer game reset', payload);
+      return initialState;
+
     default:
       return state;
   }
