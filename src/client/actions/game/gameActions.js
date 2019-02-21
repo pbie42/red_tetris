@@ -21,12 +21,7 @@ export function gameExists(username) {
 export function gameReset() {
   return {
     type: types.GAME_RESET,
-    payload: {
-      roomName: '',
-      id: '',
-      players: [],
-      queue: [],
-    },
+    payload: '',
   };
 }
 

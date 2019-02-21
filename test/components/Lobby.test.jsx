@@ -57,9 +57,6 @@ describe('the input', () => {
       error: '',
     },
   };
-  // beforeEach(() => {
-
-  // });
 
   it('has a text area that users can type in', () => {
     wrapped = mount(
@@ -85,38 +82,4 @@ describe('the input', () => {
     wrapped.update();
     expect(wrapped.find('input').prop('value')).toEqual('');
   });
-
-  // it('displays an error if error exists in store', () => {
-  //   const initialState = {
-  //     player: {
-  //       username: '',
-  //       error: 'The username already exists',
-  //     },
-  //   };
-  //   const errorWrapped = mount(
-  //     <Root initialState={initialState}>
-  //       <Login />
-  //     </Root>,
-  //   );
-  //   expect(errorWrapped.find('h3').text()).toEqual('The username already exists');
-  //   errorWrapped.unmount();
-  // });
-
-  // it('redirects if username exists', () => {
-  //   const initialState = {
-  //     player: {
-  //       username: 'Tom',
-  //       error: '',
-  //     },
-  //   };
-  //   const redirectWrapper = mount(
-  //     <Root initialState={initialState}>
-  //       <MemoryRouter initialEntries={['/']}>
-  //         <Login />
-  //       </MemoryRouter>
-  //     </Root>,
-  //   );
-  //   expect(redirectWrapper.find(Redirect).length).toEqual(1);
-  //   redirectWrapper.unmount();
-  // });
 });

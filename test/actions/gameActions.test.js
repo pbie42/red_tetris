@@ -55,12 +55,7 @@ describe('gameReset', () => {
 
   it('has the correct payload', () => {
     const action = gameReset();
-    expect(action.payload).toEqual({
-      roomName: '',
-      id: '',
-      players: [],
-      queue: [],
-    });
+    expect(action.payload).toEqual('');
   });
 });
 

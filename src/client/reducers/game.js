@@ -1,6 +1,6 @@
 import * as types from 'client/actions/types';
 
-const initialState = {
+export const gameInitialState = {
   error: '',
   id: '',
   players: [],
@@ -8,7 +8,7 @@ const initialState = {
   roomName: '',
 };
 
-export default (state = initialState, { type, payload }) => {
+export default (state = gameInitialState, { type, payload }) => {
   switch (type) {
     case types.GAME_SET:
       console.log('reducer gameset', payload);
@@ -24,7 +24,7 @@ export default (state = initialState, { type, payload }) => {
 
     case types.GAME_RESET:
       console.log('reducer game reset', payload);
-      return initialState;
+      return gameInitialState;
 
     default:
       return state;
