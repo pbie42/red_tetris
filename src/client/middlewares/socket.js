@@ -54,4 +54,16 @@ export default ({ dispatch }) => next => (action) => {
         break;
     }
   });
+
+  socket.on('lobby', (event) => {
+    switch (event.type) {
+      case types.LOBBY_GAMES_UPDATE:
+        console.log('about to LOBBY_GAMES_UPDATE', event.payload);
+        dispatch(actions.lobbyGamesUpdate(event.payload));
+        break;
+
+      default:
+        break;
+    }
+  });
 };

@@ -2,6 +2,9 @@ export const SAVE_COMMENT = 'SAVE_COMMENT';
 export const CHANGE_AUTH = 'CHANGE_AUTH';
 export const FETCH_COMMENTS = 'FETCH_COMMENTS';
 
+// ------------------------------------------------------------------------Lobby
+export const LOBBY_GAMES_UPDATE = 'LOBBY_GAMES_UPDATE';
+
 // -------------------------------------------------------------------------Game
 export const GAME_CREATE = 'GAME_CREATE';
 export const GAME_EXISTS = 'GAME_EXISTS';

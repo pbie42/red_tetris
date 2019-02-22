@@ -1,4 +1,5 @@
 import { playerCreate, playerExists, playerSet } from 'client/actions/player/playerActions';
+import { lobbyGamesUpdate } from 'client/actions/lobby/lobbyActions';
 import {
   gameCreate,
   gameExists,
@@ -15,6 +16,7 @@ export {
   gameQueueUpdate,
   gameReset,
   gameSet,
+  lobbyGamesUpdate,
   playerCreate,
   playerExists,
   playerSet,

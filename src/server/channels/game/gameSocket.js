@@ -1,4 +1,4 @@
-const { gameCreate } = require('./utils');
+const { gameCreate, lobbyUpdateGames } = require('./utils');
 
 function gameSocket(io, socket, games, players, { payload, type }) {
   console.log('payload', payload);
@@ -8,6 +8,7 @@ function gameSocket(io, socket, games, players, { payload, type }) {
   switch (type) {
     case 'GAME_CREATE':
       if (player) updatedGames = gameCreate(io, socket, roomName, player, games);
+      lobbyUpdateGames(games, io);
       break;
 
     default:
