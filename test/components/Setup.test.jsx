@@ -13,6 +13,7 @@ afterEach(() => {
 it('has one div and one h1 if location state is valid', () => {
   const initialState = {
     player: {
+      id: '',
       username: '',
       error: '',
     },
@@ -40,6 +41,7 @@ it('has one div and one h1 if location state is valid', () => {
 it('redirects to login if no location state ', () => {
   const initialState = {
     player: {
+      id: '',
       username: '',
       error: '',
     },

@@ -12,7 +12,7 @@ const checkForUsername = (ChildComponent) => {
     return <ChildComponent {...props} />;
   }
 
-  ComposedComponent.protoTypes = {
+  ComposedComponent.propTypes = {
     username: PropTypes.string.isRequired,
   };
 

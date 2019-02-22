@@ -18,6 +18,20 @@ export function gameExists(username) {
   };
 }
 
+export function gamePlayersUpdate(players) {
+  return {
+    type: types.GAME_PLAYERS_UPDATE,
+    payload: players,
+  };
+}
+
+export function gameQueueUpdate(players) {
+  return {
+    type: types.GAME_QUEUE_UPDATE,
+    payload: players,
+  };
+}
+
 export function gameReset() {
   return {
     type: types.GAME_RESET,

@@ -19,7 +19,7 @@ const checkURL = (ChildComponent) => {
     return <ChildComponent {...props} />;
   }
 
-  ComposedComponent.protoTypes = {
+  ComposedComponent.propTypes = {
     username: PropTypes.string.isRequired,
     match: ReactRouterPropTypes.match.isRequired,
   };

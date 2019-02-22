@@ -22,6 +22,20 @@ export default (state = gameInitialState, { type, payload }) => {
         roomName: payload.roomName,
       };
 
+    case types.GAME_PLAYERS_UPDATE:
+      console.log('reducer gameplayersupdate', payload);
+      return {
+        ...state,
+        players: payload,
+      };
+
+    case types.GAME_QUEUE_UPDATE:
+      console.log('reducer gamequeueupdate', payload);
+      return {
+        ...state,
+        queue: payload,
+      };
+
     case types.GAME_RESET:
       console.log('reducer game reset', payload);
       return gameInitialState;

@@ -13,6 +13,9 @@ describe('The View', () => {
 
   it('has one div and one h1 if username is set', () => {
     const initialState = {
+      game: {
+        roomName: '',
+      },
       player: {
         username: 'Paul',
         id: '1',
@@ -32,6 +35,9 @@ describe('The View', () => {
 
   it('redirects to login if no username is set', () => {
     const initialState = {
+      game: {
+        roomName: '',
+      },
       player: {
         username: '',
         id: '',
@@ -46,11 +52,39 @@ describe('The View', () => {
       </Root>,
     );
     expect(wrapped.find(Redirect).length).toEqual(1);
+    expect(wrapped.find(Redirect).prop('to')).toEqual('/');
+  });
+
+  it('redirects to game if username and roomName are set', () => {
+    const initialState = {
+      game: {
+        roomName: 'Fun',
+      },
+      player: {
+        username: 'Paul',
+        id: '',
+        error: '',
+      },
+    };
+    wrapped = mount(
+      <Root initialState={initialState}>
+        <MemoryRouter>
+          <Lobby />
+        </MemoryRouter>
+      </Root>,
+    );
+    expect(wrapped.find(Redirect).length).toEqual(1);
+    expect(wrapped.find(Redirect).prop('to')).toEqual({
+      pathname: `/${initialState.game.roomName}[${initialState.player.username}]`,
+    });
   });
 });
 
 describe('the input', () => {
   const initialState = {
+    game: {
+      roomName: '',
+    },
     player: {
       username: 'Paul',
       id: '1',
@@ -81,5 +115,6 @@ describe('the input', () => {
     wrapped.find('#game-submit').simulate('click');
     wrapped.update();
     expect(wrapped.find('input').prop('value')).toEqual('');
+    wrapped.unmount();
   });
 });

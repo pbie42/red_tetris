@@ -13,12 +13,13 @@ const checkForGame = (ChildComponent) => {
     return <ChildComponent {...props} />;
   }
 
-  ComposedComponent.protoTypes = {
+  ComposedComponent.propTypes = {
     username: PropTypes.string.isRequired,
+    roomName: PropTypes.string.isRequired,
   };
 
   function mapStateToProps(state) {
-    return { username: state.player.username };
+    return { username: state.player.username, roomName: state.game.roomName };
   }
 
   return connect(mapStateToProps)(ComposedComponent);

@@ -1,5 +1,7 @@
 import gameReducer, { gameInitialState } from 'client/reducers/game';
-import { GAME_SET, GAME_RESET } from 'client/actions/types';
+import {
+  GAME_SET, GAME_RESET, GAME_PLAYERS_UPDATE, GAME_QUEUE_UPDATE,
+} from 'client/actions/types';
 import Player from 'server/classes/Player';
 
 it('handles actions of type GAME_SET', () => {
@@ -35,6 +37,40 @@ it('handles actions of type GAME_RESET', () => {
     id: '',
     players: [],
     queue: [],
+    roomName: '',
+  });
+});
+
+it('handles actions of type GAME_PLAYERS_UPDATE', () => {
+  const player1 = new Player('1', 'Dan');
+  const player2 = new Player('2', 'Thomas');
+  const action = {
+    type: GAME_PLAYERS_UPDATE,
+    payload: [player1, player2],
+  };
+  const newState = gameReducer(gameInitialState, action);
+  expect(newState).toEqual({
+    error: '',
+    id: '',
+    players: [player1, player2],
+    queue: [],
+    roomName: '',
+  });
+});
+
+it('handles actions of type GAME_QUEUE_UPDATE', () => {
+  const player1 = new Player('1', 'Dan');
+  const player2 = new Player('2', 'Thomas');
+  const action = {
+    type: GAME_QUEUE_UPDATE,
+    payload: [player1, player2],
+  };
+  const newState = gameReducer(gameInitialState, action);
+  expect(newState).toEqual({
+    error: '',
+    id: '',
+    players: [],
+    queue: [player1, player2],
     roomName: '',
   });
 });

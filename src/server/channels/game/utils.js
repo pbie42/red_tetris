@@ -1,5 +1,5 @@
 const uniqid = require('uniqid');
-const { GAME_SET, GAME_EXISTS } = require('../../actions/types');
+const { GAME_PLAYERS_UPDATE, GAME_QUEUE_UPDATE, GAME_SET } = require('../../actions/types');
 const Game = require('../../classes/Game');
 
 function gameSetSocketEmit(game, socket) {
@@ -15,7 +15,38 @@ function gameSetSocketEmit(game, socket) {
   });
 }
 
+function gamePlayersUpdateEmit(io, players, queue) {
+  players.forEach((player) => {
+    io.to(player.getId()).emit('game', {
+      payload: players,
+      type: GAME_PLAYERS_UPDATE,
+    });
+  });
+  queue.forEach((q) => {
+    io.to(q.getId()).emit('game', {
+      payload: players,
+      type: GAME_PLAYERS_UPDATE,
+    });
+  });
+}
+
+function gameQueueUpdateEmit(io, players, queue) {
+  players.forEach((player) => {
+    io.to(player.getId()).emit('game', {
+      payload: queue,
+      type: GAME_QUEUE_UPDATE,
+    });
+  });
+  queue.forEach((q) => {
+    io.to(q.getId()).emit('game', {
+      payload: queue,
+      type: GAME_QUEUE_UPDATE,
+    });
+  });
+}
+
 function gameCreate(io, socket, roomName, player, gamesArray) {
+  console.log('player', player);
   const foundGame = gamesArray.find(game => game.getRoomName() === roomName);
   if (!foundGame) {
     const newGame = new Game(uniqid(), roomName, [player]);
@@ -24,14 +55,16 @@ function gameCreate(io, socket, roomName, player, gamesArray) {
     // io.emit('game', { payload: gamesArray, type: GAME_ADD });
   } else {
     const foundPlayer = foundGame.getPlayer(player.getId());
-    if (!foundPlayer && foundGame.getPlayersCount < 5) {
-      foundGame.gameAddPlayer(player);
+    if (!foundPlayer && foundGame.getPlayersCount() < 5) {
+      foundGame.addPlayer(player);
       gameSetSocketEmit(foundGame, socket);
-    } else if (!foundPlayer && foundGame.getPlayersCount === 5) {
+      gamePlayersUpdateEmit(io, foundGame.getPlayers(), foundGame.getQueue());
+    } else if (!foundPlayer && foundGame.getPlayersCount() >= 5) {
       foundGame.addPlayerToQueue(player);
       gameSetSocketEmit(foundGame, socket);
+      gameQueueUpdateEmit(io, foundGame.getPlayers(), foundGame.getQueue());
     }
-    socket.emit('game', { payload: roomName, type: GAME_EXISTS });
+    // socket.emit('game', { payload: roomName, type: GAME_EXISTS });
   }
   return gamesArray;
 }

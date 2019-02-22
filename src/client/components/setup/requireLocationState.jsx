@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import ReactRouterPropTypes from 'react-router-prop-types';
 import { Redirect } from 'react-router-dom';
 import * as actions from 'client/actions';
 
@@ -14,8 +15,9 @@ const requireLocationState = (ChildComponent) => {
     return <ChildComponent {...props} />;
   }
 
-  ComposedComponent.protoTypes = {
+  ComposedComponent.propTypes = {
     username: PropTypes.string.isRequired,
+    location: ReactRouterPropTypes.location.isRequired,
   };
 
   function mapStateToProps(state) {

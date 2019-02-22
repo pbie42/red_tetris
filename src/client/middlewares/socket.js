@@ -36,8 +36,15 @@ export default ({ dispatch }) => next => (action) => {
     switch (event.type) {
       case types.GAME_SET:
         console.log('about to gameSet', event.payload);
-
         dispatch(actions.gameSet(event.payload));
+        break;
+      case types.GAME_PLAYERS_UPDATE:
+        console.log('about to gamePlayersUpdate', event.payload);
+        dispatch(actions.gamePlayersUpdate(event.payload));
+        break;
+      case types.GAME_QUEUE_UPDATE:
+        console.log('about to gameQueueUpdate', event.payload);
+        dispatch(actions.gameQueueUpdate(event.payload));
         break;
       case types.GAME_EXISTS:
         dispatch(actions.gameExists(event.payload));
