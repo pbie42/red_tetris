@@ -7,8 +7,9 @@ import { Redirect } from 'react-router-dom';
 function Setup(props) {
   console.log('props setup', props);
   const {
-    username, playerID, roomName, playerCreate, location, gameCreate,
+    username, playerID, roomName, playerCreate, location, gameCreate, playerError,
   } = props;
+  if (playerError) return <Redirect to="/" />;
   if (!username) {
     playerCreate(location.state.player);
   } else if (!roomName) {
@@ -25,6 +26,7 @@ function Setup(props) {
 Setup.propTypes = {
   username: PropTypes.string.isRequired,
   playerID: PropTypes.string.isRequired,
+  playerError: PropTypes.string.isRequired,
   roomName: PropTypes.string.isRequired,
   location: ReactRouterPropTypes.location.isRequired,
   playerCreate: PropTypes.func.isRequired,

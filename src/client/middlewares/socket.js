@@ -13,9 +13,11 @@ socket.emit('player', 'testing');
 // eslint-disable-next-line consistent-return
 export default ({ dispatch }) => next => (action) => {
   if (!action.payload || !action.type || !action.channel) {
+    console.log('action', action);
     return next(action);
   }
 
+  console.log('action.channel', action.channel);
   socket.emit(action.channel, { payload: action.payload, type: action.type });
 
   socket.on('player', (event) => {
@@ -59,6 +61,7 @@ export default ({ dispatch }) => next => (action) => {
   });
 
   socket.on('lobby', (event) => {
+    console.log('lobby channel', event);
     switch (event.type) {
       case types.LOBBY_GAMES_UPDATE:
         console.log('about to LOBBY_GAMES_UPDATE', event.payload);

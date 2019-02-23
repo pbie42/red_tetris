@@ -28,6 +28,7 @@ const requireLocationState = (ChildComponent) => {
     return {
       username: state.player.username,
       playerID: state.player.id,
+      playerError: state.player.error,
       roomName: state.game.roomName,
     };
   }

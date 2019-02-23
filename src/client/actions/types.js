@@ -4,6 +4,7 @@ export const FETCH_COMMENTS = 'FETCH_COMMENTS';
 
 // ------------------------------------------------------------------------Lobby
 export const LOBBY_GAMES_UPDATE = 'LOBBY_GAMES_UPDATE';
+export const LOBBY_GET_GAMES = 'LOBBY_GET_GAMES';
 
 // -------------------------------------------------------------------------Game
 export const GAME_CREATE = 'GAME_CREATE';

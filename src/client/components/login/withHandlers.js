@@ -7,7 +7,8 @@ const handleSubmitPlayer = (playerCreate, username, resetTextArea, event) => {
 };
 
 const loginHandlers = withHandlers({
-  submitPlayer: ({ playerCreate }) => (username, resetTextArea) => (event) => {
+  submitPlayer: ({ playerCreate, lobbyGetGames }) => (username, resetTextArea) => (event) => {
+    lobbyGetGames();
     handleSubmitPlayer(playerCreate, username, resetTextArea, event);
   },
 });

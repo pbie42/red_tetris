@@ -117,4 +117,25 @@ describe('the input', () => {
     expect(wrapped.find('input').prop('value')).toEqual('');
     wrapped.unmount();
   });
+
+  it('does not submit if input value is empty', () => {
+    wrapped = mount(
+      <Root initialState={initialState}>
+        <MemoryRouter>
+          <Lobby />
+        </MemoryRouter>
+      </Root>,
+    );
+    wrapped.find('input').simulate('change', {
+      target: {
+        value: '',
+      },
+    });
+    wrapped.update();
+    expect(wrapped.find('input').prop('value')).toEqual('');
+    wrapped.find('#game-submit').simulate('click');
+    wrapped.update();
+    expect(wrapped.find('input').prop('value')).toEqual('');
+    wrapped.unmount();
+  });
 });

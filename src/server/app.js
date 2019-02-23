@@ -1,6 +1,7 @@
 const io = require('socket.io')();
 const { playerSocket } = require('./channels/player/playerSocket');
 const { gameSocket } = require('./channels/game/gameSocket');
+const { lobbySocket } = require('./channels/lobby/lobbySocket');
 
 let players = [];
 let games = [];
@@ -24,6 +25,12 @@ io.on('connection', (socket) => {
 
     const { updatedGames } = gameSocket(io, socket, games, players, { payload, type });
     games = updatedGames;
+  });
+
+  socket.on('lobby', ({ payload, type }) => {
+    console.log('lobby channel', payload, type);
+
+    lobbySocket(socket, games, { payload, type });
   });
 });
 

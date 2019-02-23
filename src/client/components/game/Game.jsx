@@ -6,11 +6,8 @@ import * as actions from 'client/actions';
 import checkURL from 'client/components/game/checkURL';
 
 function Game(props) {
-  const {
-    username, gameLeave, playerID, gameID,
-  } = props;
+  const { gameLeave, playerID, gameID } = props;
   if (!gameID) return <Redirect to="/lobby" />;
-  console.log('username game comp', username);
   return (
     <div>
       <button type="submit" onClick={() => gameLeave(playerID, gameID)}>
@@ -22,7 +19,6 @@ function Game(props) {
 }
 
 Game.propTypes = {
-  username: PropTypes.string.isRequired,
   playerID: PropTypes.string.isRequired,
   gameID: PropTypes.string.isRequired,
   gameLeave: PropTypes.func.isRequired,
