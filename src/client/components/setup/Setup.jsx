@@ -12,7 +12,7 @@ function Setup(props) {
   if (!username) {
     playerCreate(location.state.player);
   } else if (!roomName) {
-    gameCreate(location.state.room, playerID);
+    gameCreate(location.state.game, playerID);
   } else return <Redirect to={{ pathname: `/${roomName}[${username}]` }} />;
 
   return (

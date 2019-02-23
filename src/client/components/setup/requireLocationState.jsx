@@ -12,6 +12,10 @@ const requireLocationState = (ChildComponent) => {
       if (username) return <Redirect to="/lobby" />;
       return <Redirect to="/" />;
     }
+    if (!location.state.player || !location.state.game) {
+      if (username) return <Redirect to="/lobby" />;
+      return <Redirect to="/" />;
+    }
     return <ChildComponent {...props} />;
   }
 

@@ -39,6 +39,17 @@ export function gameReset() {
   };
 }
 
+export function gameLeave(playerID, gameID) {
+  return {
+    type: types.GAME_LEAVE,
+    payload: {
+      playerID,
+      gameID,
+    },
+    channel: 'game',
+  };
+}
+
 export function gameSet({
   roomName, id, players, queue,
 }) {

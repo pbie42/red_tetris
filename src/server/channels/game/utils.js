@@ -2,6 +2,7 @@ const uniqid = require('uniqid');
 const {
   GAME_PLAYERS_UPDATE,
   GAME_QUEUE_UPDATE,
+  GAME_RESET,
   GAME_SET,
   LOBBY_GAMES_UPDATE,
 } = require('../../actions/types');
@@ -11,6 +12,13 @@ function lobbyUpdateGames(games, io) {
   io.emit('lobby', {
     payload: games,
     type: LOBBY_GAMES_UPDATE,
+  });
+}
+
+function gameResetSocketEmit(socket) {
+  socket.emit('game', {
+    payload: {},
+    type: GAME_RESET,
   });
 }
 
@@ -83,5 +91,8 @@ function gameCreate(io, socket, roomName, player, gamesArray) {
 
 module.exports = {
   gameCreate,
+  gamePlayersUpdateEmit,
+  gameQueueUpdateEmit,
+  gameResetSocketEmit,
   lobbyUpdateGames,
 };

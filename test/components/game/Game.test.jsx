@@ -10,11 +10,16 @@ afterEach(() => {
   wrapped.unmount();
 });
 
-it('has one div and one h1 if url is valid with username set', () => {
+it('has one div and one h1 if url is valid with player set and game set', () => {
   const initialState = {
     player: {
+      id: '1',
       username: 'Paul',
       error: '',
+    },
+    game: {
+      roomName: 'Fun',
+      id: '1',
     },
   };
   const initialMatch = {
@@ -39,6 +44,7 @@ it('has one div and one h1 if url is valid with username set', () => {
 it('redirects to lobby if url param is invalid for a game but username is set', () => {
   const initialState = {
     player: {
+      id: '1',
       username: 'Paul',
       error: '',
     },
@@ -65,6 +71,7 @@ it('redirects to lobby if url param is invalid for a game but username is set', 
 it('redirects to login if url param is invalid for a game and no username is set', () => {
   const initialState = {
     player: {
+      id: '',
       username: '',
       error: '',
     },
@@ -91,6 +98,7 @@ it('redirects to login if url param is invalid for a game and no username is set
 it('redirects to setup with player and room name if url is invalid but no username is set', () => {
   const initialState = {
     player: {
+      id: '',
       username: '',
       error: '',
     },
@@ -113,6 +121,6 @@ it('redirects to setup with player and room name if url is invalid but no userna
   expect(wrapped.find(Redirect).length).toEqual(1);
   expect(wrapped.find(Redirect).prop('to')).toEqual({
     pathname: '/setup',
-    state: { player: 'Paul', room: 'testing' },
+    state: { player: 'Paul', game: 'testing' },
   });
 });

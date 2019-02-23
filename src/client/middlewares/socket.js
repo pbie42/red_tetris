@@ -49,6 +49,9 @@ export default ({ dispatch }) => next => (action) => {
       case types.GAME_EXISTS:
         dispatch(actions.gameExists(event.payload));
         break;
+      case types.GAME_RESET:
+        dispatch(actions.gameReset());
+        break;
 
       default:
         break;

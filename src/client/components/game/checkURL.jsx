@@ -15,7 +15,7 @@ const checkURL = (ChildComponent) => {
       return <Redirect from="/:game" exact to="/" />;
     }
     const { player, room } = parseUrl(url);
-    if (!username) return <Redirect from="/:game" exact to={{ pathname: '/setup', state: { player, room } }} />;
+    if (!username) return <Redirect from="/:game" exact to={{ pathname: '/setup', state: { player, game: room } }} />;
     return <ChildComponent {...props} />;
   }
 

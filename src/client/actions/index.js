@@ -3,6 +3,7 @@ import { lobbyGamesUpdate } from 'client/actions/lobby/lobbyActions';
 import {
   gameCreate,
   gameExists,
+  gameLeave,
   gamePlayersUpdate,
   gameQueueUpdate,
   gameReset,
@@ -12,6 +13,7 @@ import {
 export {
   gameCreate,
   gameExists,
+  gameLeave,
   gamePlayersUpdate,
   gameQueueUpdate,
   gameReset,

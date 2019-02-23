@@ -4,6 +4,7 @@ import {
   gameCreate,
   gameSet,
   gameExists,
+  gameLeave,
   gameReset,
   gameQueueUpdate,
   gamePlayersUpdate,
@@ -13,6 +14,7 @@ import {
   GAME_CREATE,
   GAME_SET,
   GAME_EXISTS,
+  GAME_LEAVE,
   GAME_RESET,
   GAME_QUEUE_UPDATE,
   GAME_PLAYERS_UPDATE,
@@ -53,6 +55,23 @@ describe('gameSet', () => {
       players: [player],
       queue: [],
     });
+  });
+});
+
+describe('gameLeave', () => {
+  const payload = {
+    playerID: '1',
+    gameID: 'k1k2',
+  };
+  it('has the correct type', () => {
+    const action = gameLeave(payload.playerID, payload.gameID);
+
+    expect(action.type).toEqual(GAME_LEAVE);
+  });
+
+  it('has the correct payload', () => {
+    const action = gameLeave(payload.playerID, payload.gameID);
+    expect(action.payload).toEqual(payload);
   });
 });
 

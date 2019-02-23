@@ -1,10 +1,11 @@
+import { Server } from 'mock-socket';
 import Player from 'server/classes/Player';
-import { gameSocket } from 'server/channels/game/gameSocket';
+import Game from 'server/classes/Game';
+import { gameSocket, handleGameLeave } from 'server/channels/game/gameSocket';
+
+const mockIO = new Server('ws://localhost:8080');
 
 describe('gameSocket', () => {
-  const mockIO = {
-    emit: jest.fn(),
-  };
   const mockSocket = {
     emit: jest.fn(),
     id: '1',
@@ -33,5 +34,35 @@ describe('gameSocket', () => {
       type: 'RALKDJF',
     });
     expect(updatedGames).toEqual(games);
+  });
+});
+
+describe('handleGameLeave', () => {
+  const mockSocket = {
+    emit: jest.fn(),
+    id: '1',
+    broadcast: {
+      emit: jest.fn(),
+    },
+  };
+  const payload = {
+    gameID: '1',
+    playerID: '2',
+  };
+  const player1 = new Player('1', 'Paul');
+  const player2 = new Player('2', 'Jen');
+  it('should remove a player from a game', () => {
+    const game = new Game('1', 'Fun', [player1, player2]);
+    const updatedGames = handleGameLeave(mockIO, mockSocket, [game], payload);
+    expect(updatedGames).toEqual([new Game('1', 'Fun', [player1])]);
+  });
+
+  it('should add a player from the queue to the active players if there is a queue', () => {
+    const game = new Game('1', 'Fun', [player1, player2]);
+    const player3 = new Player('3', 'Nick');
+    game.addPlayerToQueue(player3);
+    const updatedGames = handleGameLeave(mockIO, mockSocket, [game], payload);
+    const gameClone = new Game('1', 'Fun', [player1, player3]);
+    expect(updatedGames).toEqual([gameClone]);
   });
 });

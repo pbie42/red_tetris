@@ -36,6 +36,10 @@ module.exports = class Game {
     return this.players.push(player);
   }
 
+  removePlayer(playerID) {
+    this.players = this.players.filter(player => player.getId() !== playerID);
+  }
+
   addPlayerToQueue(player) {
     return this.queue.push(player);
   }

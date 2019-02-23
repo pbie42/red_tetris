@@ -21,7 +21,7 @@ it('has one div and one h1 if location state is valid', () => {
   const initialLocation = {
     state: {
       player: 'Paul',
-      room: 'fun',
+      game: 'fun',
     },
     pathname: '/setup',
     search: '',
@@ -76,7 +76,7 @@ it('redirects to game if username and roomName state exist ', () => {
   const initialLocation = {
     state: {
       player: 'Paul',
-      room: 'fun',
+      game: 'fun',
     },
     pathname: '/setup',
     search: '',
@@ -115,6 +115,60 @@ it('redirects to lobby if username exists but location state does not ', () => {
     <Root initialState={initialState}>
       <MemoryRouter>
         <Setup location={initialLocation} />
+      </MemoryRouter>
+    </Root>,
+  );
+  expect(wrapped.find(Redirect).length).toEqual(1);
+  expect(wrapped.find(Redirect).prop('to')).toEqual('/lobby');
+});
+
+it('redirects to home page if username and location state exists but does not have data for game or player', () => {
+  const initialState = {
+    player: {
+      username: '',
+      id: '',
+      error: '',
+    },
+    game: {
+      roomName: '',
+    },
+  };
+  const initialLocation = {
+    pathname: '/setup',
+    search: '',
+    hash: '',
+  };
+  wrapped = mount(
+    <Root initialState={initialState}>
+      <MemoryRouter>
+        <Setup to={{ state: { player: '', game: '' } }} location={initialLocation} />
+      </MemoryRouter>
+    </Root>,
+  );
+  expect(wrapped.find(Redirect).length).toEqual(1);
+  expect(wrapped.find(Redirect).prop('to')).toEqual('/');
+});
+
+it('redirects to lobby page if location state exists but does not have data for game or player and username is not set for player', () => {
+  const initialState = {
+    player: {
+      username: 'Paul',
+      id: '1',
+      error: '',
+    },
+    game: {
+      roomName: '',
+    },
+  };
+  const initialLocation = {
+    pathname: '/setup',
+    search: '',
+    hash: '',
+  };
+  wrapped = mount(
+    <Root initialState={initialState}>
+      <MemoryRouter>
+        <Setup to={{ state: { player: '', game: '' } }} location={initialLocation} />
       </MemoryRouter>
     </Root>,
   );

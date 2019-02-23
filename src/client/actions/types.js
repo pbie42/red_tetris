@@ -8,6 +8,7 @@ export const LOBBY_GAMES_UPDATE = 'LOBBY_GAMES_UPDATE';
 // -------------------------------------------------------------------------Game
 export const GAME_CREATE = 'GAME_CREATE';
 export const GAME_EXISTS = 'GAME_EXISTS';
+export const GAME_LEAVE = 'GAME_LEAVE';
 export const GAME_PLAYERS_UPDATE = 'GAME_PLAYERS_UPDATE';
 export const GAME_QUEUE_UPDATE = 'GAME_QUEUE_UPDATE';
 export const GAME_RESET = 'GAME_RESET';
