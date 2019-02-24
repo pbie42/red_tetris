@@ -3,15 +3,21 @@ import composeWithLogic from 'client/components/lobby/withLogic';
 import checkForGame from 'client/components/lobby/checkForGame';
 import PropTypes from 'prop-types';
 
-const renderGames = games => games.map(game => (
+export const renderGames = (games, gameCreate, playerID) => games.map(game => (
   <li className="game" key={game.id}>
-    {game.roomName}
+    <button type="submit" className="game-button" onClick={() => gameCreate(game.roomName, playerID)}>{game.roomName}</button>
   </li>
 ));
 
 function Lobby(props) {
   const {
-    games, newRoomName, onChangeTextArea, playerID, resetTextArea, submitGame,
+    gameCreate,
+    games,
+    newRoomName,
+    onChangeTextArea,
+    playerID,
+    resetTextArea,
+    submitGame,
   } = props;
   return (
     <div>
@@ -24,18 +30,19 @@ function Lobby(props) {
       >
         Create Room
       </button>
-      {renderGames(games)}
+      {renderGames(games, gameCreate, playerID)}
     </div>
   );
 }
 
 Lobby.propTypes = {
+  gameCreate: PropTypes.func.isRequired,
   games: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  playerID: PropTypes.string.isRequired,
   newRoomName: PropTypes.string.isRequired,
-  submitGame: PropTypes.func.isRequired,
   onChangeTextArea: PropTypes.func.isRequired,
+  playerID: PropTypes.string.isRequired,
   resetTextArea: PropTypes.func.isRequired,
+  submitGame: PropTypes.func.isRequired,
 };
 
 export default checkForGame(composeWithLogic(Lobby), '/');

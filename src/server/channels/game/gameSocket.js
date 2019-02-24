@@ -17,13 +17,18 @@ function handleGameCreate(io, socket, games, players, payload) {
 
 function handleGameLeave(io, socket, games, payload) {
   const { gameID, playerID } = payload;
-  const updatedGames = games;
+  let updatedGames = games;
   const game = updatedGames.find(g => g.getId() === gameID);
-  if (!game) return updatedGames;
-  if (!game.getPlayer(playerID)) return updatedGames;
+  if (!game || !game.getPlayer(playerID)) return updatedGames;
   game.removePlayer(playerID);
   const queue = game.getQueue();
-  if (game.getPlayersCount() < 5 && queue.length > 0) {
+  const playerCount = game.getPlayersCount();
+  if (playerCount === 0 && queue.length === 0) {
+    updatedGames = updatedGames.filter(g => g.getId() !== game.getId());
+    lobbyUpdateGames(updatedGames, io);
+    return updatedGames;
+  }
+  if (playerCount < 5 && queue.length > 0) {
     const player = queue.shift();
     game.addPlayer(player);
     gameQueueUpdateEmit(io, game.getPlayers(), game.getQueue());

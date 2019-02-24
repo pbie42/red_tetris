@@ -4,6 +4,7 @@ import Game from 'server/classes/Game';
 import { gameSocket, handleGameLeave } from 'server/channels/game/gameSocket';
 
 const mockIO = new Server('ws://localhost:8080');
+jest.mock('uniqid', () => () => '1');
 
 describe('gameSocket', () => {
   const mockSocket = {
@@ -16,7 +17,8 @@ describe('gameSocket', () => {
   let games = [];
   const username = 'Paul';
   const player = new Player(mockSocket.id, username);
-  const players = [player];
+  const player2 = new Player(mockSocket.id + 1, 'Jen');
+  const players = [player, player2];
   const payload = {
     roomName: 'Fun',
     playerID: '1',
@@ -26,6 +28,17 @@ describe('gameSocket', () => {
     const { updatedGames } = gameSocket(mockIO, mockSocket, games, players, { payload, type });
     games = updatedGames;
     expect(games.length).toEqual(1);
+  });
+
+  it('should remove a game when the last player leaves on GAME_LEAVE', () => {
+    const { updatedGames } = gameSocket(mockIO, mockSocket, games, players, {
+      payload: {
+        playerID: '1',
+        gameID: '1',
+      },
+      type: 'GAME_LEAVE',
+    });
+    expect(updatedGames).toEqual([]);
   });
 
   it('should return same games if unknown type', () => {
@@ -64,5 +77,19 @@ describe('handleGameLeave', () => {
     const updatedGames = handleGameLeave(mockIO, mockSocket, [game], payload);
     const gameClone = new Game('1', 'Fun', [player1, player3]);
     expect(updatedGames).toEqual([gameClone]);
+  });
+
+  it('should remove a game from games list if there are no players and no queue of players', () => {
+    const payload2 = {
+      gameID: '1',
+      playerID: '1',
+    };
+    const game1 = new Game('1', 'Fun', [player1, player2]);
+    const player3 = new Player('3', 'Nick');
+    const player4 = new Player('4', 'Josie');
+    const game2 = new Game('2', 'Funner', [player3, player4]);
+    let updatedGames = handleGameLeave(mockIO, mockSocket, [game1, game2], payload2);
+    updatedGames = handleGameLeave(mockIO, mockSocket, [game1, game2], payload);
+    expect(updatedGames).toEqual([game2]);
   });
 });
