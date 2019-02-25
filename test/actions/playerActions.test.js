@@ -1,5 +1,9 @@
-import { playerCreate, playerSet, playerExists } from 'client/actions';
-import { PLAYER_CREATE, PLAYER_SET, PLAYER_EXISTS } from 'client/actions/types';
+import {
+  playerCreate, playerSet, playerExists, playerRemove,
+} from 'client/actions';
+import {
+  PLAYER_CREATE, PLAYER_SET, PLAYER_EXISTS, PLAYER_REMOVE,
+} from 'client/actions/types';
 
 describe('playerCreate', () => {
   it('has the correct type', () => {
@@ -24,6 +28,19 @@ describe('playerSet', () => {
 
   it('has the correct payload', () => {
     const action = playerSet(payload);
+    expect(action.payload).toEqual({ username: 'paul', id: '1' });
+  });
+});
+
+describe('playerRemove', () => {
+  it('has the correct type', () => {
+    const action = playerRemove('paul', '1');
+
+    expect(action.type).toEqual(PLAYER_REMOVE);
+  });
+
+  it('has the correct payload', () => {
+    const action = playerRemove('paul', '1');
     expect(action.payload).toEqual({ username: 'paul', id: '1' });
   });
 });

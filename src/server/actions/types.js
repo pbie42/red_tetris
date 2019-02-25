@@ -12,6 +12,7 @@ const LOBBY_GAMES_UPDATE = 'LOBBY_GAMES_UPDATE';
 // -----------------------------------------------------------------------Player
 const PLAYER_ADD = 'PLAYER_ADD';
 const PLAYER_EXISTS = 'PLAYER_EXISTS';
+const PLAYER_REMOVE = 'PLAYER_REMOVE';
 const PLAYER_SET = 'PLAYER_SET';
 
 module.exports = {
@@ -24,5 +25,6 @@ module.exports = {
   LOBBY_GAMES_UPDATE,
   PLAYER_ADD,
   PLAYER_EXISTS,
+  PLAYER_REMOVE,
   PLAYER_SET,
 };

@@ -33,12 +33,13 @@ function handleKeyDown(e) {
 
 function Game(props) {
   const {
-    gameLeave, playerID, gameID, players,
+    gameLeave, playerID, gameID, players, playerRemove, username,
   } = props;
   document.addEventListener('keydown', handleKeyDown);
   window.addEventListener('beforeunload', (e) => {
     e.preventDefault();
     gameLeave(playerID, gameID);
+    playerRemove(username, playerID);
   });
   if (!gameID) return <Redirect to="/lobby" />;
   return (
@@ -56,18 +57,23 @@ Game.propTypes = {
   gameID: PropTypes.string.isRequired,
   gameLeave: PropTypes.func.isRequired,
   playerID: PropTypes.string.isRequired,
-  players: PropTypes.arrayOf(PropTypes.objectOf({
+  playerRemove: PropTypes.func.isRequired,
+  players: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string,
     username: PropTypes.string,
-    board: PropTypes.arrayOf(PropTypes.array),
+    board: PropTypes.arrayOf(
+      PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])),
+    ),
   })).isRequired,
+  username: PropTypes.string.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
-    playerID: state.player.id,
     gameID: state.game.id,
+    playerID: state.player.id,
     players: state.game.players,
+    username: state.player.username,
   };
 }
 

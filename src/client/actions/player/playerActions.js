@@ -15,6 +15,14 @@ export function playerCreate(username) {
   };
 }
 
+export function playerRemove(username, id) {
+  return {
+    type: types.PLAYER_REMOVE,
+    payload: { username, id },
+    channel: 'player',
+  };
+}
+
 export function playerSet({ username, id }) {
   return {
     type: types.PLAYER_SET,

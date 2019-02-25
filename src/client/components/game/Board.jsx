@@ -25,8 +25,14 @@ function setColorClass(y, x, board) {
 
 function Row(row, y, board) {
   const items = [];
-  row.forEach((item, x) => {
-    items.push(<div className={`column-${x} ${setColorClass(y, x, board)} board-column`} />);
+  row.forEach((item, i) => {
+    const x = i;
+    items.push(
+      <div
+        key={`${x}-${y}`}
+        className={`column-${x} ${setColorClass(y, x, board)} board-column`}
+      />,
+    );
   });
   return items;
 }
@@ -34,9 +40,10 @@ function Row(row, y, board) {
 function Board({ board }) {
   const rows = [];
   board.forEach((row, i) => {
+    const y = i;
     rows.push(
-      <div id={`row-${i}`} className="board-row">
-        {Row(row, i, board)}
+      <div key={`row-${y}`} id={`row-${y}`} className="board-row">
+        {Row(row, y, board)}
       </div>,
     );
   });

@@ -18,6 +18,9 @@ export default (state = initialState, { type, payload }) => {
     case types.PLAYER_EXISTS:
       return { ...state, error: `Sorry '${payload}' is taken` };
 
+    case types.PLAYER_RESET:
+      return initialState;
+
     default:
       return state;
   }

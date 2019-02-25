@@ -17,5 +17,7 @@ export const GAME_SET = 'GAME_SET';
 
 // -----------------------------------------------------------------------Player
 export const PLAYER_CREATE = 'PLAYER_CREATE';
+export const PLAYER_REMOVE = 'PLAYER_REMOVE';
 export const PLAYER_SET = 'PLAYER_SET';
+export const PLAYER_RESET = 'PLAYER_RESET';
 export const PLAYER_EXISTS = 'PLAYER_EXISTS';

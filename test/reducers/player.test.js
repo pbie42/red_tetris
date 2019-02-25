@@ -1,5 +1,5 @@
 import playerReducer from 'client/reducers/player';
-import { PLAYER_SET, PLAYER_EXISTS } from 'client/actions/types';
+import { PLAYER_SET, PLAYER_EXISTS, PLAYER_RESET } from 'client/actions/types';
 
 const initialState = {
   error: '',
@@ -15,6 +15,16 @@ it('handles actions of type PLAYER_SET', () => {
   };
   const newState = playerReducer(initialState, action);
   expect(newState).toEqual({ username: 'paul', id: '1', error: '' });
+});
+
+it('handles actions of type PLAYER_RESET', () => {
+  const payload = {};
+  const action = {
+    type: PLAYER_RESET,
+    payload,
+  };
+  const newState = playerReducer(initialState, action);
+  expect(newState).toEqual(initialState);
 });
 
 it('handles actions of type PLAYER_EXISTS', () => {
