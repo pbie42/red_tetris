@@ -1,38 +1,50 @@
 import React from 'react';
-import * as keys from 'client/components/game/keyCodes';
+import PropTypes from 'prop-types';
+import 'client/style/game/Board.scss';
 
-function handleKeyDown(e) {
-  switch (e.keyCode) {
-    case keys.ARROW_UP:
-      console.log('ARROW_UP');
-      break;
-    case keys.ARROW_DOWN:
-      console.log('ARROW_DOWN');
-      break;
-    case keys.ARROW_LEFT:
-      console.log('ARROW_LEFT');
-      break;
-    case keys.ARROW_RIGHT:
-      console.log('ARROW_RIGHT');
-      break;
-    case keys.SPACE_BAR:
-      console.log('SPACE_BAR');
-      break;
-
+function setColorClass(y, x, board) {
+  switch (board[y][x]) {
+    case 'i':
+      return 'cyan';
+    case 'j':
+      return 'blue';
+    case 'l':
+      return 'orange';
+    case 'o':
+      return 'yellow';
+    case 's':
+      return 'green';
+    case 't':
+      return 'purple';
+    case 'z':
+      return 'red';
     default:
-      break;
+      return '';
   }
 }
 
-function Board() {
-  document.addEventListener('keydown', handleKeyDown);
-  return (
-    <div>
-      <h1>This is a board</h1>
-    </div>
-  );
+function Row(row, y, board) {
+  const items = [];
+  row.forEach((item, x) => {
+    items.push(<div className={`column-${x} ${setColorClass(y, x, board)} board-column`} />);
+  });
+  return items;
 }
 
-Board.propTypes = {};
+function Board({ board }) {
+  const rows = [];
+  board.forEach((row, i) => {
+    rows.push(
+      <div id={`row-${i}`} className="board-row">
+        {Row(row, i, board)}
+      </div>,
+    );
+  });
+  return <div className="board">{rows}</div>;
+}
+
+Board.propTypes = {
+  board: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)).isRequired,
+};
 
 export default Board;

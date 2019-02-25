@@ -2,6 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { MemoryRouter, Redirect } from 'react-router-dom';
 import Game from 'client/components/game/Game';
+import Player from 'server/classes/Player';
 import Root from 'client/components/Root';
 
 let wrapped;
@@ -10,7 +11,7 @@ afterEach(() => {
   wrapped.unmount();
 });
 
-it('has one div and one h1 if url is valid with player set and game set', () => {
+it('has one h1 if url is valid with player set and game set', () => {
   const initialState = {
     player: {
       id: '1',
@@ -19,6 +20,7 @@ it('has one div and one h1 if url is valid with player set and game set', () => 
     },
     game: {
       roomName: 'Fun',
+      players: [new Player('1', 'Paul')],
       id: '1',
     },
   };
@@ -37,7 +39,6 @@ it('has one div and one h1 if url is valid with player set and game set', () => 
       </MemoryRouter>
     </Root>,
   );
-  expect(wrapped.find('div').length).toEqual(1);
   expect(wrapped.find('h1').length).toEqual(1);
 });
 
@@ -49,6 +50,7 @@ it('redirects to lobby if url param is invalid for a game but username is set', 
       error: '',
     },
     game: {
+      players: [],
       id: '',
     },
   };
@@ -79,6 +81,7 @@ it('redirects to login if url param is invalid for a game and no username is set
       error: '',
     },
     game: {
+      players: [],
       id: '',
     },
   };
@@ -109,6 +112,7 @@ it('redirects to setup with player and room name if url is invalid but no userna
       error: '',
     },
     game: {
+      players: [],
       id: '',
     },
   };
@@ -142,6 +146,7 @@ it('redirects to lobby if game id is not set', () => {
       error: '',
     },
     game: {
+      players: [],
       id: '',
     },
   };

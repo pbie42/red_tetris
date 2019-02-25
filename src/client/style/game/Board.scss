@@ -1,0 +1,27 @@
+$board-height: 85vh;
+
+@function widthOfBoard() {
+  @return $board-height / 2;
+}
+
+.board {
+  height: 86vh;
+  width: widthOfBoard();
+  display: flex;
+  align-items: center;
+  flex-flow: column;
+  border-top: 0.1rem solid black;
+  border-left: 0.1rem solid black;
+
+  .board-row {
+    width: 100%;
+    display: flex;
+    flex-flow: row;
+    flex: 1;
+    .board-column {
+      border-bottom: 0.1rem solid black;
+      border-right: 0.1rem solid black;
+      flex: 1;
+    }
+  }
+}

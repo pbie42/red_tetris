@@ -7,6 +7,7 @@ import Lobby from 'client/components/lobby/Lobby';
 import Login from 'client/components/login/Login';
 import Setup from 'client/components/setup/Setup';
 import * as actions from 'client/actions';
+import 'client/style/App.scss';
 
 const App = () => (
   <div>

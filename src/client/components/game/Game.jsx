@@ -5,6 +5,8 @@ import { Redirect } from 'react-router-dom';
 import * as actions from 'client/actions';
 import * as keys from 'client/components/game/keyCodes';
 import checkURL from 'client/components/game/checkURL';
+import Board from 'client/components/game/Board';
+import 'client/style/game/Game.scss';
 
 function handleKeyDown(e) {
   switch (e.keyCode) {
@@ -30,7 +32,9 @@ function handleKeyDown(e) {
 }
 
 function Game(props) {
-  const { gameLeave, playerID, gameID } = props;
+  const {
+    gameLeave, playerID, gameID, players,
+  } = props;
   document.addEventListener('keydown', handleKeyDown);
   if (!gameID) return <Redirect to="/lobby" />;
   return (
@@ -38,21 +42,28 @@ function Game(props) {
       <button type="submit" onClick={() => gameLeave(playerID, gameID)}>
         Leave Game
       </button>
-      <h1>This is the game page</h1>
+      <h1 id="game-title">This is the game page</h1>
+      {Board({ board: players[0].board })}
     </div>
   );
 }
 
 Game.propTypes = {
-  playerID: PropTypes.string.isRequired,
   gameID: PropTypes.string.isRequired,
   gameLeave: PropTypes.func.isRequired,
+  playerID: PropTypes.string.isRequired,
+  players: PropTypes.arrayOf(PropTypes.objectOf({
+    id: PropTypes.string,
+    username: PropTypes.string,
+    board: PropTypes.arrayOf(PropTypes.array),
+  })).isRequired,
 };
 
 function mapStateToProps(state) {
   return {
     playerID: state.player.id,
     gameID: state.game.id,
+    players: state.game.players,
   };
 }
 
