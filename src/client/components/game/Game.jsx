@@ -3,10 +3,35 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import * as actions from 'client/actions';
+import * as keys from 'client/components/game/keyCodes';
 import checkURL from 'client/components/game/checkURL';
+
+function handleKeyDown(e) {
+  switch (e.keyCode) {
+    case keys.ARROW_UP:
+      console.log('ARROW_UP');
+      break;
+    case keys.ARROW_DOWN:
+      console.log('ARROW_DOWN');
+      break;
+    case keys.ARROW_LEFT:
+      console.log('ARROW_LEFT');
+      break;
+    case keys.ARROW_RIGHT:
+      console.log('ARROW_RIGHT');
+      break;
+    case keys.SPACE_BAR:
+      console.log('SPACE_BAR');
+      break;
+
+    default:
+      break;
+  }
+}
 
 function Game(props) {
   const { gameLeave, playerID, gameID } = props;
+  document.addEventListener('keydown', handleKeyDown);
   if (!gameID) return <Redirect to="/lobby" />;
   return (
     <div>
