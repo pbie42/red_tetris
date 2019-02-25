@@ -36,6 +36,10 @@ function Game(props) {
     gameLeave, playerID, gameID, players,
   } = props;
   document.addEventListener('keydown', handleKeyDown);
+  window.addEventListener('beforeunload', (e) => {
+    e.preventDefault();
+    gameLeave(playerID, gameID);
+  });
   if (!gameID) return <Redirect to="/lobby" />;
   return (
     <div>
@@ -43,7 +47,7 @@ function Game(props) {
         Leave Game
       </button>
       <h1 id="game-title">This is the game page</h1>
-      {Board({ board: players[0].board })}
+      {Board({ board: players.find(p => p.id === playerID).board })}
     </div>
   );
 }

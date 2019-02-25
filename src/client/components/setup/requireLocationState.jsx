@@ -7,13 +7,19 @@ import * as actions from 'client/actions';
 
 const requireLocationState = (ChildComponent) => {
   function ComposedComponent(props) {
-    const { location, username } = props;
+    const { location, username, lobbyGetGames } = props;
     if (!location.state) {
-      if (username) return <Redirect to="/lobby" />;
+      if (username) {
+        lobbyGetGames();
+        return <Redirect to="/lobby" />;
+      }
       return <Redirect to="/" />;
     }
     if (!location.state.player || !location.state.game) {
-      if (username) return <Redirect to="/lobby" />;
+      if (username) {
+        lobbyGetGames();
+        return <Redirect to="/lobby" />;
+      }
       return <Redirect to="/" />;
     }
     return <ChildComponent {...props} />;
@@ -21,6 +27,7 @@ const requireLocationState = (ChildComponent) => {
 
   ComposedComponent.propTypes = {
     username: PropTypes.string.isRequired,
+    lobbyGetGames: PropTypes.func.isRequired,
     location: ReactRouterPropTypes.location.isRequired,
   };
 

@@ -25,6 +25,7 @@ function handleGameLeave(io, socket, games, payload) {
   const playerCount = game.getPlayersCount();
   if (playerCount === 0 && queue.length === 0) {
     updatedGames = updatedGames.filter(g => g.getId() !== game.getId());
+    gameResetSocketEmit(socket);
     lobbyUpdateGames(updatedGames, io);
     return updatedGames;
   }

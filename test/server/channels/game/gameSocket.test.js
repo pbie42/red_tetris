@@ -68,6 +68,7 @@ describe('handleGameLeave', () => {
     const game = new Game('1', 'Fun', [player1, player2]);
     const updatedGames = handleGameLeave(mockIO, mockSocket, [game], payload);
     expect(updatedGames).toEqual([new Game('1', 'Fun', [player1])]);
+    expect(mockSocket.emit).toHaveBeenCalledTimes(1);
   });
 
   it('should add a player from the queue to the active players if there is a queue', () => {
@@ -77,6 +78,7 @@ describe('handleGameLeave', () => {
     const updatedGames = handleGameLeave(mockIO, mockSocket, [game], payload);
     const gameClone = new Game('1', 'Fun', [player1, player3]);
     expect(updatedGames).toEqual([gameClone]);
+    expect(mockSocket.emit).toHaveBeenCalledTimes(2);
   });
 
   it('should remove a game from games list if there are no players and no queue of players', () => {
@@ -91,5 +93,6 @@ describe('handleGameLeave', () => {
     let updatedGames = handleGameLeave(mockIO, mockSocket, [game1, game2], payload2);
     updatedGames = handleGameLeave(mockIO, mockSocket, [game1, game2], payload);
     expect(updatedGames).toEqual([game2]);
+    expect(mockSocket.emit).toHaveBeenCalledTimes(4);
   });
 });
