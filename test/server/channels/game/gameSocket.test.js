@@ -13,6 +13,7 @@ describe('gameSocket', () => {
     broadcast: {
       emit: jest.fn(),
     },
+    join: jest.fn(),
   };
   let games = [];
   const username = 'Paul';
@@ -58,6 +59,12 @@ describe('handleGameLeave', () => {
       emit: jest.fn(),
     },
   };
+  const mockedIO = {
+    in: jest.fn(() => ({
+      emit: jest.fn(),
+    })),
+    emit: jest.fn(),
+  };
   const payload = {
     gameID: '1',
     playerID: '2',
@@ -66,7 +73,7 @@ describe('handleGameLeave', () => {
   const player2 = new Player('2', 'Jen');
   it('should remove a player from a game', () => {
     const game = new Game('1', 'Fun', [player1, player2]);
-    const updatedGames = handleGameLeave(mockIO, mockSocket, [game], payload);
+    const updatedGames = handleGameLeave(mockedIO, mockSocket, [game], payload);
     const gameCompare = new Game('1', 'Fun', [player1]);
     gameCompare.pieces = game.getPieces();
     expect(updatedGames).toEqual([gameCompare]);
@@ -77,7 +84,7 @@ describe('handleGameLeave', () => {
     const game = new Game('1', 'Fun', [player1, player2]);
     const player3 = new Player('3', 'Nick');
     game.addPlayerToQueue(player3);
-    const updatedGames = handleGameLeave(mockIO, mockSocket, [game], payload);
+    const updatedGames = handleGameLeave(mockedIO, mockSocket, [game], payload);
     const gameClone = new Game('1', 'Fun', [player1, player3]);
     gameClone.pieces = game.getPieces();
     expect(updatedGames).toEqual([gameClone]);
@@ -93,7 +100,7 @@ describe('handleGameLeave', () => {
     const player3 = new Player('3', 'Nick');
     const player4 = new Player('4', 'Josie');
     const game2 = new Game('2', 'Funner', [player3, player4]);
-    let updatedGames = handleGameLeave(mockIO, mockSocket, [game1, game2], payload2);
+    let updatedGames = handleGameLeave(mockedIO, mockSocket, [game1, game2], payload2);
     updatedGames = handleGameLeave(mockIO, mockSocket, [game1, game2], payload);
     expect(updatedGames).toEqual([game2]);
     expect(mockSocket.emit).toHaveBeenCalledTimes(4);

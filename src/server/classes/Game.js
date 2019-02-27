@@ -8,10 +8,19 @@ module.exports = class Game {
     this.queue = [];
     this.pieces = pieceOrder();
     this.active = false;
+    this.leader = this.setLeader();
   }
 
   startGame() {
     this.active = true;
+  }
+
+  setLeader() {
+    return this.players[0].getId();
+  }
+
+  getLeader() {
+    return this.leader;
   }
 
   endGame() {

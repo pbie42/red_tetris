@@ -1,6 +1,6 @@
 import Game from 'server/classes/Game';
 import Player from 'server/classes/Player';
-import { gameCreate } from 'server/channels/game/utils';
+import { gameCreate } from 'server/channels/game/handlers';
 import { Server } from 'mock-socket';
 
 const mockIO = new Server('ws://localhost:8080');
@@ -14,6 +14,13 @@ describe('gameCreate', () => {
     broadcast: {
       emit: jest.fn(),
     },
+    join: jest.fn(),
+  };
+  const mockedIO = {
+    in: jest.fn(() => ({
+      emit: jest.fn(),
+    })),
+    emit: jest.fn(),
   };
   let games = [];
   const roomName = '';
@@ -30,7 +37,7 @@ describe('gameCreate', () => {
   });
 
   it('adds a player to the game if it already exists', () => {
-    games = gameCreate(mockIO, mockSocket, roomName, player2, games);
+    games = gameCreate(mockedIO, mockSocket, roomName, player2, games);
     expect(games.length).toEqual(1);
     expect(games[0].players).toEqual([player, player2]);
     expect(games[0].id).toEqual('1');
@@ -51,10 +58,10 @@ describe('gameCreate', () => {
     const player5 = new Player('5', 'Jalel');
     const player6 = new Player('6', 'Raph');
     const game = new Game(mockSocket.id, roomName, [player, player2, player3, player4, player5]);
-    games = gameCreate(mockIO, mockSocket, roomName, player3, games);
-    games = gameCreate(mockIO, mockSocket, roomName, player4, games);
-    games = gameCreate(mockIO, mockSocket, roomName, player5, games);
-    games = gameCreate(mockIO, mockSocket, roomName, player6, games);
+    games = gameCreate(mockedIO, mockSocket, roomName, player3, games);
+    games = gameCreate(mockedIO, mockSocket, roomName, player4, games);
+    games = gameCreate(mockedIO, mockSocket, roomName, player5, games);
+    games = gameCreate(mockedIO, mockSocket, roomName, player6, games);
     game.addPlayerToQueue(player6);
     expect(games.length).toEqual(1);
     expect(games[0].players).toEqual([player, player2, player3, player4, player5]);

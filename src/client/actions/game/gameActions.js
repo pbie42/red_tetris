@@ -50,16 +50,38 @@ export function gameLeave(playerID, gameID) {
   };
 }
 
+export function gameStart(gameID, playerID) {
+  return {
+    type: types.GAME_START,
+    payload: {
+      gameID,
+      playerID,
+    },
+    channel: 'game',
+  };
+}
+
 export function gameSet({
-  roomName, id, players, queue,
+  active, id, leader, players, queue, roomName,
 }) {
   return {
     type: types.GAME_SET,
     payload: {
-      roomName,
+      active,
       id,
+      leader,
       players,
       queue,
+      roomName,
+    },
+  };
+}
+
+export function gameSetActive(active) {
+  return {
+    type: types.GAME_SET_ACTIVE,
+    payload: {
+      active,
     },
   };
 }

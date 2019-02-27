@@ -1,16 +1,22 @@
 import gameReducer, { gameInitialState } from 'client/reducers/game';
 import {
-  GAME_SET, GAME_RESET, GAME_PLAYERS_UPDATE, GAME_QUEUE_UPDATE,
+  GAME_PLAYERS_UPDATE,
+  GAME_QUEUE_UPDATE,
+  GAME_RESET,
+  GAME_SET_ACTIVE,
+  GAME_SET,
 } from 'client/actions/types';
 import Player from 'server/classes/Player';
 
 it('handles actions of type GAME_SET', () => {
   const player = new Player('1', 'Paul');
   const payload = {
-    roomName: 'Fun',
+    active: false,
     id: '1',
+    leader: player.getId(),
     players: [player],
     queue: [],
+    roomName: 'Fun',
   };
   const action = {
     type: GAME_SET,
@@ -18,11 +24,33 @@ it('handles actions of type GAME_SET', () => {
   };
   const newState = gameReducer(gameInitialState, action);
   expect(newState).toEqual({
+    active: false,
     error: '',
-    roomName: 'Fun',
     id: '1',
+    leader: '1',
     players: [player],
     queue: [],
+    roomName: 'Fun',
+  });
+});
+
+it('handles actions of type GAME_SET_ACTIVE', () => {
+  const payload = {
+    active: true,
+  };
+  const action = {
+    type: GAME_SET_ACTIVE,
+    payload,
+  };
+  const newState = gameReducer(gameInitialState, action);
+  expect(newState).toEqual({
+    active: true,
+    error: '',
+    id: '',
+    leader: '',
+    players: [],
+    queue: [],
+    roomName: '',
   });
 });
 
@@ -33,8 +61,10 @@ it('handles actions of type GAME_RESET', () => {
   };
   const newState = gameReducer(gameInitialState, action);
   expect(newState).toEqual({
+    active: false,
     error: '',
     id: '',
+    leader: '',
     players: [],
     queue: [],
     roomName: '',
@@ -50,8 +80,10 @@ it('handles actions of type GAME_PLAYERS_UPDATE', () => {
   };
   const newState = gameReducer(gameInitialState, action);
   expect(newState).toEqual({
+    active: false,
     error: '',
     id: '',
+    leader: '',
     players: [player1, player2],
     queue: [],
     roomName: '',
@@ -67,8 +99,10 @@ it('handles actions of type GAME_QUEUE_UPDATE', () => {
   };
   const newState = gameReducer(gameInitialState, action);
   expect(newState).toEqual({
+    active: false,
     error: '',
     id: '',
+    leader: '',
     players: [],
     queue: [player1, player2],
     roomName: '',

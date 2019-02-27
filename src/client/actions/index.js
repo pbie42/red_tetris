@@ -6,6 +6,8 @@ import {
   gameQueueUpdate,
   gameReset,
   gameSet,
+  gameSetActive,
+  gameStart,
 } from 'client/actions/game/gameActions';
 
 import { lobbyGamesUpdate, lobbyGetGames } from 'client/actions/lobby/lobbyActions';
@@ -25,6 +27,8 @@ export {
   gameQueueUpdate,
   gameReset,
   gameSet,
+  gameSetActive,
+  gameStart,
   lobbyGamesUpdate,
   lobbyGetGames,
   playerCreate,

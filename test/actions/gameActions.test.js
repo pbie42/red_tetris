@@ -2,22 +2,26 @@ import Player from 'server/classes/Player';
 
 import {
   gameCreate,
-  gameSet,
   gameExists,
   gameLeave,
-  gameReset,
-  gameQueueUpdate,
   gamePlayersUpdate,
+  gameQueueUpdate,
+  gameReset,
+  gameSet,
+  gameSetActive,
+  gameStart,
 } from 'client/actions';
 
 import {
   GAME_CREATE,
-  GAME_SET,
   GAME_EXISTS,
   GAME_LEAVE,
-  GAME_RESET,
-  GAME_QUEUE_UPDATE,
   GAME_PLAYERS_UPDATE,
+  GAME_QUEUE_UPDATE,
+  GAME_RESET,
+  GAME_SET_ACTIVE,
+  GAME_SET,
+  GAME_START,
 } from 'client/actions/types';
 
 describe('gameCreate', () => {
@@ -39,6 +43,7 @@ describe('gameSet', () => {
     roomName: 'Fun',
     id: '1',
     players: [player],
+    leader: player.getId(),
     queue: [],
   };
   it('has the correct type', () => {
@@ -52,6 +57,7 @@ describe('gameSet', () => {
     expect(action.payload).toEqual({
       roomName: 'Fun',
       id: '1',
+      leader: '1',
       players: [player],
       queue: [],
     });
@@ -128,5 +134,34 @@ describe('gameQueueUpdate', () => {
     const player2 = new Player('2', 'Thomas');
     const action = gameQueueUpdate([player1, player2]);
     expect(action.payload).toEqual([player1, player2]);
+  });
+});
+
+describe('gameStart', () => {
+  it('has the correct type', () => {
+    const action = gameStart();
+    expect(action.type).toEqual(GAME_START);
+  });
+
+  it('has the correct payload', () => {
+    const action = gameStart('1', '2');
+    expect(action.payload).toEqual({ gameID: '1', playerID: '2' });
+  });
+
+  it('has a game channel property', () => {
+    const action = gameStart('1', '2');
+    expect(action.channel).toEqual('game');
+  });
+});
+
+describe('gameSetActive', () => {
+  it('has the correct type', () => {
+    const action = gameSetActive();
+    expect(action.type).toEqual(GAME_SET_ACTIVE);
+  });
+
+  it('has the correct payload', () => {
+    const action = gameSetActive(true);
+    expect(action.payload).toEqual({ active: true });
   });
 });

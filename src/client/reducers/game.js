@@ -1,11 +1,13 @@
 import * as types from 'client/actions/types';
 
 export const gameInitialState = {
+  active: false,
   error: '',
   id: '',
   players: [],
   queue: [],
   roomName: '',
+  leader: '',
 };
 
 export default (state = gameInitialState, { type, payload }) => {
@@ -17,9 +19,18 @@ export default (state = gameInitialState, { type, payload }) => {
         ...state,
         error: '',
         id: payload.id,
+        leader: payload.leader,
         players: payload.players,
         queue: payload.queue,
         roomName: payload.roomName,
+      };
+
+    case types.GAME_SET_ACTIVE:
+      console.log('reducer gamesetactive', payload);
+
+      return {
+        ...state,
+        active: payload.active,
       };
 
     case types.GAME_PLAYERS_UPDATE:
