@@ -43,11 +43,14 @@ function handleGameCreate(io, socket, games, players, payload) {
   return updatedGames;
 }
 
-function handleGameLeave(io, socket, games, payload) {
-  const { gameID, playerID } = payload;
+function handleQueuerLeave(io, socket, game, playerID) {
+  game.removePlayerFromQueue(playerID);
+  gameResetSocketEmit(socket);
+  gameQueueUpdateEmit(io, game.getId(), game.getQueue());
+}
+
+function handlePlayerLeave(io, socket, games, game, playerID) {
   let updatedGames = games;
-  const game = updatedGames.find(g => g.getId() === gameID);
-  if (!game || !game.getPlayer(playerID)) return updatedGames;
   game.removePlayer(playerID);
   const queue = game.getQueue();
   const playerCount = game.getPlayersCount();
@@ -58,13 +61,29 @@ function handleGameLeave(io, socket, games, payload) {
     return updatedGames;
   }
   if (playerCount < 5 && queue.length > 0) {
-    const player = queue.shift();
-    game.addPlayer(player);
+    const playerQueued = queue.shift();
+    game.addPlayer(playerQueued);
     gameQueueUpdateEmit(io, game.getId(), game.getQueue());
   }
   gamePlayersUpdateEmit(io, game.getId(), game.getPlayers());
   gameResetSocketEmit(socket);
   lobbyUpdateGamesEmit(updatedGames, io);
+  return updatedGames;
+}
+
+function handleGameLeave(io, socket, games, payload) {
+  const { gameID, playerID } = payload;
+  const updatedGames = games;
+  const game = updatedGames.find(g => g.getId() === gameID);
+  if (!game) return updatedGames;
+  const player = game.getPlayer(playerID);
+  const queuer = game.getPlayerFromQueue(playerID);
+  if (!player && !queuer) return updatedGames;
+  if (player) {
+    player.setActivity(false);
+    return handlePlayerLeave(io, socket, updatedGames, game, playerID);
+  }
+  handleQueuerLeave(io, socket, game, playerID);
   return updatedGames;
 }
 
@@ -75,7 +94,9 @@ function handleGameStart(io, socket, games, payload) {
   if (!game) return updatedGames;
   if (game.getLeader() !== playerID) return updatedGames;
   game.startGame();
+  game.getPlayers.forEach(player => player.setActivity(true));
   gameSetActiveEmit(io, game.getId(), game.getActivity());
+  lobbyUpdateGamesEmit(updatedGames, io);
   return updatedGames;
 }
 

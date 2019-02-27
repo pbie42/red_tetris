@@ -71,6 +71,8 @@ describe('handleGameLeave', () => {
   };
   const player1 = new Player('1', 'Paul');
   const player2 = new Player('2', 'Jen');
+  const player3 = new Player('3', 'Nick');
+  const player4 = new Player('4', 'Josie');
   it('should remove a player from a game', () => {
     const game = new Game('1', 'Fun', [player1, player2]);
     const updatedGames = handleGameLeave(mockedIO, mockSocket, [game], payload);
@@ -82,7 +84,6 @@ describe('handleGameLeave', () => {
 
   it('should add a player from the queue to the active players if there is a queue', () => {
     const game = new Game('1', 'Fun', [player1, player2]);
-    const player3 = new Player('3', 'Nick');
     game.addPlayerToQueue(player3);
     const updatedGames = handleGameLeave(mockedIO, mockSocket, [game], payload);
     const gameClone = new Game('1', 'Fun', [player1, player3]);
@@ -97,12 +98,26 @@ describe('handleGameLeave', () => {
       playerID: '1',
     };
     const game1 = new Game('1', 'Fun', [player1, player2]);
-    const player3 = new Player('3', 'Nick');
-    const player4 = new Player('4', 'Josie');
     const game2 = new Game('2', 'Funner', [player3, player4]);
     let updatedGames = handleGameLeave(mockedIO, mockSocket, [game1, game2], payload2);
     updatedGames = handleGameLeave(mockIO, mockSocket, [game1, game2], payload);
     expect(updatedGames).toEqual([game2]);
     expect(mockSocket.emit).toHaveBeenCalledTimes(4);
+  });
+
+  it('should remove a player from the queue if they are not a player', () => {
+    const payload2 = {
+      gameID: '1',
+      playerID: '6',
+    };
+    const player5 = new Player('5', 'Martha');
+    const player6 = new Player('6', 'Roy');
+    const game1 = new Game('1', 'Fun', [player1, player2, player3, player4, player5]);
+    game1.addPlayerToQueue(player6);
+    expect(game1.queue.length).toEqual(1);
+    const updatedGames = handleGameLeave(mockedIO, mockSocket, [game1], payload2);
+    expect(updatedGames).toEqual([game1]);
+    expect(updatedGames[0].queue.length).toEqual(0);
+    expect(mockSocket.emit).toHaveBeenCalledTimes(5);
   });
 });
