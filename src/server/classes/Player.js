@@ -33,6 +33,7 @@ module.exports = class Player {
     this.id = id;
     this.username = username;
     this.board = newBoard();
+    this.current = 0;
   }
 
   updateBoard(updatedBoard) {
@@ -54,5 +55,13 @@ module.exports = class Player {
 
   getId() {
     return this.id;
+  }
+
+  resetCurrent() {
+    this.current = 0;
+  }
+
+  updateCurrent() {
+    this.current += 1;
   }
 };

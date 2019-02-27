@@ -1,13 +1,18 @@
 import Game from 'server/classes/Game';
 import Player from 'server/classes/Player';
 
+jest.mock('server/classes/utils/pieceOrder', () => () => [{ piece: 'l' }, { piece: 't' }]);
+
 describe('Game Class', () => {
   const player = new Player('1', 'Paul');
   const player2 = new Player('2', 'Jen');
   const player3 = new Player('3', 'Michael');
   const game = new Game('1', 'Fun', [player]);
   it('creates a new game with given id, roomName, and players', () => {
-    expect(game).toEqual(new Game('1', 'Fun', [player]));
+    expect(game.players).toEqual([player]);
+    expect(game.queue).toEqual([]);
+    expect(game.id).toEqual('1');
+    expect(game.pieces.length).toEqual(2);
     expect(game.getActivity()).toEqual(false);
   });
 
@@ -55,11 +60,23 @@ describe('Game Class', () => {
     expect(game.getPlayer('1')).toEqual(player);
   });
 
+  it('can return the next piece in line based on player current', () => {
+    const playerForCurrent = game.getPlayer('1');
+    expect(game.getNextPiece(playerForCurrent.current)).toEqual({ piece: 'l' });
+    playerForCurrent.updateCurrent();
+    expect(game.getNextPiece(playerForCurrent.current)).toEqual({ piece: 't' });
+  });
+
+  it("can add new pieces to it's pieces array", () => {
+    game.getNewPieces();
+    expect(game.getPieces().length).toEqual(4);
+  });
+
   it("can return all of it's info at once", () => {
     expect(game.getInfo()).toEqual({
       active: false,
       id: '1',
-      pieces: [],
+      pieces: [{ piece: 'l' }, { piece: 't' }, { piece: 'l' }, { piece: 't' }],
       players: [player, player2],
       queue: [player3],
       roomName: 'Fun',

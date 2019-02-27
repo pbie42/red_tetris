@@ -53,6 +53,16 @@ describe('Player Class', () => {
     expect(player.getInfo()).toEqual({ id: 1, username: 'Paul', board: newBoard() });
   });
 
+  it('can increase current by 1', () => {
+    player.updateCurrent();
+    expect(player.current).toEqual(1);
+  });
+
+  it('can reset current', () => {
+    player.resetCurrent();
+    expect(player.current).toEqual(0);
+  });
+
   it('can update the board', () => {
     const updatedBoard = [
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],

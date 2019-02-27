@@ -67,7 +67,9 @@ describe('handleGameLeave', () => {
   it('should remove a player from a game', () => {
     const game = new Game('1', 'Fun', [player1, player2]);
     const updatedGames = handleGameLeave(mockIO, mockSocket, [game], payload);
-    expect(updatedGames).toEqual([new Game('1', 'Fun', [player1])]);
+    const gameCompare = new Game('1', 'Fun', [player1]);
+    gameCompare.pieces = game.getPieces();
+    expect(updatedGames).toEqual([gameCompare]);
     expect(mockSocket.emit).toHaveBeenCalledTimes(1);
   });
 
@@ -77,6 +79,7 @@ describe('handleGameLeave', () => {
     game.addPlayerToQueue(player3);
     const updatedGames = handleGameLeave(mockIO, mockSocket, [game], payload);
     const gameClone = new Game('1', 'Fun', [player1, player3]);
+    gameClone.pieces = game.getPieces();
     expect(updatedGames).toEqual([gameClone]);
     expect(mockSocket.emit).toHaveBeenCalledTimes(2);
   });

@@ -1,10 +1,12 @@
+const pieceOrder = require('./utils/pieceOrder');
+
 module.exports = class Game {
   constructor(id, roomName, players) {
     this.id = id;
     this.roomName = roomName;
     this.players = players;
     this.queue = [];
-    this.pieces = [];
+    this.pieces = pieceOrder();
     this.active = false;
   }
 
@@ -42,6 +44,18 @@ module.exports = class Game {
 
   addPlayerToQueue(player) {
     return this.queue.push(player);
+  }
+
+  getNewPieces() {
+    this.pieces = this.pieces.concat(pieceOrder());
+  }
+
+  getNextPiece(i) {
+    return this.pieces[i];
+  }
+
+  getPieces() {
+    return this.pieces;
   }
 
   getQueue() {
