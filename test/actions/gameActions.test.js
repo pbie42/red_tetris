@@ -156,7 +156,7 @@ describe('gameStart', () => {
 
 describe('gameSetActive', () => {
   it('has the correct type', () => {
-    const action = gameSetActive();
+    const action = gameSetActive(true);
     expect(action.type).toEqual(GAME_SET_ACTIVE);
   });
 

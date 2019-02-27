@@ -75,7 +75,7 @@ function handleGameStart(io, socket, games, payload) {
   if (!game) return updatedGames;
   if (game.getLeader() !== playerID) return updatedGames;
   game.startGame();
-  gameSetActiveEmit(io, game.getId(), game.getActive());
+  gameSetActiveEmit(io, game.getId(), game.getActivity());
   return updatedGames;
 }
 

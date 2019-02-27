@@ -33,7 +33,7 @@ function handleKeyDown(e) {
 
 function Game(props) {
   const {
-    gameLeave, playerID, gameID, players, playerRemove, username,
+    gameLeave, playerID, gameID, players, playerRemove, username, gameStart, leader,
   } = props;
   document.addEventListener('keydown', handleKeyDown);
   window.addEventListener('beforeunload', (e) => {
@@ -47,6 +47,12 @@ function Game(props) {
       <button type="submit" onClick={() => gameLeave(playerID, gameID)}>
         Leave Game
       </button>
+      {leader === playerID && (
+        <button type="submit" onClick={() => gameStart(gameID, playerID)}>
+          Start Game
+        </button>
+      )
+      }
       <h1 id="game-title">This is the game page</h1>
       {Board({ board: players.find(p => p.id === playerID).board })}
     </div>
@@ -56,6 +62,8 @@ function Game(props) {
 Game.propTypes = {
   gameID: PropTypes.string.isRequired,
   gameLeave: PropTypes.func.isRequired,
+  gameStart: PropTypes.func.isRequired,
+  leader: PropTypes.string.isRequired,
   playerID: PropTypes.string.isRequired,
   playerRemove: PropTypes.func.isRequired,
   players: PropTypes.arrayOf(PropTypes.shape({
@@ -70,6 +78,7 @@ Game.propTypes = {
 
 function mapStateToProps(state) {
   return {
+    leader: state.game.leader,
     gameID: state.game.id,
     playerID: state.player.id,
     players: state.game.players,
