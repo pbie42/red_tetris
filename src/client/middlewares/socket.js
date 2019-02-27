@@ -41,8 +41,12 @@ export default ({ dispatch }) => next => (action) => {
         dispatch(actions.gameSet(event.payload));
         break;
       case types.GAME_SET_ACTIVE:
-        console.log('about to gameSet', event.payload);
+        console.log('about to gameSetactive', event.payload);
         dispatch(actions.gameSetActive(event.payload));
+        break;
+      case types.GAME_SET_NEW_LEADER:
+        console.log('about to gameSetnewleader', event.payload);
+        dispatch(actions.gameSetNewLeader(event.payload));
         break;
       case types.GAME_PLAYERS_UPDATE:
         console.log('about to gamePlayersUpdate', event.payload);

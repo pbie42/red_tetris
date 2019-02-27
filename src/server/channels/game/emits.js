@@ -4,6 +4,7 @@ const {
   GAME_RESET,
   GAME_SET,
   GAME_SET_ACTIVE,
+  GAME_SET_NEW_LEADER,
   LOBBY_GAMES_UPDATE,
 } = require('../../actions/types');
 
@@ -56,7 +57,15 @@ function gameQueueUpdateEmit(io, gameID, queue) {
   });
 }
 
+function gameNewLeaderEmit(io, gameID, leader) {
+  io.in(gameID).emit('game', {
+    payload: leader,
+    type: GAME_SET_NEW_LEADER,
+  });
+}
+
 module.exports = {
+  gameNewLeaderEmit,
   gamePlayersUpdateEmit,
   gameQueueUpdateEmit,
   gameResetSocketEmit,

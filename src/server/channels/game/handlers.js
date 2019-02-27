@@ -1,6 +1,7 @@
 const uniqid = require('uniqid');
 const Game = require('../../classes/Game');
 const {
+  gameNewLeaderEmit,
   gamePlayersUpdateEmit,
   gameQueueUpdateEmit,
   gameResetSocketEmit,
@@ -52,6 +53,7 @@ function handleQueuerLeave(io, socket, game, playerID) {
 function handlePlayerLeave(io, socket, games, game, playerID) {
   let updatedGames = games;
   game.removePlayer(playerID);
+  socket.leave(game.getId());
   const queue = game.getQueue();
   const playerCount = game.getPlayersCount();
   if (playerCount === 0 && queue.length === 0) {
@@ -64,6 +66,10 @@ function handlePlayerLeave(io, socket, games, game, playerID) {
     const playerQueued = queue.shift();
     game.addPlayer(playerQueued);
     gameQueueUpdateEmit(io, game.getId(), game.getQueue());
+  }
+  if (playerID === game.getLeader()) {
+    game.setNewLeader();
+    gameNewLeaderEmit(io, game.getId(), game.getLeader());
   }
   gamePlayersUpdateEmit(io, game.getId(), game.getPlayers());
   gameResetSocketEmit(socket);

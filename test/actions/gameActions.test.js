@@ -9,6 +9,7 @@ import {
   gameReset,
   gameSet,
   gameSetActive,
+  gameSetNewLeader,
   gameStart,
 } from 'client/actions';
 
@@ -20,6 +21,7 @@ import {
   GAME_QUEUE_UPDATE,
   GAME_RESET,
   GAME_SET_ACTIVE,
+  GAME_SET_NEW_LEADER,
   GAME_SET,
   GAME_START,
 } from 'client/actions/types';
@@ -163,5 +165,17 @@ describe('gameSetActive', () => {
   it('has the correct payload', () => {
     const action = gameSetActive(true);
     expect(action.payload).toEqual({ active: true });
+  });
+});
+
+describe('gameSetNewLeader', () => {
+  it('has the correct type', () => {
+    const action = gameSetNewLeader(true);
+    expect(action.type).toEqual(GAME_SET_NEW_LEADER);
+  });
+
+  it('has the correct payload', () => {
+    const action = gameSetNewLeader('dsalijfda');
+    expect(action.payload).toEqual({ leader: 'dsalijfda' });
   });
 });

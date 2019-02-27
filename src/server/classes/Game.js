@@ -79,6 +79,10 @@ module.exports = class Game {
     return this.queue;
   }
 
+  setNewLeader() {
+    this.leader = this.players[0].getId();
+  }
+
   getInfo() {
     const {
       active, id, roomName, players, queue, pieces,

@@ -33,6 +33,14 @@ export default (state = gameInitialState, { type, payload }) => {
         active: payload.active,
       };
 
+    case types.GAME_SET_NEW_LEADER:
+      console.log('reducer gamesetnewleader', payload);
+
+      return {
+        ...state,
+        leader: payload.leader,
+      };
+
     case types.GAME_PLAYERS_UPDATE:
       console.log('reducer gameplayersupdate', payload);
       return {

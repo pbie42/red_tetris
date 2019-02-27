@@ -85,3 +85,12 @@ export function gameSetActive(active) {
     },
   };
 }
+
+export function gameSetNewLeader(leader) {
+  return {
+    type: types.GAME_SET_NEW_LEADER,
+    payload: {
+      leader,
+    },
+  };
+}

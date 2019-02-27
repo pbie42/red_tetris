@@ -14,6 +14,7 @@ describe('gameSocket', () => {
       emit: jest.fn(),
     },
     join: jest.fn(),
+    leave: jest.fn(),
   };
   let games = [];
   const username = 'Paul';
@@ -58,6 +59,7 @@ describe('handleGameLeave', () => {
     broadcast: {
       emit: jest.fn(),
     },
+    leave: jest.fn(),
   };
   const mockedIO = {
     in: jest.fn(() => ({
