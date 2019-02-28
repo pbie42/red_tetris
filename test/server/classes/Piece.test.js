@@ -9,6 +9,8 @@ import {
   positionsZ,
 } from 'server/classes/utils/piecePositions';
 
+jest.mock('server/classes/utils/randomX', () => () => 4);
+
 describe('Piece Class', () => {
   const piece = new Piece('l', 2);
   it('creates a new piece with given shape', () => {

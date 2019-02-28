@@ -1,3 +1,4 @@
+const randomX = require('./utils/randomX');
 const {
   positionsI,
   positionsJ,
@@ -12,6 +13,7 @@ module.exports = class Piece {
   constructor(piece, position) {
     this.piece = piece;
     this.position = position;
+    this.location = { x: randomX(), y: 0 };
   }
 
   getPiece() {
