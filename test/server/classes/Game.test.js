@@ -1,9 +1,15 @@
 import Game from 'server/classes/Game';
 import Player from 'server/classes/Player';
+import Piece from 'server/classes/Piece';
 
-jest.mock('server/classes/utils/pieceOrder', () => () => [{ piece: 'l' }, { piece: 't' }]);
+jest.mock('server/classes/utils/pieceOrder', () => () => [
+  { piece: 'l', position: 1 },
+  { piece: 't', position: 3 },
+]);
 
 describe('Game Class', () => {
+  const pieceL = new Piece('l', 1);
+  const pieceT = new Piece('t', 3);
   const player = new Player('1', 'Paul');
   const player2 = new Player('2', 'Jen');
   const player3 = new Player('3', 'Michael');
@@ -62,9 +68,9 @@ describe('Game Class', () => {
 
   it('can return the next piece in line based on player current', () => {
     const playerForCurrent = game.getPlayer('1');
-    expect(game.getNextPiece(playerForCurrent.current)).toEqual({ piece: 'l' });
+    expect(game.getNextPiece(playerForCurrent.current)).toEqual(pieceL);
     playerForCurrent.updateCurrent();
-    expect(game.getNextPiece(playerForCurrent.current)).toEqual({ piece: 't' });
+    expect(game.getNextPiece(playerForCurrent.current)).toEqual(pieceT);
   });
 
   it("can add new pieces to it's pieces array", () => {
@@ -76,7 +82,7 @@ describe('Game Class', () => {
     expect(game.getInfo()).toEqual({
       active: false,
       id: '1',
-      pieces: [{ piece: 'l' }, { piece: 't' }, { piece: 'l' }, { piece: 't' }],
+      pieces: [pieceL, pieceT, pieceL, pieceT],
       players: [player, player2],
       queue: [player3],
       roomName: 'Fun',
