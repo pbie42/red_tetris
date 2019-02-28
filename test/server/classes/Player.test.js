@@ -63,6 +63,11 @@ describe('Player Class', () => {
     expect(player.current).toEqual(0);
   });
 
+  it("can get the player's activity", () => {
+    const activity = player.getActivity();
+    expect(activity).toEqual(false);
+  });
+
   it('can update the board', () => {
     const updatedBoard = [
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],

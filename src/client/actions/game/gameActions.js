@@ -77,6 +77,15 @@ export function gameSet({
   };
 }
 
+export function gameSetPiece({ piece }) {
+  return {
+    type: types.GAME_SET_PIECE,
+    payload: {
+      piece,
+    },
+  };
+}
+
 export function gameSetActive(active) {
   return {
     type: types.GAME_SET_ACTIVE,

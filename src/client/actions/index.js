@@ -8,6 +8,7 @@ import {
   gameSet,
   gameSetActive,
   gameSetNewLeader,
+  gameSetPiece,
   gameStart,
 } from 'client/actions/game/gameActions';
 
@@ -30,6 +31,7 @@ export {
   gameSet,
   gameSetActive,
   gameSetNewLeader,
+  gameSetPiece,
   gameStart,
   lobbyGamesUpdate,
   lobbyGetGames,

@@ -4,6 +4,7 @@ export const gameInitialState = {
   active: false,
   error: '',
   id: '',
+  piece: {},
   players: [],
   queue: [],
   roomName: '',
@@ -31,6 +32,13 @@ export default (state = gameInitialState, { type, payload }) => {
       return {
         ...state,
         active: payload.active,
+      };
+    case types.GAME_SET_PIECE:
+      console.log('reducer gamesetpiece', payload);
+
+      return {
+        ...state,
+        piece: payload.piece,
       };
 
     case types.GAME_SET_NEW_LEADER:

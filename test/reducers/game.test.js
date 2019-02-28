@@ -4,6 +4,8 @@ import {
   GAME_QUEUE_UPDATE,
   GAME_RESET,
   GAME_SET_ACTIVE,
+  GAME_SET_PIECE,
+  GAME_SET_NEW_LEADER,
   GAME_SET,
 } from 'client/actions/types';
 import Player from 'server/classes/Player';
@@ -28,6 +30,7 @@ it('handles actions of type GAME_SET', () => {
     error: '',
     id: '1',
     leader: '1',
+    piece: {},
     players: [player],
     queue: [],
     roomName: 'Fun',
@@ -48,6 +51,7 @@ it('handles actions of type GAME_SET_ACTIVE', () => {
     error: '',
     id: '',
     leader: '',
+    piece: {},
     players: [],
     queue: [],
     roomName: '',
@@ -65,6 +69,7 @@ it('handles actions of type GAME_RESET', () => {
     error: '',
     id: '',
     leader: '',
+    piece: {},
     players: [],
     queue: [],
     roomName: '',
@@ -84,6 +89,7 @@ it('handles actions of type GAME_PLAYERS_UPDATE', () => {
     error: '',
     id: '',
     leader: '',
+    piece: {},
     players: [player1, player2],
     queue: [],
     roomName: '',
@@ -103,8 +109,49 @@ it('handles actions of type GAME_QUEUE_UPDATE', () => {
     error: '',
     id: '',
     leader: '',
+    piece: {},
     players: [],
     queue: [player1, player2],
+    roomName: '',
+  });
+});
+
+it('handles actions of type GAME_SET_PIECE', () => {
+  const action = {
+    type: GAME_SET_PIECE,
+    payload: {
+      piece: { piece: 'l' },
+    },
+  };
+  const newState = gameReducer(gameInitialState, action);
+  expect(newState).toEqual({
+    active: false,
+    error: '',
+    id: '',
+    leader: '',
+    piece: { piece: 'l' },
+    players: [],
+    queue: [],
+    roomName: '',
+  });
+});
+
+it('handles actions of type GAME_SET_NEW_LEADER', () => {
+  const action = {
+    type: GAME_SET_NEW_LEADER,
+    payload: {
+      leader: 'ioejaqwf',
+    },
+  };
+  const newState = gameReducer(gameInitialState, action);
+  expect(newState).toEqual({
+    active: false,
+    error: '',
+    id: '',
+    leader: 'ioejaqwf',
+    piece: {},
+    players: [],
+    queue: [],
     roomName: '',
   });
 });

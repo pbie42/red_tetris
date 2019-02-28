@@ -16,6 +16,7 @@ export const GAME_RESET = 'GAME_RESET';
 export const GAME_SET = 'GAME_SET';
 export const GAME_SET_ACTIVE = 'GAME_SET_ACTIVE';
 export const GAME_SET_NEW_LEADER = 'GAME_SET_NEW_LEADER';
+export const GAME_SET_PIECE = 'GAME_SET_PIECE';
 export const GAME_START = 'GAME_START';
 
 // -----------------------------------------------------------------------Player
