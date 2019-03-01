@@ -2,11 +2,19 @@ import Game from 'server/classes/Game';
 import Player from 'server/classes/Player';
 import Piece from 'server/classes/Piece';
 
-jest.mock('server/classes/utils/randomX', () => () => 4);
-
 jest.mock('server/classes/utils/pieceOrder', () => () => [
-  { piece: 'l', position: 1, location: { x: 4, y: 0 } },
-  { piece: 't', position: 3, location: { x: 4, y: 0 } },
+  {
+    piece: 'l',
+    position: 1,
+    location: { x: 3, y: 0 },
+    active: true,
+  },
+  {
+    piece: 't',
+    position: 3,
+    location: { x: 3, y: 0 },
+    active: true,
+  },
 ]);
 
 describe('Game Class', () => {

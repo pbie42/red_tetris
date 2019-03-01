@@ -6,7 +6,7 @@ function selectPosition() {
 
 function randomPiece() {
   const pieces = ['i', 'j', 'l', 'o', 's', 't', 'z'];
-  return new Piece(pieces[Math.floor(Math.random() * pieces.length)], selectPosition());
+  return new Piece(pieces[Math.floor(Math.random() * pieces.length)], 0);
 }
 
 module.exports = {
