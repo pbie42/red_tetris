@@ -20,6 +20,10 @@ module.exports = class Piece {
     this.active = bool;
   }
 
+  getPosition() {
+    return this.position;
+  }
+
   nextPosition() {
     if (this.position === 3) this.position = 0;
     else this.position += 1;
@@ -35,5 +39,14 @@ module.exports = class Piece {
 
   getShape() {
     return getShape(this.piece, this.position);
+  }
+
+  getInfo() {
+    return {
+      letter: this.piece,
+      position: this.position,
+      location: this.location,
+      shape: this.getShape(),
+    };
   }
 };
