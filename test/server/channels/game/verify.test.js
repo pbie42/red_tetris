@@ -36,7 +36,8 @@ describe('verifyPlacement', () => {
     ];
     const location = piece1.getLocation();
     const shape = piece1.getShape();
-    const canPlace = verifyPlacement(location, shape, board, 0);
+    const letter = piece1.getPiece();
+    const canPlace = verifyPlacement(location, shape, board, letter);
     expect(canPlace).toBeTruthy();
   });
 
@@ -70,7 +71,8 @@ describe('verifyPlacement', () => {
     ];
     const location = piece1.getLocation();
     const shape = piece1.getShape();
-    const canPlace = verifyPlacement(location, shape, board, 0);
+    const letter = piece1.getPiece();
+    const canPlace = verifyPlacement(location, shape, board, letter);
     expect(canPlace).toBeFalsy();
   });
 
@@ -80,7 +82,8 @@ describe('verifyPlacement', () => {
     const board = newBoard();
     const location = pieceI.getLocation();
     const shape = pieceI.getShape();
-    const canPlace = verifyPlacement(location, shape, board, 0);
+    const letter = pieceI.getPiece();
+    const canPlace = verifyPlacement(location, shape, board, letter);
     expect(canPlace).toBeTruthy();
   });
 
@@ -90,7 +93,8 @@ describe('verifyPlacement', () => {
     const board = newBoard();
     const location = pieceT.getLocation();
     const shape = pieceT.getShape();
-    const canPlace = verifyPlacement(location, shape, board, 0);
+    const letter = pieceT.getPiece();
+    const canPlace = verifyPlacement(location, shape, board, letter);
     expect(canPlace).toBeTruthy();
   });
 
@@ -100,7 +104,30 @@ describe('verifyPlacement', () => {
     const board = newBoard();
     const location = pieceI.getLocation();
     const shape = pieceI.getShape();
-    const canPlace = verifyPlacement(location, shape, board, 0);
+    const letter = pieceI.getPiece();
+    const canPlace = verifyPlacement(location, shape, board, letter);
     expect(canPlace).toBeTruthy();
+  });
+
+  it('should return false for a piece that is out of bounds on left', () => {
+    const pieceI = new Piece('i', 1);
+    pieceI.setLocation({ x: -3, y: 0 });
+    const board = newBoard();
+    const location = pieceI.getLocation();
+    const shape = pieceI.getShape();
+    const letter = pieceI.getPiece();
+    const canPlace = verifyPlacement(location, shape, board, letter);
+    expect(canPlace).toBeFalsy();
+  });
+
+  it('should return false for a piece that is out of bounds on right', () => {
+    const pieceI = new Piece('i', 1);
+    pieceI.setLocation({ x: 9, y: 0 });
+    const board = newBoard();
+    const location = pieceI.getLocation();
+    const shape = pieceI.getShape();
+    const letter = pieceI.getPiece();
+    const canPlace = verifyPlacement(location, shape, board, letter);
+    expect(canPlace).toBeFalsy();
   });
 });

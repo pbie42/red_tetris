@@ -57,14 +57,26 @@ describe('gameCreate', () => {
     const player4 = new Player('4', 'Thomas');
     const player5 = new Player('5', 'Jalel');
     const player6 = new Player('6', 'Raph');
-    const game = new Game(mockSocket.id, roomName, [player, player2, player3, player4, player5]);
+    const game = new Game(mockSocket.id, roomName, [
+      player,
+      player2,
+      player3,
+      player4,
+      player5,
+    ]);
     games = gameCreate(mockedIO, mockSocket, roomName, player3, games);
     games = gameCreate(mockedIO, mockSocket, roomName, player4, games);
     games = gameCreate(mockedIO, mockSocket, roomName, player5, games);
     games = gameCreate(mockedIO, mockSocket, roomName, player6, games);
     game.addPlayerToQueue(player6);
     expect(games.length).toEqual(1);
-    expect(games[0].players).toEqual([player, player2, player3, player4, player5]);
+    expect(games[0].players).toEqual([
+      player,
+      player2,
+      player3,
+      player4,
+      player5,
+    ]);
     expect(games[0].queue).toEqual([player6]);
     expect(games[0].id).toEqual('1');
     expect(games[0].pieces.length).toEqual(100);
