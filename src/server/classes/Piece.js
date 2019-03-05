@@ -4,7 +4,7 @@ module.exports = class Piece {
   constructor(piece, position) {
     this.piece = piece;
     this.position = position;
-    this.location = { x: 3, y: 0 };
+    this.location = piece !== 'i' ? { x: 3, y: 0 } : { x: 3, y: -1 };
     this.active = true;
   }
 

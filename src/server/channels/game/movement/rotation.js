@@ -13,6 +13,7 @@ function rotatePiece(board, piece) {
     testLocations = testLocations.concat([
       { x: location.x + 2, y: location.y },
       { x: location.x - 2, y: location.y },
+      { x: location.x, y: location.y + 1 },
     ]);
   }
   const newLocation = testLocations.find(l => verifyPlacement(l, nextShape, board, letter));

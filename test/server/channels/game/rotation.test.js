@@ -5,10 +5,18 @@ import newBoard from 'server/classes/utils/newBoard';
 describe('rotatePiece', () => {
   const pieceI = new Piece('i', 0);
   it('should return same location if the piece can be rotated in place but change piece position', () => {
+    const pieceT = new Piece('t', 0);
     const board = newBoard();
-    const location = pieceI.getLocation();
-    const newLocation = rotatePiece(board, pieceI);
+    const location = pieceT.getLocation();
+    const newLocation = rotatePiece(board, pieceT);
     expect(newLocation).toEqual(location);
+    expect(pieceT.getPosition()).toEqual(1);
+  });
+
+  it('should return a new location if the piece is I and can be rotated in place but must be moved down one position at the start', () => {
+    const board = newBoard();
+    const newLocation = rotatePiece(board, pieceI);
+    expect(newLocation).toEqual({ x: 3, y: 0 });
     expect(pieceI.getPosition()).toEqual(1);
   });
 
