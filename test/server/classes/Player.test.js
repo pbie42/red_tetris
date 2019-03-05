@@ -13,6 +13,10 @@ describe('Player Class', () => {
     expect(player.getBoard()).toEqual(newBoard());
   });
 
+  it('can return a the displayBoard', () => {
+    expect(player.getDisplayBoard()).toEqual(newBoard());
+  });
+
   it('can return the username', () => {
     expect(player.getUsername()).toEqual('Paul');
   });
@@ -65,5 +69,31 @@ describe('Player Class', () => {
     ];
     player.updateBoard(updatedBoard);
     expect(player.getBoard()).toEqual(updatedBoard);
+  });
+  it('can update the display board', () => {
+    const updatedBoard = [
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 'l', 0, 0, 0],
+      [0, 0, 0, 0, 'l', 'l', 'l', 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    ];
+    player.updateDisplayBoard(updatedBoard);
+    expect(player.getDisplayBoard()).toEqual(updatedBoard);
   });
 });

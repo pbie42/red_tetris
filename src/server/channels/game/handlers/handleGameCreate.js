@@ -19,14 +19,14 @@ function addNewPlayerToExistingRoom(io, socket, foundGame, player) {
   foundGame.addPlayer(player);
   socket.join(foundGame.getId());
   gameSetSocketEmit(foundGame, socket);
-  gamePlayersUpdateEmit(io, foundGame.getId(), foundGame.getPlayers());
+  gamePlayersUpdateEmit(io, foundGame.getId(), foundGame.getPlayersFront());
 }
 
 function addNewPlayerToRoomQueue(io, socket, foundGame, player) {
   socket.join(foundGame.getId());
   foundGame.addPlayerToQueue(player);
   gameSetSocketEmit(foundGame, socket);
-  gameQueueUpdateEmit(io, foundGame.getId(), foundGame.getQueue());
+  gameQueueUpdateEmit(io, foundGame.getId(), foundGame.getQueueFront());
 }
 
 function gameCreate(io, socket, roomName, player, gamesArray) {

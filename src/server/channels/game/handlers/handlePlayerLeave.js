@@ -39,7 +39,7 @@ function handlePlayerLeave(io, socket, games, game, playerID) {
   if (playerCount === 0 && queue.length === 0) return removeGame(io, games, gameID);
   if (playerCount < 5 && queue.length > 0) movePlayerFromQueue(io, game);
   if (playerID === game.getLeader()) setNewLeader(io, game);
-  gamePlayersUpdateEmit(io, gameID, game.getPlayers());
+  gamePlayersUpdateEmit(io, gameID, game.getPlayersFront());
   lobbyUpdateGamesEmit(updatedGames, io);
   return updatedGames;
 }

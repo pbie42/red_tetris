@@ -5,7 +5,7 @@ function lobbySocket(socket, games, event) {
   switch (type) {
     case 'LOBBY_GET_GAMES':
       socket.emit('lobby', {
-        payload: games,
+        payload: games.map(g => g.getInfoFront()),
         type: LOBBY_GAMES_UPDATE,
       });
       break;

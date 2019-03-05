@@ -18,6 +18,14 @@ module.exports = class Player {
     return this.board;
   }
 
+  getDisplayBoard() {
+    return this.displayBoard;
+  }
+
+  updateDisplayBoard(updatedBoard) {
+    this.displayBoard = updatedBoard;
+  }
+
   getInfo() {
     const { id, username, board } = this;
     return { id, username, board };

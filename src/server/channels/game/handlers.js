@@ -11,7 +11,7 @@ const {
 function handleQueuerLeave(io, socket, game, playerID) {
   game.removePlayerFromQueue(playerID);
   gameResetSocketEmit(socket);
-  gameQueueUpdateEmit(io, game.getId(), game.getQueue());
+  gameQueueUpdateEmit(io, game.getId(), game.getQueueFront());
 }
 
 function handleGameLeave(io, socket, games, payload) {

@@ -54,6 +54,16 @@ describe('Game Class', () => {
     expect(game.getPlayers()).toEqual([player]);
   });
 
+  it('can return the players with only relevant information to the front', () => {
+    expect(game.getPlayersFront()).toEqual([
+      {
+        id: player.getId(),
+        username: player.getUsername(),
+        board: player.getDisplayBoard(),
+      },
+    ]);
+  });
+
   it('can add a player to itself', () => {
     game.addPlayer(player2);
     expect(game.getPlayers()).toEqual([player, player2]);
@@ -96,6 +106,16 @@ describe('Game Class', () => {
       players: [player, player2],
       queue: [player3],
       roomName: 'Fun',
+    });
+  });
+
+  it("can return all of it's relevant info for the front at once", () => {
+    expect(game.getInfoFront()).toEqual({
+      id: game.getId(),
+      roomName: game.getRoomName(),
+      players: game.getPlayersFront(),
+      active: game.getActivity(),
+      leader: game.getLeader(),
     });
   });
 });

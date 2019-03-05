@@ -39,6 +39,14 @@ module.exports = class Game {
     return this.players;
   }
 
+  getPlayersFront() {
+    return this.players.map(p => ({
+      id: p.getId(),
+      username: p.getUsername(),
+      board: p.getDisplayBoard(),
+    }));
+  }
+
   getPlayersCount() {
     return this.players.length;
   }
@@ -79,6 +87,14 @@ module.exports = class Game {
     return this.queue;
   }
 
+  getQueueFront() {
+    return this.queue.map(p => ({
+      id: p.getId(),
+      username: p.getUsername(),
+      board: p.getDisplayBoard(),
+    }));
+  }
+
   setNewLeader() {
     this.leader = this.players[0].getId();
   }
@@ -94,6 +110,16 @@ module.exports = class Game {
       players,
       queue,
       roomName,
+    };
+  }
+
+  getInfoFront() {
+    return {
+      id: this.getId(),
+      roomName: this.getRoomName(),
+      players: this.getPlayersFront(),
+      active: this.getActivity(),
+      leader: this.getLeader(),
     };
   }
 

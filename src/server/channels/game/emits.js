@@ -11,7 +11,7 @@ const {
 
 function lobbyUpdateGamesEmit(games, io) {
   io.emit('lobby', {
-    payload: games,
+    payload: games.map(g => g.getInfoFront()),
     type: LOBBY_GAMES_UPDATE,
   });
 }
@@ -42,8 +42,8 @@ function gameSetSocketEmit(game, socket) {
       error: '',
       id: game.getId(),
       leader: game.getLeader(),
-      players: game.getPlayers(),
-      queue: game.getQueue(),
+      players: game.getPlayersFront(),
+      queue: game.getQueueFront(),
       roomName: game.getRoomName(),
     },
     type: GAME_SET,
