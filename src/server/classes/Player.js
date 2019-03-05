@@ -1,3 +1,4 @@
+const Piece = require('./Piece');
 const newBoard = require('./utils/newBoard');
 
 module.exports = class Player {
@@ -8,6 +9,7 @@ module.exports = class Player {
     this.displayBoard = newBoard();
     this.current = 0;
     this.active = false;
+    this.piece = {};
   }
 
   updateBoard(updatedBoard) {
@@ -45,6 +47,14 @@ module.exports = class Player {
 
   setActivity(bool) {
     this.active = bool;
+  }
+
+  setPiece(letter, position) {
+    this.piece = new Piece(letter, position);
+  }
+
+  getPiece() {
+    return this.piece;
   }
 
   resetCurrent() {

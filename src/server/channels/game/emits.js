@@ -22,7 +22,6 @@ function gameResetSocketEmit(socket) {
     type: GAME_RESET,
   });
 }
-
 function gameSendFirstPieceEmit(io, game) {
   const piece = game.getNextPiece(0);
   io.in(game.getId()).emit('game', {
