@@ -17,7 +17,6 @@ function calcPieceStart(shape, piece) {
     let y = 0;
     while (y < shape[0].length) {
       const current = shape[y][x];
-      console.log('current', current);
       if (current === piece) return x;
       y += 1;
     }

@@ -14,7 +14,7 @@ export const gameInitialState = {
 export default (state = gameInitialState, { type, payload }) => {
   switch (type) {
     case types.GAME_SET:
-      console.log('reducer gameset', payload);
+      console.log('reducer gameset');
 
       return {
         ...state,
@@ -27,14 +27,14 @@ export default (state = gameInitialState, { type, payload }) => {
       };
 
     case types.GAME_SET_ACTIVE:
-      console.log('reducer gamesetactive', payload);
+      console.log('reducer gamesetactive');
 
       return {
         ...state,
         active: payload.active,
       };
     case types.GAME_SET_PIECE:
-      console.log('reducer gamesetpiece', payload);
+      console.log('reducer gamesetpiece');
 
       return {
         ...state,
@@ -42,7 +42,7 @@ export default (state = gameInitialState, { type, payload }) => {
       };
 
     case types.GAME_SET_NEW_LEADER:
-      console.log('reducer gamesetnewleader', payload);
+      console.log('reducer gamesetnewleader');
 
       return {
         ...state,
@@ -50,21 +50,21 @@ export default (state = gameInitialState, { type, payload }) => {
       };
 
     case types.GAME_PLAYERS_UPDATE:
-      console.log('reducer gameplayersupdate', payload);
+      console.log('reducer gameplayersupdate');
       return {
         ...state,
         players: payload,
       };
 
     case types.GAME_QUEUE_UPDATE:
-      console.log('reducer gamequeueupdate', payload);
+      console.log('reducer gamequeueupdate');
       return {
         ...state,
         queue: payload,
       };
 
     case types.GAME_RESET:
-      console.log('reducer game reset', payload);
+      console.log('reducer game reset');
       return gameInitialState;
 
     default:

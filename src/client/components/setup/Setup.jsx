@@ -5,7 +5,6 @@ import ReactRouterPropTypes from 'react-router-prop-types';
 import { Redirect } from 'react-router-dom';
 
 function Setup(props) {
-  console.log('props setup', props);
   const {
     username, playerID, roomName, playerCreate, location, gameCreate, playerError,
   } = props;

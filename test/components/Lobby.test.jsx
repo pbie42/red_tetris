@@ -118,7 +118,6 @@ describe('the input', () => {
       },
     });
     wrapped.update();
-    console.log('wrapped.html()', wrapped.html());
     expect(wrapped.find('input').prop('value')).toEqual('Fun');
   });
 
