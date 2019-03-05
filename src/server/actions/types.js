@@ -7,7 +7,6 @@ const GAME_RESET = 'GAME_RESET';
 const GAME_SET = 'GAME_SET';
 const GAME_SET_ACTIVE = 'GAME_SET_ACTIVE';
 const GAME_SET_NEW_LEADER = 'GAME_SET_NEW_LEADER';
-const GAME_SET_PIECE = 'GAME_SET_PIECE';
 
 // ------------------------------------------------------------------------Lobby
 const LOBBY_GAMES_UPDATE = 'LOBBY_GAMES_UPDATE';
@@ -27,7 +26,6 @@ module.exports = {
   GAME_SET,
   GAME_SET_ACTIVE,
   GAME_SET_NEW_LEADER,
-  GAME_SET_PIECE,
   LOBBY_GAMES_UPDATE,
   PLAYER_ADD,
   PLAYER_EXISTS,

@@ -5,7 +5,6 @@ const {
   GAME_SET,
   GAME_SET_ACTIVE,
   GAME_SET_NEW_LEADER,
-  GAME_SET_PIECE,
   LOBBY_GAMES_UPDATE,
 } = require('../../actions/types');
 
@@ -20,18 +19,6 @@ function gameResetSocketEmit(socket) {
   socket.emit('game', {
     payload: {},
     type: GAME_RESET,
-  });
-}
-function gameSendFirstPieceEmit(io, game) {
-  const piece = game.getNextPiece(0);
-  io.in(game.getId()).emit('game', {
-    payload: {
-      piece,
-    },
-    type: GAME_SET_PIECE,
-  });
-  game.getPlayers().forEach((player) => {
-    if (player.getActivity()) player.updateCurrent();
   });
 }
 
@@ -82,7 +69,6 @@ module.exports = {
   gamePlayersUpdateEmit,
   gameQueueUpdateEmit,
   gameResetSocketEmit,
-  gameSendFirstPieceEmit,
   gameSetActiveEmit,
   gameSetSocketEmit,
   lobbyUpdateGamesEmit,

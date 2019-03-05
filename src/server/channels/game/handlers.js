@@ -1,9 +1,9 @@
 const handlePlayerLeave = require('./handlers/handlePlayerLeave');
+const { handleFirstPiece } = require('./handlers/handleFirstPiece');
 const { handleGameCreate, gameCreate } = require('./handlers/handleGameCreate');
 const {
   gameQueueUpdateEmit,
   gameResetSocketEmit,
-  gameSendFirstPieceEmit,
   gameSetActiveEmit,
   lobbyUpdateGamesEmit,
 } = require('./emits');
@@ -39,7 +39,7 @@ function handleGameStart(io, socket, games, payload) {
   game.startGame();
   game.getPlayers().forEach(player => player.setActivity(true));
   gameSetActiveEmit(io, game.getId(), game.getActivity());
-  gameSendFirstPieceEmit(io, game);
+  handleFirstPiece(io, game);
   lobbyUpdateGamesEmit(updatedGames, io);
   return updatedGames;
 }

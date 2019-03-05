@@ -24,15 +24,19 @@ function newDisplayBoardWithPiece(piece, playerBoard) {
 
 function handleFirstPiece(io, game) {
   const piece = game.getNextPiece(0);
-  game.getPlayers.forEach((p) => {
+  game.getPlayers().forEach((p) => {
     if (p.getActivity()) {
+      console.log('player is active');
       p.setPiece(piece.getPiece(), piece.getPosition());
       const playerPiece = p.getPiece();
+      console.log('playerPiece', playerPiece);
       const { location, shape, letter } = playerPiece.getInfo();
       const playerBoard = p.getBoard();
       if (verifyPlacement(location, shape, playerBoard, letter)) {
         const newDisplayBoard = newDisplayBoardWithPiece(playerPiece, playerBoard);
-        p.setDisplayBoard(newDisplayBoard);
+        console.log('newDisplayBoard', newDisplayBoard);
+        p.updateDisplayBoard(newDisplayBoard);
+        p.updateCurrent();
       }
     }
   });
