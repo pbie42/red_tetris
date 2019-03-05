@@ -94,3 +94,44 @@ export function gameSetNewLeader(leader) {
     },
   };
 }
+
+export function gameMovePieceRight(gameID, playerID) {
+  return {
+    type: types.GAME_MOVE_PIECE_RIGHT,
+    payload: {
+      gameID,
+      playerID,
+    },
+    channel: 'game',
+  };
+}
+export function gameMovePieceLeft(gameID, playerID) {
+  return {
+    type: types.GAME_MOVE_PIECE_LEFT,
+    payload: {
+      gameID,
+      playerID,
+    },
+    channel: 'game',
+  };
+}
+export function gameMovePieceDown(gameID, playerID) {
+  return {
+    type: types.GAME_MOVE_PIECE_DOWN,
+    payload: {
+      gameID,
+      playerID,
+    },
+    channel: 'game',
+  };
+}
+export function gameMovePieceRotate(gameID, playerID) {
+  return {
+    type: types.GAME_MOVE_PIECE_ROTATE,
+    payload: {
+      gameID,
+      playerID,
+    },
+    channel: 'game',
+  };
+}

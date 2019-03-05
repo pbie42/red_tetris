@@ -8,34 +8,43 @@ import checkURL from 'client/components/game/checkURL';
 import Board from 'client/components/game/Board';
 import 'client/style/game/Game.scss';
 
-function handleKeyDown(e) {
-  switch (e.keyCode) {
-    case keys.ARROW_UP:
-      console.log('ARROW_UP');
-      break;
-    case keys.ARROW_DOWN:
-      console.log('ARROW_DOWN');
-      break;
-    case keys.ARROW_LEFT:
-      console.log('ARROW_LEFT');
-      break;
-    case keys.ARROW_RIGHT:
-      console.log('ARROW_RIGHT');
-      break;
-    case keys.SPACE_BAR:
-      console.log('SPACE_BAR');
-      break;
+function handleKeyDown(props) {
+  const {
+    gameID, playerID, gameMovePieceRight, gameMovePieceLeft, gameMovePieceDown, gameMovePieceRotate,
+  } = props;
+  return function keyDown(e) {
+    switch (e.keyCode) {
+      case keys.ARROW_UP:
+        console.log('ARROW_UP');
+        gameMovePieceRotate(gameID, playerID);
+        break;
+      case keys.ARROW_DOWN:
+        console.log('ARROW_DOWN');
+        gameMovePieceDown(gameID, playerID);
+        break;
+      case keys.ARROW_LEFT:
+        console.log('ARROW_LEFT');
+        gameMovePieceLeft(gameID, playerID);
+        break;
+      case keys.ARROW_RIGHT:
+        console.log('ARROW_RIGHT');
+        gameMovePieceRight(gameID, playerID);
+        break;
+      case keys.SPACE_BAR:
+        console.log('SPACE_BAR');
+        break;
 
-    default:
-      break;
-  }
+      default:
+        break;
+    }
+  };
 }
 
 function Game(props) {
   const {
     gameLeave, playerID, gameID, players, playerRemove, username, gameStart, leader,
   } = props;
-  document.addEventListener('keydown', handleKeyDown);
+  document.addEventListener('keydown', handleKeyDown(props));
   window.addEventListener('beforeunload', (e) => {
     e.preventDefault();
     gameLeave(playerID, gameID);

@@ -1,5 +1,6 @@
 const handlePlayerLeave = require('./handlers/handlePlayerLeave');
 const { handleFirstPiece } = require('./handlers/handleFirstPiece');
+const { handleGamePieceMove } = require('./handlers/handleMovement');
 const { handleGameCreate, gameCreate } = require('./handlers/handleGameCreate');
 const {
   gameQueueUpdateEmit,
@@ -48,5 +49,6 @@ module.exports = {
   gameCreate,
   handleGameCreate,
   handleGameLeave,
+  handleGamePieceMove,
   handleGameStart,
 };

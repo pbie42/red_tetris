@@ -2,7 +2,7 @@ const { verifyPlacement } = require('../movement/verify');
 const { gamePlayersUpdateEmit } = require('../emits');
 
 function newDisplayBoardWithPiece(piece, playerBoard) {
-  const newDisplayBoard = playerBoard;
+  const newDisplayBoard = JSON.parse(JSON.stringify(playerBoard));
   const { location, shape, letter } = piece.getInfo();
   let y = 0;
   let bY = location.y;
@@ -33,8 +33,10 @@ function handleFirstPiece(io, game) {
       const { location, shape, letter } = playerPiece.getInfo();
       const playerBoard = p.getBoard();
       if (verifyPlacement(location, shape, playerBoard, letter)) {
+        console.log('p before', p);
         const newDisplayBoard = newDisplayBoardWithPiece(playerPiece, playerBoard);
         console.log('newDisplayBoard', newDisplayBoard);
+        console.log('p', p);
         p.updateDisplayBoard(newDisplayBoard);
         p.updateCurrent();
       }

@@ -1,6 +1,8 @@
 const { verifyPlacement } = require('./verify');
 
 function movePieceRight(board, piece) {
+  console.log('board', board);
+  console.log('piece', piece);
   const { letter, shape, location } = piece.getInfo();
   if (verifyPlacement({ x: location.x + 1, y: location.y }, shape, board, letter)) {
     return { ...location, x: location.x + 1 };

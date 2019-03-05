@@ -4,6 +4,10 @@ import {
   gameCreate,
   gameExists,
   gameLeave,
+  gameMovePieceRight,
+  gameMovePieceLeft,
+  gameMovePieceDown,
+  gameMovePieceRotate,
   gamePlayersUpdate,
   gameQueueUpdate,
   gameReset,
@@ -17,6 +21,10 @@ import {
   GAME_CREATE,
   GAME_EXISTS,
   GAME_LEAVE,
+  GAME_MOVE_PIECE_RIGHT,
+  GAME_MOVE_PIECE_LEFT,
+  GAME_MOVE_PIECE_DOWN,
+  GAME_MOVE_PIECE_ROTATE,
   GAME_PLAYERS_UPDATE,
   GAME_QUEUE_UPDATE,
   GAME_RESET,
@@ -177,5 +185,81 @@ describe('gameSetNewLeader', () => {
   it('has the correct payload', () => {
     const action = gameSetNewLeader('dsalijfda');
     expect(action.payload).toEqual({ leader: 'dsalijfda' });
+  });
+});
+
+describe('gameMovePieceRight', () => {
+  const gameID = 'game1';
+  const playerID = 'player1';
+  it('has the correct type', () => {
+    const action = gameMovePieceRight(gameID, playerID);
+    expect(action.type).toEqual(GAME_MOVE_PIECE_RIGHT);
+  });
+
+  it('has the correct payload', () => {
+    const action = gameMovePieceRight(gameID, playerID);
+    expect(action.payload).toEqual({ gameID, playerID });
+  });
+
+  it('has the correct channel', () => {
+    const action = gameMovePieceRight(gameID, playerID);
+    expect(action.channel).toEqual('game');
+  });
+});
+
+describe('gameMovePieceLeft', () => {
+  const gameID = 'game1';
+  const playerID = 'player1';
+  it('has the correct type', () => {
+    const action = gameMovePieceLeft(gameID, playerID);
+    expect(action.type).toEqual(GAME_MOVE_PIECE_LEFT);
+  });
+
+  it('has the correct payload', () => {
+    const action = gameMovePieceLeft(gameID, playerID);
+    expect(action.payload).toEqual({ gameID, playerID });
+  });
+
+  it('has the correct channel', () => {
+    const action = gameMovePieceLeft(gameID, playerID);
+    expect(action.channel).toEqual('game');
+  });
+});
+
+describe('gameMovePieceDown', () => {
+  const gameID = 'game1';
+  const playerID = 'player1';
+  it('has the correct type', () => {
+    const action = gameMovePieceDown(gameID, playerID);
+    expect(action.type).toEqual(GAME_MOVE_PIECE_DOWN);
+  });
+
+  it('has the correct payload', () => {
+    const action = gameMovePieceDown(gameID, playerID);
+    expect(action.payload).toEqual({ gameID, playerID });
+  });
+
+  it('has the correct channel', () => {
+    const action = gameMovePieceDown(gameID, playerID);
+    expect(action.channel).toEqual('game');
+  });
+});
+
+describe('gameMovePieceRotate', () => {
+  const gameID = 'game1';
+  const playerID = 'player1';
+  it('has the correct type', () => {
+    const action = gameMovePieceRotate(gameID, playerID);
+    expect(action.type).toEqual(GAME_MOVE_PIECE_ROTATE);
+  });
+
+  it('has the correct payload', () => {
+    const action = gameMovePieceRotate(gameID, playerID);
+    expect(action.payload).toEqual({ gameID, playerID });
+  });
+
+  it('has the correct channel', () => {
+    const action = gameMovePieceRotate(gameID, playerID);
+    expect(action.channel).toEqual('game');
   });
 });
