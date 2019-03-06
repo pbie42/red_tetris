@@ -87,6 +87,16 @@ describe('verifyPlacement', () => {
     expect(canPlace).toBeTruthy();
   });
 
+  it("should return true for a I piece at it's starting postion { x: 3, y: -1 }", () => {
+    const pieceI = new Piece('i', 0);
+    const board = newBoard();
+    const location = pieceI.getLocation();
+    const shape = pieceI.getShape();
+    const letter = pieceI.getPiece();
+    const canPlace = verifyPlacement(location, shape, board, letter);
+    expect(canPlace).toBeTruthy();
+  });
+
   it("should return true for a piece that can fit on bottom edge even if it's shape container goes out of bounds on bottom", () => {
     const pieceT = new Piece('t', 0);
     pieceT.setLocation({ x: 3, y: 18 });

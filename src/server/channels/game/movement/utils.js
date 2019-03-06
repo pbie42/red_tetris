@@ -3,7 +3,7 @@ function newDisplayBoardWithPiece(piece, playerBoard) {
   const { location, shape, letter } = piece.getInfo();
   let y = 0;
   let bY = location.y;
-  while (shape[y] && newDisplayBoard[bY]) {
+  while (shape[y] && bY <= newDisplayBoard.length - 1) {
     let x = 0;
     let bX = location.x;
     while (x < shape[0].length) {

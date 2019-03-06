@@ -31,7 +31,36 @@ describe('newDisplayBoardWithPiece', () => {
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     ]);
   });
+
   it('should not modify the player board', () => {
     expect(player.getBoard()).toEqual(newBoard());
+  });
+
+  it('should place an i piece on the board with a y value of -1', () => {
+    const player2 = new Player('1', 'paul');
+    const pieceI = new Piece('i', 0);
+    const newDisplayBoard2 = newDisplayBoardWithPiece(pieceI, player2.getBoard());
+    expect(newDisplayBoard2).toEqual([
+      [0, 0, 0, 'i', 'i', 'i', 'i', 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    ]);
   });
 });
