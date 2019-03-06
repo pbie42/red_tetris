@@ -19,16 +19,16 @@ function gameSocket(io, socket, games, players, { payload, type }) {
       updatedGames = handleGameStart(io, socket, games, payload);
       break;
     case 'GAME_MOVE_PIECE_RIGHT':
-      updatedGames = handleGamePieceMove(io, socket, games, payload, 'right');
+      updatedGames = handleGamePieceMove(io, games, payload, 'right');
       break;
     case 'GAME_MOVE_PIECE_LEFT':
-      updatedGames = handleGamePieceMove(io, socket, games, payload, 'left');
+      updatedGames = handleGamePieceMove(io, games, payload, 'left');
       break;
     case 'GAME_MOVE_PIECE_DOWN':
-      updatedGames = handleGamePieceMove(io, socket, games, payload, 'down');
+      updatedGames = handleGamePieceMove(io, games, payload, 'down');
       break;
     case 'GAME_MOVE_PIECE_ROTATE':
-      updatedGames = handleGamePieceMove(io, socket, games, payload, 'rotate');
+      updatedGames = handleGamePieceMove(io, games, payload, 'rotate');
       break;
 
     default:
