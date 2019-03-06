@@ -19,6 +19,7 @@ it('has one h1 if url is valid with player set and game set', () => {
       error: '',
     },
     game: {
+      listening: false,
       leader: '',
       roomName: 'Fun',
       players: [new Player('1', 'Paul')],
@@ -51,6 +52,7 @@ it('redirects to lobby if url param is invalid for a game but username is set', 
       error: '',
     },
     game: {
+      listening: false,
       leader: '',
       players: [],
       id: '',
@@ -83,6 +85,7 @@ it('redirects to login if url param is invalid for a game and no username is set
       error: '',
     },
     game: {
+      listening: false,
       leader: '',
       players: [],
       id: '',
@@ -115,6 +118,7 @@ it('redirects to setup with player and room name if url is invalid but no userna
       error: '',
     },
     game: {
+      listening: false,
       leader: '',
       players: [],
       id: '',
@@ -150,6 +154,7 @@ it('redirects to lobby if game id is not set', () => {
       error: '',
     },
     game: {
+      listening: false,
       leader: '',
       players: [],
       id: '',

@@ -4,6 +4,7 @@ import {
   GAME_QUEUE_UPDATE,
   GAME_RESET,
   GAME_SET_ACTIVE,
+  GAME_SET_LISTENING,
   GAME_SET_NEW_LEADER,
   GAME_SET,
 } from 'client/actions/types';
@@ -29,6 +30,7 @@ it('handles actions of type GAME_SET', () => {
     error: '',
     id: '1',
     leader: '1',
+    listening: false,
     players: [player],
     queue: [],
     roomName: 'Fun',
@@ -47,6 +49,7 @@ it('handles actions of type GAME_SET_ACTIVE', () => {
   expect(newState).toEqual({
     active: true,
     error: '',
+    listening: false,
     id: '',
     leader: '',
     players: [],
@@ -64,6 +67,7 @@ it('handles actions of type GAME_RESET', () => {
   expect(newState).toEqual({
     active: false,
     error: '',
+    listening: false,
     id: '',
     leader: '',
     players: [],
@@ -83,6 +87,7 @@ it('handles actions of type GAME_PLAYERS_UPDATE', () => {
   expect(newState).toEqual({
     active: false,
     error: '',
+    listening: false,
     id: '',
     leader: '',
     players: [player1, player2],
@@ -102,6 +107,7 @@ it('handles actions of type GAME_QUEUE_UPDATE', () => {
   expect(newState).toEqual({
     active: false,
     error: '',
+    listening: false,
     id: '',
     leader: '',
     players: [],
@@ -121,8 +127,29 @@ it('handles actions of type GAME_SET_NEW_LEADER', () => {
   expect(newState).toEqual({
     active: false,
     error: '',
+    listening: false,
     id: '',
     leader: 'ioejaqwf',
+    players: [],
+    queue: [],
+    roomName: '',
+  });
+});
+
+it('handles actions of type GAME_SET_LISTENING', () => {
+  const action = {
+    type: GAME_SET_LISTENING,
+    payload: {
+      listening: true,
+    },
+  };
+  const newState = gameReducer(gameInitialState, action);
+  expect(newState).toEqual({
+    active: false,
+    error: '',
+    listening: true,
+    id: '',
+    leader: '',
     players: [],
     queue: [],
     roomName: '',

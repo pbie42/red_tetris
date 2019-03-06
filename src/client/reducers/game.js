@@ -3,6 +3,7 @@ import * as types from 'client/actions/types';
 export const gameInitialState = {
   active: false,
   error: '',
+  listening: false,
   id: '',
   players: [],
   queue: [],
@@ -31,6 +32,14 @@ export default (state = gameInitialState, { type, payload }) => {
       return {
         ...state,
         active: payload.active,
+      };
+
+    case types.GAME_SET_LISTENING:
+      console.log('reducer gamesetlistening');
+
+      return {
+        ...state,
+        listening: payload.listening,
       };
 
     case types.GAME_SET_NEW_LEADER:

@@ -95,6 +95,15 @@ export function gameSetNewLeader(leader) {
   };
 }
 
+export function gameSetListener(bool) {
+  return {
+    type: types.GAME_SET_LISTENING,
+    payload: {
+      listening: bool,
+    },
+  };
+}
+
 export function gameMovePieceRight(gameID, playerID) {
   return {
     type: types.GAME_MOVE_PIECE_RIGHT,

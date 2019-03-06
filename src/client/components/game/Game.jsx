@@ -10,7 +10,12 @@ import 'client/style/game/Game.scss';
 
 function handleKeyDown(props) {
   const {
-    gameID, playerID, gameMovePieceRight, gameMovePieceLeft, gameMovePieceDown, gameMovePieceRotate,
+    gameID,
+    playerID,
+    gameMovePieceRight,
+    gameMovePieceLeft,
+    gameMovePieceDown,
+    gameMovePieceRotate,
   } = props;
   return function keyDown(e) {
     switch (e.keyCode) {
@@ -42,10 +47,25 @@ function handleKeyDown(props) {
 
 function Game(props) {
   const {
-    gameLeave, playerID, gameID, players, playerRemove, username, gameStart, leader,
+    gameLeave,
+    gameSetListener,
+    listening,
+    playerID,
+    gameID,
+    players,
+    playerRemove,
+    username,
+    gameStart,
+    leader,
   } = props;
-  document.addEventListener('keydown', handleKeyDown(props));
+  console.log('game rendered');
+
+  if (!listening) {
+    gameSetListener(true);
+    document.addEventListener('keydown', handleKeyDown(props));
+  }
   window.addEventListener('beforeunload', (e) => {
+    document.removeEventListener('keydown', handleKeyDown(props));
     e.preventDefault();
     gameLeave(playerID, gameID);
     playerRemove(username, playerID);
@@ -60,8 +80,7 @@ function Game(props) {
         <button type="submit" onClick={() => gameStart(gameID, playerID)}>
           Start Game
         </button>
-      )
-      }
+      )}
       <h1 id="game-title">This is the game page</h1>
       {Board({ board: players.find(p => p.id === playerID).board })}
     </div>
@@ -71,24 +90,29 @@ function Game(props) {
 Game.propTypes = {
   gameID: PropTypes.string.isRequired,
   gameLeave: PropTypes.func.isRequired,
+  gameSetListener: PropTypes.func.isRequired,
   gameStart: PropTypes.func.isRequired,
   leader: PropTypes.string.isRequired,
+  listening: PropTypes.bool.isRequired,
   playerID: PropTypes.string.isRequired,
   playerRemove: PropTypes.func.isRequired,
-  players: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string,
-    username: PropTypes.string,
-    board: PropTypes.arrayOf(
-      PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])),
-    ),
-  })).isRequired,
+  players: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      username: PropTypes.string,
+      board: PropTypes.arrayOf(
+        PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])),
+      ),
+    }),
+  ).isRequired,
   username: PropTypes.string.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
-    leader: state.game.leader,
+    listening: state.game.listening,
     gameID: state.game.id,
+    leader: state.game.leader,
     playerID: state.player.id,
     players: state.game.players,
     username: state.player.username,

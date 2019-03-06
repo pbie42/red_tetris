@@ -11,6 +11,7 @@ import {
   gameReset,
   gameSet,
   gameSetActive,
+  gameSetListener,
   gameSetNewLeader,
   gameStart,
 } from 'client/actions/game/gameActions';
@@ -37,6 +38,7 @@ export {
   gameReset,
   gameSet,
   gameSetActive,
+  gameSetListener,
   gameSetNewLeader,
   gameStart,
   lobbyGamesUpdate,
