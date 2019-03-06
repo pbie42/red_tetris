@@ -83,6 +83,16 @@ module.exports = class Game {
     return this.pieces;
   }
 
+  setAutoDrop(intervalFunction) {
+    this.autoDrop = intervalFunction;
+  }
+
+  stopAutoDrop() {
+    if (this.autoDrop) {
+      clearInterval(this.autoDrop);
+    }
+  }
+
   getQueue() {
     return this.queue;
   }

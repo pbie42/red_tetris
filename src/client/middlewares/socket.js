@@ -42,6 +42,10 @@ socket.on('game', (event) => {
       console.log('about to gameSet', event.payload);
       dispatchFunc(actions.gameSet(event.payload));
       break;
+    case types.GAME_MOVE_PIECE_DOWN:
+      console.log('about to gameSet', event.payload);
+      dispatchFunc(actions.gameMovePieceDown(event.payload.gameID, event.payload.playerID));
+      break;
     case types.GAME_SET_ACTIVE:
       console.log('about to gameSetactive', event.payload);
       dispatchFunc(actions.gameSetActive(event.payload));

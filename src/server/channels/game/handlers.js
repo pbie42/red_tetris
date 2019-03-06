@@ -3,6 +3,7 @@ const { handleFirstPiece } = require('./handlers/handleFirstPiece');
 const { handleGamePieceMove } = require('./handlers/handleMovement');
 const { handleGameCreate, gameCreate } = require('./handlers/handleGameCreate');
 const {
+  gamePieceMoveDownEmit,
   gameQueueUpdateEmit,
   gameResetSocketEmit,
   gameSetActiveEmit,
@@ -42,6 +43,7 @@ function handleGameStart(io, socket, games, payload) {
   gameSetActiveEmit(io, game.getId(), game.getActivity());
   handleFirstPiece(io, game);
   lobbyUpdateGamesEmit(updatedGames, io);
+  game.setAutoDrop(setInterval(() => gamePieceMoveDownEmit(socket, game), 1000));
   return updatedGames;
 }
 

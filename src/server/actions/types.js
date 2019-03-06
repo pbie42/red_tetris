@@ -1,6 +1,7 @@
 // -------------------------------------------------------------------------Game
 const GAME_ADD = 'GAME_ADD';
 const GAME_EXISTS = 'GAME_EXISTS';
+const GAME_MOVE_PIECE_DOWN = 'GAME_MOVE_PIECE_DOWN';
 const GAME_PLAYERS_UPDATE = 'GAME_PLAYERS_UPDATE';
 const GAME_QUEUE_UPDATE = 'GAME_QUEUE_UPDATE';
 const GAME_RESET = 'GAME_RESET';
@@ -20,6 +21,7 @@ const PLAYER_SET = 'PLAYER_SET';
 module.exports = {
   GAME_ADD,
   GAME_EXISTS,
+  GAME_MOVE_PIECE_DOWN,
   GAME_PLAYERS_UPDATE,
   GAME_QUEUE_UPDATE,
   GAME_RESET,

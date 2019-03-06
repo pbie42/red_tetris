@@ -57,6 +57,10 @@ module.exports = class Player {
     return this.piece;
   }
 
+  getCurrent() {
+    return this.current;
+  }
+
   resetCurrent() {
     this.current = 0;
   }

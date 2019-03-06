@@ -17,26 +17,41 @@ function handleGamePieceMove(io, socket, games, { gameID, playerID }, type) {
   const position = piece.getPosition();
   let newLocation;
   let newDisplayBoard;
+  let nextPiece;
   if (!game || !player || !piece) return games;
   switch (type) {
     case 'right':
-      newLocation = movePieceRight(player.getBoard(), player.getPiece());
+      newLocation = movePieceRight(player.getBoard(), piece);
       if (newLocation === piece.getLocation()) return games;
       emitPieceNewLocation(io, game, player, piece, newLocation);
       return games;
     case 'left':
-      newLocation = movePieceLeft(player.getBoard(), player.getPiece());
+      newLocation = movePieceLeft(player.getBoard(), piece);
       if (newLocation === piece.getLocation()) return games;
       emitPieceNewLocation(io, game, player, piece, newLocation);
       break;
     case 'down':
-      newLocation = movePieceDown(player.getBoard(), player.getPiece());
-      if (newLocation === piece.getLocation()) return games;
+      newLocation = movePieceDown(player.getBoard(), piece);
+      if (newLocation === piece.getLocation()) {
+        if (!piece.getActivity()) {
+          player.updateBoard(player.getDisplayBoard());
+          nextPiece = game.getNextPiece(player.getCurrent());
+          player.setPiece(nextPiece.getPiece(), piece.getPosition());
+          player.updateCurrent();
+          newDisplayBoard = newDisplayBoardWithPiece(player.getPiece(), player.getBoard());
+          player.updateDisplayBoard(newDisplayBoard);
+          gamePlayersUpdateEmit(io, game.getId(), game.getPlayersFront());
+          return games;
+        }
+        piece.setActivity(false);
+        return games;
+      }
+      piece.setActivity(true);
       emitPieceNewLocation(io, game, player, piece, newLocation);
       break;
     case 'rotate':
       console.log('rotate');
-      newLocation = rotatePiece(player.getBoard(), player.getPiece());
+      newLocation = rotatePiece(player.getBoard(), piece);
       if (piece.getPosition() === position) return games;
       piece.setLocation(newLocation);
       newDisplayBoard = newDisplayBoardWithPiece(piece, player.getBoard());

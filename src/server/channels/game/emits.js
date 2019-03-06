@@ -1,4 +1,5 @@
 const {
+  GAME_MOVE_PIECE_DOWN,
   GAME_PLAYERS_UPDATE,
   GAME_QUEUE_UPDATE,
   GAME_RESET,
@@ -43,6 +44,20 @@ function gameSetActiveEmit(io, gameID, active) {
   });
 }
 
+function gamePieceMoveDownEmit(socket, game) {
+  game.getPlayers().forEach((p) => {
+    if (p.getActivity) {
+      socket.emit('game', {
+        payload: {
+          gameID: game.getId(),
+          playerID: p.getId(),
+        },
+        type: GAME_MOVE_PIECE_DOWN,
+      });
+    }
+  });
+}
+
 function gamePlayersUpdateEmit(io, gameID, players) {
   io.in(gameID).emit('game', {
     payload: players,
@@ -66,6 +81,7 @@ function gameNewLeaderEmit(io, gameID, leader) {
 
 module.exports = {
   gameNewLeaderEmit,
+  gamePieceMoveDownEmit,
   gamePlayersUpdateEmit,
   gameQueueUpdateEmit,
   gameResetSocketEmit,

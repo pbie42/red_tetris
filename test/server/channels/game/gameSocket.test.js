@@ -5,6 +5,20 @@ import { gameSocket, handleGameLeave } from 'server/channels/game/gameSocket';
 
 const mockIO = new Server('ws://localhost:8080');
 jest.mock('uniqid', () => () => '1');
+jest.mock('server/classes/utils/pieceOrder', () => () => [
+  {
+    piece: 'l',
+    position: 0,
+    location: { x: 3, y: 0 },
+    active: true,
+  },
+  {
+    piece: 't',
+    position: 0,
+    location: { x: 3, y: 0 },
+    active: true,
+  },
+]);
 
 describe('gameSocket', () => {
   const mockSocket = {
