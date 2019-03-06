@@ -9,7 +9,7 @@ const {
   LOBBY_GAMES_UPDATE,
 } = require('../../actions/types');
 
-function lobbyUpdateGamesEmit(games, io) {
+function lobbyUpdateGamesEmit(io, games) {
   io.emit('lobby', {
     payload: games.map(g => g.getInfoFront()),
     type: LOBBY_GAMES_UPDATE,
@@ -23,7 +23,7 @@ function gameResetSocketEmit(socket) {
   });
 }
 
-function gameSetSocketEmit(game, socket) {
+function gameSetSocketEmit(socket, game) {
   socket.emit('game', {
     payload: {
       error: '',
@@ -37,7 +37,9 @@ function gameSetSocketEmit(game, socket) {
   });
 }
 
-function gameSetActiveEmit(io, gameID, active) {
+function gameSetActiveEmit(io, game) {
+  const gameID = game.getId();
+  const active = game.getActivity();
   io.in(gameID).emit('game', {
     payload: active,
     type: GAME_SET_ACTIVE,
@@ -58,21 +60,27 @@ function gamePieceMoveDownEmit(socket, game) {
   });
 }
 
-function gamePlayersUpdateEmit(io, gameID, players) {
+function gamePlayersUpdateEmit(io, game) {
+  const gameID = game.getId();
+  const players = game.getPlayersFront();
   io.in(gameID).emit('game', {
     payload: players,
     type: GAME_PLAYERS_UPDATE,
   });
 }
 
-function gameQueueUpdateEmit(io, gameID, queue) {
+function gameQueueUpdateEmit(io, game) {
+  const gameID = game.getId();
+  const queue = game.getQueueFront();
   io.in(gameID).emit('game', {
     payload: queue,
     type: GAME_QUEUE_UPDATE,
   });
 }
 
-function gameNewLeaderEmit(io, gameID, leader) {
+function gameNewLeaderEmit(io, game) {
+  const gameID = game.getId();
+  const leader = game.getLeader();
   io.in(gameID).emit('game', {
     payload: leader,
     type: GAME_SET_NEW_LEADER,

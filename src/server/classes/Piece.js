@@ -20,7 +20,7 @@ module.exports = class Piece {
     this.active = bool;
   }
 
-  getPosition() {
+  currentPosition() {
     return this.position;
   }
 
@@ -29,7 +29,7 @@ module.exports = class Piece {
     else this.position += 1;
   }
 
-  getLocation() {
+  currentLocation() {
     return this.location;
   }
 

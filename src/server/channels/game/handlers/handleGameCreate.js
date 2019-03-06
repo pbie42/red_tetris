@@ -8,30 +8,30 @@ const {
   lobbyUpdateGamesEmit,
 } = require('../emits');
 
-function createNewGame(socket, gamesArray, roomName, player) {
+function createNewGame(socket, games, roomName, player) {
   const newGame = new Game(uniqid(), roomName, [player]);
-  gamesArray.push(newGame);
+  games.push(newGame);
   socket.join(newGame.getId());
-  gameSetSocketEmit(newGame, socket);
+  gameSetSocketEmit(socket, newGame);
 }
 
-function addNewPlayerToExistingRoom(io, socket, foundGame, player) {
-  foundGame.addPlayer(player);
-  socket.join(foundGame.getId());
-  gameSetSocketEmit(foundGame, socket);
-  gamePlayersUpdateEmit(io, foundGame.getId(), foundGame.getPlayersFront());
+function addNewPlayerToExistingRoom(io, socket, game, player) {
+  game.addPlayer(player);
+  socket.join(game.getId());
+  gameSetSocketEmit(socket, game);
+  gamePlayersUpdateEmit(io, game);
 }
 
-function addNewPlayerToRoomQueue(io, socket, foundGame, player) {
-  socket.join(foundGame.getId());
-  foundGame.addPlayerToQueue(player);
-  gameSetSocketEmit(foundGame, socket);
-  gameQueueUpdateEmit(io, foundGame.getId(), foundGame.getQueueFront());
+function addNewPlayerToRoomQueue(io, socket, game, player) {
+  socket.join(game.getId());
+  game.addPlayerToQueue(player);
+  gameSetSocketEmit(socket, game);
+  gameQueueUpdateEmit(io, game);
 }
 
-function gameCreate(io, socket, roomName, player, gamesArray) {
-  const foundGame = gamesArray.find(game => game.getRoomName() === roomName);
-  if (!foundGame) createNewGame(socket, gamesArray, roomName, player);
+function gameCreate(io, socket, roomName, player, games) {
+  const foundGame = games.find(game => game.getRoomName() === roomName);
+  if (!foundGame) createNewGame(socket, games, roomName, player);
   else {
     const foundPlayer = foundGame.getPlayer(player.getId());
     if (!foundPlayer && foundGame.getPlayersCount() < 5) {
@@ -40,15 +40,14 @@ function gameCreate(io, socket, roomName, player, gamesArray) {
       addNewPlayerToRoomQueue(io, socket, foundGame, player);
     }
   }
-  return gamesArray;
+  return games;
 }
 
-function handleGameCreate(io, socket, games, players, payload) {
-  const { roomName, playerID } = payload;
-  const player = players.find(playr => playr.getId() === playerID);
+function handleGameCreate(io, socket, games, players, { roomName, playerID }) {
+  const foundPlayer = players.find(player => player.getId() === playerID);
   let updatedGames = games;
-  if (player) updatedGames = gameCreate(io, socket, roomName, player, games);
-  lobbyUpdateGamesEmit(games, io);
+  if (foundPlayer) updatedGames = gameCreate(io, socket, roomName, foundPlayer, games);
+  lobbyUpdateGamesEmit(io, games);
   return updatedGames;
 }
 

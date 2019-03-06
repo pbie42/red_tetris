@@ -13,8 +13,8 @@ function removePlayer(socket, game, playerID) {
 }
 
 function removeGame(io, games, gameID) {
-  const updatedGames = games.filter(g => g.getId() !== gameID);
-  lobbyUpdateGamesEmit(updatedGames, io);
+  const updatedGames = games.filter(game => game.getId() !== gameID);
+  lobbyUpdateGamesEmit(io, updatedGames);
   return updatedGames;
 }
 
@@ -22,12 +22,12 @@ function movePlayerFromQueue(io, game) {
   const queue = game.getQueue();
   const playerQueued = queue.shift();
   game.addPlayer(playerQueued);
-  gameQueueUpdateEmit(io, game.getId(), queue);
+  gameQueueUpdateEmit(io, game);
 }
 
 function setNewLeader(io, game) {
   game.setNewLeader();
-  gameNewLeaderEmit(io, game.getId(), game.getLeader());
+  gameNewLeaderEmit(io, game);
 }
 
 function handlePlayerLeave(io, socket, games, game, playerID) {
@@ -39,8 +39,8 @@ function handlePlayerLeave(io, socket, games, game, playerID) {
   if (playerCount === 0 && queue.length === 0) return removeGame(io, games, gameID);
   if (playerCount < 5 && queue.length > 0) movePlayerFromQueue(io, game);
   if (playerID === game.getLeader()) setNewLeader(io, game);
-  gamePlayersUpdateEmit(io, gameID, game.getPlayersFront());
-  lobbyUpdateGamesEmit(updatedGames, io);
+  gamePlayersUpdateEmit(io, game);
+  lobbyUpdateGamesEmit(io, updatedGames);
   return updatedGames;
 }
 

@@ -4,25 +4,20 @@ const { newDisplayBoardWithPiece } = require('../movement/utils');
 
 function handleFirstPiece(io, game) {
   const piece = game.getNextPiece(0);
-  game.getPlayers().forEach((p) => {
-    if (p.getActivity()) {
-      console.log('player is active');
-      p.setPiece(piece.getPiece(), piece.getPosition());
-      const playerPiece = p.getPiece();
-      console.log('playerPiece', playerPiece);
+  game.getPlayers().forEach((player) => {
+    if (player.getActivity()) {
+      player.setPiece(piece.getPiece(), piece.currentPosition());
+      const playerPiece = player.getPiece();
       const { location, shape, letter } = playerPiece.getInfo();
-      const playerBoard = p.getBoard();
+      const playerBoard = player.getBoard();
       if (verifyPlacement(location, shape, playerBoard, letter)) {
-        console.log('p before', p);
         const newDisplayBoard = newDisplayBoardWithPiece(playerPiece, playerBoard);
-        console.log('newDisplayBoard', newDisplayBoard);
-        console.log('p', p);
-        p.updateDisplayBoard(newDisplayBoard);
-        p.updateCurrent();
+        player.updateDisplayBoard(newDisplayBoard);
+        player.updateCurrent();
       }
     }
   });
-  gamePlayersUpdateEmit(io, game.getId(), game.getPlayersFront());
+  gamePlayersUpdateEmit(io, game);
 }
 
 module.exports = {

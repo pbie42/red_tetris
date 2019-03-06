@@ -13,7 +13,7 @@ const {
 function handleQueuerLeave(io, socket, game, playerID) {
   game.removePlayerFromQueue(playerID);
   gameResetSocketEmit(socket);
-  gameQueueUpdateEmit(io, game.getId(), game.getQueueFront());
+  gameQueueUpdateEmit(io, game);
 }
 
 function handleGameLeave(io, socket, games, payload) {
@@ -32,18 +32,17 @@ function handleGameLeave(io, socket, games, payload) {
   return updatedGames;
 }
 
-function handleGameStart(io, socket, games, payload) {
+function handleGameStart(io, socket, games, { gameID, playerID }) {
   const updatedGames = games;
-  const { gameID, playerID } = payload;
-  const game = updatedGames.find(g => g.getId() === gameID);
-  if (!game) return updatedGames;
-  if (game.getLeader() !== playerID) return updatedGames;
-  game.startGame();
-  game.getPlayers().forEach(player => player.setActivity(true));
-  gameSetActiveEmit(io, game.getId(), game.getActivity());
-  handleFirstPiece(io, game);
-  lobbyUpdateGamesEmit(updatedGames, io);
-  game.setAutoDrop(setInterval(() => gamePieceMoveDownEmit(socket, game), 1000));
+  const gameToStart = updatedGames.find(game => game.getId() === gameID);
+  if (!gameToStart) return updatedGames;
+  if (gameToStart.getLeader() !== playerID) return updatedGames;
+  gameToStart.startGame();
+  gameToStart.getPlayers().forEach(player => player.setActivity(true));
+  gameSetActiveEmit(io, gameToStart);
+  handleFirstPiece(io, gameToStart);
+  lobbyUpdateGamesEmit(io, updatedGames);
+  gameToStart.setAutoDrop(setInterval(() => gamePieceMoveDownEmit(socket, gameToStart), 1000));
   return updatedGames;
 }
 

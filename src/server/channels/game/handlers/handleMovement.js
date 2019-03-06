@@ -6,64 +6,61 @@ const { gamePlayersUpdateEmit } = require('../emits');
 function emitPieceNewLocation(io, game, player, piece) {
   const newDisplayBoard = newDisplayBoardWithPiece(piece, player.getBoard());
   player.updateDisplayBoard(newDisplayBoard);
-  gamePlayersUpdateEmit(io, game.getId(), game.getPlayersFront());
+  gamePlayersUpdateEmit(io, game);
 }
 
 function setNextPiece(game, player, piece) {
   player.updateBoard(player.getDisplayBoard());
   const nextPiece = game.getNextPiece(player.getCurrent());
-  player.setPiece(nextPiece.getPiece(), piece.getPosition());
+  player.setPiece(nextPiece.getPiece(), piece.currentPosition());
   player.updateCurrent();
   const newDisplayBoard = newDisplayBoardWithPiece(player.getPiece(), player.getBoard());
   player.updateDisplayBoard(newDisplayBoard);
 }
 
-function getGamePlayerPiece(games, gameID, playerID) {
-  const game = games.find(g => g.getId() === gameID);
-  const player = game.getPlayers().find(p => p.getId() === playerID);
-  const piece = player.getPiece();
-  return { game, player, piece };
+function findGamePlayerPiece(games, gameID, playerID) {
+  const foundGame = games.find(game => game.getId() === gameID);
+  const foundPlayer = foundGame.getPlayers().find(player => player.getId() === playerID);
+  const foundPiece = foundPlayer.getPiece();
+  return { game: foundGame, player: foundPlayer, piece: foundPiece };
 }
 
 function movePiece(io, games, gameID, playerID, moveFunc) {
-  const { game, player, piece } = getGamePlayerPiece(games, gameID, playerID);
-  if (!game || !player || !piece) return games;
-  const newLocation = moveFunc(player.getBoard(), piece);
-  if (newLocation === piece.getLocation()) return games;
-  piece.setLocation(newLocation);
+  const { game, player, piece } = findGamePlayerPiece(games, gameID, playerID);
+  const newPieceLocation = moveFunc(player.getBoard(), piece);
+  if (newPieceLocation === piece.currentLocation()) return games;
+  piece.setLocation(newPieceLocation);
   emitPieceNewLocation(io, game, player, piece);
   return games;
 }
 
 function handleMovePieceDown(io, games, gameID, playerID) {
-  const { game, player, piece } = getGamePlayerPiece(games, gameID, playerID);
-  if (!game || !player || !piece) return games;
-  const newLocation = movePieceDown(player.getBoard(), piece);
-  if (newLocation === piece.getLocation()) {
+  const { game, player, piece } = findGamePlayerPiece(games, gameID, playerID);
+  const newPieceLocation = movePieceDown(player.getBoard(), piece);
+  if (newPieceLocation === piece.currentLocation()) {
     if (!piece.getActivity()) {
       setNextPiece(game, player, piece);
-      gamePlayersUpdateEmit(io, game.getId(), game.getPlayersFront());
+      gamePlayersUpdateEmit(io, game);
       return games;
     }
     piece.setActivity(false);
     return games;
   }
   piece.setActivity(true);
-  piece.setLocation(newLocation);
+  piece.setLocation(newPieceLocation);
   emitPieceNewLocation(io, game, player, piece);
   return games;
 }
 
 function handleRotatePiece(io, games, gameID, playerID) {
-  const { game, player, piece } = getGamePlayerPiece(games, gameID, playerID);
-  if (!game || !player || !piece) return games;
-  const prevPosition = piece.getPosition();
-  const newLocation = rotatePiece(player.getBoard(), piece);
-  if (piece.getPosition() === prevPosition) return games;
-  piece.setLocation(newLocation);
+  const { game, player, piece } = findGamePlayerPiece(games, gameID, playerID);
+  const prevPiecePosition = piece.currentPosition();
+  const newPieceLocation = rotatePiece(player.getBoard(), piece);
+  if (piece.currentPosition() === prevPiecePosition) return games;
+  piece.setLocation(newPieceLocation);
   const newDisplayBoard = newDisplayBoardWithPiece(piece, player.getBoard());
   player.updateDisplayBoard(newDisplayBoard);
-  gamePlayersUpdateEmit(io, game.getId(), game.getPlayersFront());
+  gamePlayersUpdateEmit(io, game);
   return games;
 }
 

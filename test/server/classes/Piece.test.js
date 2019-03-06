@@ -29,19 +29,19 @@ describe('Piece Class', () => {
     expect(piece.position).toEqual(0);
   });
 
-  it("returns it's shape on getPosition", () => {
+  it("returns it's shape on currentPosition", () => {
     expect(piece.getShape()).toEqual(positionsL[0].shape);
   });
 
-  it("returns it's location on getLocation", () => {
-    expect(piece.getLocation()).toEqual({ x: 3, y: 0 });
+  it("returns it's location on currentLocation", () => {
+    expect(piece.currentLocation()).toEqual({ x: 3, y: 0 });
   });
 
   it("it returns all of it's info on getInfo", () => {
     expect(piece.getInfo()).toEqual({
       shape: piece.getShape(),
-      position: piece.getPosition(),
-      location: piece.getLocation(),
+      position: piece.currentPosition(),
+      location: piece.currentLocation(),
       letter: piece.getPiece(),
     });
   });
