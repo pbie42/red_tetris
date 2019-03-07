@@ -1,6 +1,6 @@
 const { movePieceDown, movePieceLeft, movePieceRight } = require('../movement/movement');
 const { addSolidRows, checkBoardForFullRows, removeFullRows } = require('../movement/utils');
-const { verifyPlacement } = require('../movement/verify');
+const { verifyNotInSolid, verifyPlacement } = require('../movement/verify');
 const { rotatePiece } = require('../movement/rotation');
 const { newDisplayBoardWithPiece } = require('./handleFirstPiece');
 const { gamePlayersUpdateEmit, gameSetActiveEmit } = require('../emits');
@@ -36,16 +36,24 @@ function findGamePlayerPiece(games, gameID, playerID) {
   return { game: foundGame, player: foundPlayer, piece: foundPiece };
 }
 
-function verifyGamePlayerPiece(game, player, piece) {
+function verifyGamePlayerPiece(io, game, player, piece) {
   if (!game || !player || !piece) return false;
   if (!game.getActivity()) return false;
   if (!player.getActivity()) return false;
+  const { location, shape } = piece.getInfo();
+  if (!verifyNotInSolid(location, shape, player.getBoard())) {
+    const newDisplayBoard = newDisplayBoardWithPiece(player.getPiece(), player.getBoard());
+    player.updateDisplayBoard(newDisplayBoard);
+    setNextPiece(io, game, player, piece);
+    gamePlayersUpdateEmit(io, game);
+    return false;
+  }
   return true;
 }
 
 function movePiece(io, games, gameID, playerID, moveFunc) {
   const { game, player, piece } = findGamePlayerPiece(games, gameID, playerID);
-  if (!verifyGamePlayerPiece(game, player, piece)) return games;
+  if (!verifyGamePlayerPiece(io, game, player, piece)) return games;
   const newPieceLocation = moveFunc(player.getBoard(), piece);
   if (newPieceLocation === piece.currentLocation()) return games;
   piece.setLocation(newPieceLocation);
@@ -56,14 +64,16 @@ function movePiece(io, games, gameID, playerID, moveFunc) {
 function handleAddSolidRows(game, playerID, rowsToAdd) {
   const otherPlayers = game.getActivePlayers().filter(player => player.getId() !== playerID);
   otherPlayers.forEach((player) => {
-    const updatedBoard = addSolidRows(player.getDisplayBoard(), rowsToAdd);
-    player.updateDisplayBoard(updatedBoard);
+    const updatedBoard = addSolidRows(player.getBoard(), rowsToAdd);
+    player.updateBoard(updatedBoard);
+    const newDisplayBoard = newDisplayBoardWithPiece(player.getPiece(), player.getBoard());
+    player.updateDisplayBoard(newDisplayBoard);
   });
 }
 
 function handleMovePieceDown(io, games, gameID, playerID) {
   const { game, player, piece } = findGamePlayerPiece(games, gameID, playerID);
-  if (!verifyGamePlayerPiece(game, player, piece)) return games;
+  if (!verifyGamePlayerPiece(io, game, player, piece)) return games;
   const newPieceLocation = movePieceDown(player.getBoard(), piece);
   if (newPieceLocation === piece.currentLocation()) {
     if (!piece.getActivity()) {
@@ -71,8 +81,8 @@ function handleMovePieceDown(io, games, gameID, playerID) {
       if (fullRows.length > 0) {
         const cleanedBoard = removeFullRows(player.getDisplayBoard(), fullRows);
         player.updateDisplayBoard(cleanedBoard);
-        // const rowsToAdd = fullRows.length - 1;
-        // if (rowsToAdd > 0) handleAddSolidRows(game, playerID, rowsToAdd);
+        const rowsToAdd = fullRows.length - 1;
+        if (rowsToAdd > 0) handleAddSolidRows(game, playerID, rowsToAdd);
       }
       setNextPiece(io, game, player, piece);
       gamePlayersUpdateEmit(io, game);
@@ -89,7 +99,7 @@ function handleMovePieceDown(io, games, gameID, playerID) {
 
 function handleRotatePiece(io, games, gameID, playerID) {
   const { game, player, piece } = findGamePlayerPiece(games, gameID, playerID);
-  if (!verifyGamePlayerPiece(game, player, piece)) return games;
+  if (!verifyGamePlayerPiece(io, game, player, piece)) return games;
   const prevPiecePosition = piece.currentPosition();
   const newPieceLocation = rotatePiece(player.getBoard(), piece);
   if (piece.currentPosition() === prevPiecePosition) return games;

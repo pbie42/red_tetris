@@ -18,6 +18,8 @@ function setColorClass(y, x, board) {
       return 'purple';
     case 'z':
       return 'red';
+    case 'x':
+      return 'black';
     default:
       return '';
   }

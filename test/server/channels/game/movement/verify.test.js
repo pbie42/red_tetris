@@ -1,5 +1,5 @@
 import Piece from 'server/classes/Piece';
-import { verifyPlacement } from 'server/channels/game/movement/verify';
+import { verifyNotInSolid, verifyPlacement } from 'server/channels/game/movement/verify';
 import newBoard from 'server/classes/utils/newBoard';
 
 jest.mock('server/classes/utils/randomX', () => () => 0);
@@ -139,5 +139,43 @@ describe('verifyPlacement', () => {
     const letter = pieceI.getPiece();
     const canPlace = verifyPlacement(location, shape, board, letter);
     expect(canPlace).toBeFalsy();
+  });
+});
+
+describe('verifyNotInSolid', () => {
+  const board = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'],
+    ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'],
+    ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'],
+    ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'],
+    ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'],
+    ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'],
+    ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'],
+    ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'],
+    ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'],
+    ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'],
+    ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'],
+    ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'],
+    ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'],
+    ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'],
+    ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'],
+    ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'],
+    ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'],
+  ];
+
+  it('should return true if the piece is not in the solid', () => {
+    const piece1 = new Piece('o', 0);
+    const { location, shape } = piece1.getInfo();
+    expect(verifyNotInSolid(location, shape, board)).toBeTruthy();
+  });
+
+  it('should return false if the piece is in the solid', () => {
+    const piece1 = new Piece('o', 0);
+    piece1.setLocation({ x: 3, y: 2 });
+    const { location, shape } = piece1.getInfo();
+    expect(verifyNotInSolid(location, shape, board)).toBeFalsy();
   });
 });
