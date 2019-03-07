@@ -19,6 +19,34 @@ function newDisplayBoardWithPiece(piece, playerBoard) {
   return newDisplayBoard;
 }
 
+function removeFullRows(board, fullRows) {
+  const cleanedBoard = JSON.parse(JSON.stringify(board));
+  fullRows.forEach((fullRow) => {
+    cleanedBoard.splice(fullRow, 1);
+    cleanedBoard.unshift([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+  });
+  return cleanedBoard;
+}
+
+function checkBoardForFullRows(board) {
+  const fullRows = [];
+  let filledSpaces = 0;
+  let y = 0;
+  while (board[y]) {
+    let x = 0;
+    filledSpaces = 0;
+    while (board[y][x]) {
+      if (board[y][x] !== 0 && board[y][x] !== 'x') filledSpaces += 1;
+      x += 1;
+    }
+    if (filledSpaces === 10) fullRows.push(y);
+    y += 1;
+  }
+  return fullRows;
+}
+
 module.exports = {
+  checkBoardForFullRows,
   newDisplayBoardWithPiece,
+  removeFullRows,
 };

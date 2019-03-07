@@ -1,6 +1,10 @@
 import Piece from 'server/classes/Piece';
 import Player from 'server/classes/Player';
-import { newDisplayBoardWithPiece } from 'server/channels/game/movement/utils';
+import {
+  checkBoardForFullRows,
+  newDisplayBoardWithPiece,
+  removeFullRows,
+} from 'server/channels/game/movement/utils';
 import newBoard from 'server/classes/utils/newBoard';
 
 describe('newDisplayBoardWithPiece', () => {
@@ -62,5 +66,89 @@ describe('newDisplayBoardWithPiece', () => {
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     ]);
+  });
+});
+
+describe('checkBoardForFullRows', () => {
+  const board = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    ['i', 'i', 'i', 'i', 'i', 'i', 'i', 'i', 'i', 'i'],
+    ['i', 'i', 'i', 'i', 'i', 'i', 'i', 'i', 'i', 'i'],
+    ['i', 'i', 'i', 'i', 'i', 'i', 'i', 'i', 'i', 'i'],
+  ];
+  it('should return an array of indexes that tell which rows are full', () => {
+    expect(checkBoardForFullRows(board)).toEqual([17, 18, 19]);
+  });
+});
+
+describe('checkBoardForFullRows', () => {
+  const board = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    ['i', 'i', 'i', 'i', 'i', 'i', 'i', 'i', 'i', 'i'],
+    ['i', 'i', 'i', 'i', 'i', 'i', 'i', 'i', 'i', 'i'],
+    ['i', 'i', 'i', 'i', 'i', 'i', 'i', 'i', 'i', 'i'],
+  ];
+  it('should return an array of indexes that tell which rows are full', () => {
+    expect(checkBoardForFullRows(board)).toEqual([17, 18, 19]);
+  });
+});
+
+describe('removeFullRows', () => {
+  const board = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    ['i', 'i', 'i', 'i', 'i', 'i', 'i', 'i', 'i', 'i'],
+    ['i', 'i', 'i', 'i', 'i', 'i', 'i', 'i', 'i', 'i'],
+    ['i', 'i', 'i', 'i', 'i', 'i', 'i', 'i', 'i', 'i'],
+  ];
+  it('should remove the full lines and add a new empty line to the start of the board array', () => {
+    expect(removeFullRows(board, [17, 18, 19])).toEqual(newBoard());
   });
 });
