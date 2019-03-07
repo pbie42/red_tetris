@@ -47,16 +47,17 @@ function handleKeyDown(props) {
 
 function Game(props) {
   const {
+    gameID,
+    gameIsActive,
     gameLeave,
     gameSetListener,
-    listening,
-    playerID,
-    gameID,
-    players,
-    playerRemove,
-    username,
     gameStart,
     leader,
+    listening,
+    playerID,
+    playerRemove,
+    players,
+    username,
   } = props;
   console.log('game rendered');
 
@@ -76,7 +77,7 @@ function Game(props) {
       <button type="submit" onClick={() => gameLeave(playerID, gameID)}>
         Leave Game
       </button>
-      {leader === playerID && (
+      {leader === playerID && !gameIsActive && (
         <button type="submit" onClick={() => gameStart(gameID, playerID)}>
           Start Game
         </button>
@@ -88,6 +89,7 @@ function Game(props) {
 }
 
 Game.propTypes = {
+  gameIsActive: PropTypes.bool.isRequired,
   gameID: PropTypes.string.isRequired,
   gameLeave: PropTypes.func.isRequired,
   gameSetListener: PropTypes.func.isRequired,
@@ -110,6 +112,7 @@ Game.propTypes = {
 
 function mapStateToProps(state) {
   return {
+    active: state.game.active,
     listening: state.game.listening,
     gameID: state.game.id,
     leader: state.game.leader,

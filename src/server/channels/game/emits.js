@@ -47,16 +47,14 @@ function gameSetActiveEmit(io, game) {
 }
 
 function gamePieceMoveDownEmit(socket, game) {
-  game.getPlayers().forEach((p) => {
-    if (p.getActivity) {
-      socket.emit('game', {
-        payload: {
-          gameID: game.getId(),
-          playerID: p.getId(),
-        },
-        type: GAME_MOVE_PIECE_DOWN,
-      });
-    }
+  game.getActivePlayers().forEach((p) => {
+    socket.emit('game', {
+      payload: {
+        gameID: game.getId(),
+        playerID: p.getId(),
+      },
+      type: GAME_MOVE_PIECE_DOWN,
+    });
   });
 }
 

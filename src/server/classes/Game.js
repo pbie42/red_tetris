@@ -13,6 +13,7 @@ module.exports = class Game {
 
   startGame() {
     this.active = true;
+    this.newPieceOrder();
   }
 
   setLeader() {
@@ -25,6 +26,11 @@ module.exports = class Game {
 
   endGame() {
     this.active = false;
+    this.stopAutoDrop();
+  }
+
+  newPieceOrder() {
+    this.pieces = pieceOrder();
   }
 
   getActivity() {
@@ -37,6 +43,10 @@ module.exports = class Game {
 
   getPlayers() {
     return this.players;
+  }
+
+  getActivePlayers() {
+    return this.players.filter(player => player.getActivity());
   }
 
   getPlayersFront() {

@@ -1,4 +1,5 @@
 const handlePlayerLeave = require('./handlers/handlePlayerLeave');
+const newBoard = require('../../classes/utils/newBoard');
 const { handleFirstPiece } = require('./handlers/handleFirstPiece');
 const { handleGamePieceMove } = require('./handlers/handleMovement');
 const { handleGameCreate, gameCreate } = require('./handlers/handleGameCreate');
@@ -32,13 +33,19 @@ function handleGameLeave(io, socket, games, payload) {
   return updatedGames;
 }
 
+function setupPlayer(player) {
+  player.setActivity(true);
+  player.updateDisplayBoard(newBoard());
+  player.updateBoard(newBoard());
+}
+
 function handleGameStart(io, socket, games, { gameID, playerID }) {
   const updatedGames = games;
   const gameToStart = updatedGames.find(game => game.getId() === gameID);
   if (!gameToStart) return updatedGames;
   if (gameToStart.getLeader() !== playerID) return updatedGames;
   gameToStart.startGame();
-  gameToStart.getPlayers().forEach(player => player.setActivity(true));
+  gameToStart.getPlayers().forEach(player => setupPlayer(player));
   gameSetActiveEmit(io, gameToStart);
   handleFirstPiece(io, gameToStart);
   lobbyUpdateGamesEmit(io, updatedGames);
