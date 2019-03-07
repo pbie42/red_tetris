@@ -28,6 +28,20 @@ function removeFullRows(board, fullRows) {
   return cleanedBoard;
 }
 
+function addSolidRows(board, rowCount) {
+  const newBoard = JSON.parse(JSON.stringify(board));
+  let y = board.length - 1;
+  let rowsToFill = rowCount;
+  while (rowsToFill || y > 0) {
+    if (rowsToFill > 0 && newBoard[y][0] !== 'x') {
+      newBoard[y] = ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'];
+      rowsToFill -= 1;
+    }
+    y -= 1;
+  }
+  return newBoard;
+}
+
 function checkBoardForFullRows(board) {
   const fullRows = [];
   let filledSpaces = 0;
@@ -46,6 +60,7 @@ function checkBoardForFullRows(board) {
 }
 
 module.exports = {
+  addSolidRows,
   checkBoardForFullRows,
   newDisplayBoardWithPiece,
   removeFullRows,
