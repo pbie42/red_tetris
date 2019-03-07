@@ -1,5 +1,42 @@
+$board-height: 41vh;
+@function widthOfBoard() {
+  @return $board-height / 2;
+}
+
 #game-title {
   color: aqua;
   background-color: black;
   font-size: 1rem;
+}
+
+#boards-container {
+  display: flex;
+  justify-content: space-evenly;
+
+  .boards-others {
+    display: flex;
+    flex-flow: column;
+
+    .other {
+      height: 41vh;
+      width: widthOfBoard();
+      display: flex;
+      align-items: center;
+      flex-flow: column;
+      border-top: 0.1rem solid black;
+      border-left: 0.1rem solid black;
+
+      .board-row {
+        width: 100%;
+        display: flex;
+        flex-flow: row;
+        flex: 1;
+        .board-column {
+          border-bottom: 0.1rem solid black;
+          border-right: 0.1rem solid black;
+          flex: 1;
+        }
+      }
+    }
+  }
 }

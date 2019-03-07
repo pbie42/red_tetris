@@ -13,6 +13,7 @@ $tetris-yellow: #fee800;
 .board {
   height: 86vh;
   width: widthOfBoard();
+  min-width: 56rem;
   display: flex;
   align-items: center;
   flex-flow: column;

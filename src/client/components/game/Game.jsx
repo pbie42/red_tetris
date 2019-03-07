@@ -71,6 +71,7 @@ function Game(props) {
     gameLeave(playerID, gameID);
     playerRemove(username, playerID);
   });
+  const others = players.filter(player => player.id !== playerID);
   if (!gameID) return <Redirect to="/lobby" />;
   return (
     <div>
@@ -83,7 +84,17 @@ function Game(props) {
         </button>
       )}
       <h1 id="game-title">This is the game page</h1>
-      {Board({ board: players.find(p => p.id === playerID).board })}
+      <div id="boards-container">
+        <div className="boards-others">
+          {others.length > 0 && Board({ board: others[0].board, type: 'other' })}
+          {others.length > 2 && Board({ board: others[2].board, type: 'other' })}
+        </div>
+        {Board({ board: players.find(p => p.id === playerID).board, type: 'board' })}
+        <div className="boards-others">
+          {others.length > 1 && Board({ board: others[1].board, type: 'other' })}
+          {others.length > 3 && Board({ board: others[3].board, type: 'other' })}
+        </div>
+      </div>
     </div>
   );
 }
@@ -112,7 +123,7 @@ Game.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    active: state.game.active,
+    gameIsActive: state.game.active,
     listening: state.game.listening,
     gameID: state.game.id,
     leader: state.game.leader,

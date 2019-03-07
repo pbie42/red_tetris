@@ -37,7 +37,7 @@ function Row(row, y, board) {
   return items;
 }
 
-function Board({ board }) {
+function Board({ board, type }) {
   const rows = [];
   board.forEach((row, i) => {
     const y = i;
@@ -47,11 +47,12 @@ function Board({ board }) {
       </div>,
     );
   });
-  return <div className="board">{rows}</div>;
+  return <div className={type}>{rows}</div>;
 }
 
 Board.propTypes = {
   board: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)).isRequired,
+  type: PropTypes.string.isRequired,
 };
 
 export default Board;
