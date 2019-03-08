@@ -28,6 +28,11 @@ module.exports = class Player {
     this.displayBoard = updatedBoard;
   }
 
+  resetBoards() {
+    this.board = newBoard();
+    this.displayBoard = newBoard();
+  }
+
   getInfo() {
     const { id, username, board } = this;
     return { id, username, board };

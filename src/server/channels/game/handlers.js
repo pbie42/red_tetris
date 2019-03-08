@@ -27,6 +27,8 @@ function handleGameLeave(io, socket, games, payload) {
   if (!player && !queuer) return updatedGames;
   if (player) {
     player.setActivity(false);
+    player.resetBoards();
+    player.resetCurrent();
     return handlePlayerLeave(io, socket, updatedGames, game, playerID);
   }
   handleQueuerLeave(io, socket, game, playerID);
@@ -35,6 +37,7 @@ function handleGameLeave(io, socket, games, payload) {
 
 function setupPlayer(player) {
   player.setActivity(true);
+  player.resetCurrent();
   player.updateDisplayBoard(newBoard());
   player.updateBoard(newBoard());
 }

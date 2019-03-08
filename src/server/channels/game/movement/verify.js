@@ -35,7 +35,17 @@ function verifyNotInSolid(location, shape, board) {
   return true;
 }
 
+function verifyRow(row) {
+  let x = 0;
+  while (x < row.length) {
+    if (row[x] !== 0) return false;
+    x += 1;
+  }
+  return true;
+}
+
 module.exports = {
-  verifyPlacement,
   verifyNotInSolid,
+  verifyPlacement,
+  verifyRow,
 };

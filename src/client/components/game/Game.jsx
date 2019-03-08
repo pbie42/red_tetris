@@ -61,7 +61,7 @@ function Game(props) {
   } = props;
   console.log('game rendered');
 
-  if (!listening) {
+  if (!listening && gameID && playerID) {
     gameSetListener(true);
     document.addEventListener('keydown', handleKeyDown(props));
   }
@@ -75,7 +75,13 @@ function Game(props) {
   if (!gameID) return <Redirect to="/lobby" />;
   return (
     <div>
-      <button type="submit" onClick={() => gameLeave(playerID, gameID)}>
+      <button
+        type="submit"
+        onClick={() => {
+          document.removeEventListener('keydown', handleKeyDown(props));
+          gameLeave(playerID, gameID);
+        }}
+      >
         Leave Game
       </button>
       {leader === playerID && !gameIsActive && (

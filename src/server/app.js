@@ -21,8 +21,6 @@ io.on('connection', (socket) => {
   });
 
   socket.on('game', ({ payload, type }) => {
-    console.log('game channel', payload, type);
-
     const { updatedGames } = gameSocket(io, socket, games, players, { payload, type });
     games = updatedGames;
   });

@@ -1,6 +1,6 @@
 const { movePieceDown, movePieceLeft, movePieceRight } = require('../movement/movement');
 const { addSolidRows, checkBoardForFullRows, removeFullRows } = require('../movement/utils');
-const { verifyNotInSolid, verifyPlacement } = require('../movement/verify');
+const { verifyNotInSolid, verifyPlacement, verifyRow } = require('../movement/verify');
 const { rotatePiece } = require('../movement/rotation');
 const { newDisplayBoardWithPiece } = require('./handleFirstPiece');
 const { gamePlayersUpdateEmit, gameSetActiveEmit } = require('../emits');
@@ -11,10 +11,20 @@ function emitPieceNewLocation(io, game, player, piece) {
   gamePlayersUpdateEmit(io, game);
 }
 
-function setNextPiece(io, game, player, piece) {
+function placeEndingPiece(player) {
+  const playerPiece = player.getPiece();
+  if (playerPiece.getPiece() !== 'i') playerPiece.setLocation({ x: 3, y: -1 });
+  const playerBoard = player.getBoard();
+  if (verifyRow(playerBoard[0])) {
+    const newDisplayBoard = newDisplayBoardWithPiece(playerPiece, playerBoard);
+    player.updateDisplayBoard(newDisplayBoard);
+  }
+}
+
+function setNextPiece(io, game, player) {
   player.updateBoard(player.getDisplayBoard());
   const nextPiece = game.getNextPiece(player.getCurrent());
-  player.setPiece(nextPiece.getPiece(), piece.currentPosition());
+  player.setPiece(nextPiece.getPiece(), nextPiece.currentPosition());
   player.updateCurrent();
   const { letter, location, shape } = nextPiece.getInfo();
   if (verifyPlacement(location, shape, player.getBoard(), letter)) {
@@ -22,6 +32,7 @@ function setNextPiece(io, game, player, piece) {
     player.updateDisplayBoard(newDisplayBoard);
   } else {
     player.setActivity(false);
+    placeEndingPiece(player);
     if (game.getActivePlayers().length === 0) {
       game.endGame();
       gameSetActiveEmit(io, game);
@@ -44,7 +55,7 @@ function verifyGamePlayerPiece(io, game, player, piece) {
   if (!verifyNotInSolid(location, shape, player.getBoard())) {
     const newDisplayBoard = newDisplayBoardWithPiece(player.getPiece(), player.getBoard());
     player.updateDisplayBoard(newDisplayBoard);
-    setNextPiece(io, game, player, piece);
+    setNextPiece(io, game, player);
     gamePlayersUpdateEmit(io, game);
     return false;
   }
@@ -84,7 +95,7 @@ function handleMovePieceDown(io, games, gameID, playerID) {
         const rowsToAdd = fullRows.length - 1;
         if (rowsToAdd > 0) handleAddSolidRows(game, playerID, rowsToAdd);
       }
-      setNextPiece(io, game, player, piece);
+      setNextPiece(io, game, player);
       gamePlayersUpdateEmit(io, game);
       return games;
     }
