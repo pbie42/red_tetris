@@ -1,6 +1,12 @@
 $imgpath: '/client/img/tetris.jpg';
 $bright-red: #be0712;
 $light-red: #dc4d46;
+$border-thickness: 0.2rem;
+$login-container-height: 75vh;
+
+@function borderRadiusCalc() {
+  @return 10vh;
+}
 
 .login-page {
   display: flex;
@@ -13,30 +19,32 @@ $light-red: #dc4d46;
     // background-color: #fff;
     height: 75vh;
     width: 23%;
-    min-width: 38rem;
+    min-width: 37.5rem;
+    max-width: 45rem;
     display: flex;
     flex-flow: column;
 
     .login-image-container {
-      flex: 3;
+      flex: 5;
       // background-color: yellow;
-      border-top-right-radius: 25%;
+      border-top-right-radius: borderRadiusCalc();
       background-size: cover;
       background-repeat: no-repeat;
-      background-position: 49% 50%;
+      background-position: 49% 100%;
+      height: 100%;
       background-image: url(../img/tetris6.png);
 
       img {
         width: 100%;
         height: 100%;
-        border-top-right-radius: 25%;
+        border-top-right-radius: borderRadiusCalc();
       }
     }
 
     .login-form-container {
-      flex: 2;
+      flex: 3;
       background-color: #ffffff;
-      border-bottom-left-radius: 25%;
+      border-bottom-left-radius: borderRadiusCalc();
       display: flex;
       flex-flow: column;
 
@@ -61,7 +69,7 @@ $light-red: #dc4d46;
           outline: 0;
           background: transparent;
           width: 75%;
-          border-bottom: 3px solid $bright-red;
+          border-bottom: $border-thickness solid $bright-red;
           font-size: 1.8rem;
           color: black;
         }
@@ -83,11 +91,12 @@ $light-red: #dc4d46;
             height: 2.8rem;
             font-size: 1.8rem;
             color: $bright-red;
-            border-bottom: 3px solid $bright-red;
-            border-right: 3px solid $bright-red;
-            border-left: 3px solid $bright-red;
+            border-bottom: $border-thickness solid $bright-red;
+            border-right: $border-thickness solid $bright-red;
+            border-left: $border-thickness solid $bright-red;
             border-bottom-left-radius: 1.5rem;
-            // border-bottom-right-radius: 1.5rem;
+            cursor: pointer;
+            // border-bottom-right-radius: borderRadiusCalc();
           }
         }
       }

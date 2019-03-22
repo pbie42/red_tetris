@@ -25,7 +25,7 @@ function Login({
               type="text"
               value={localUsername}
               onChange={onChangeTextArea}
-              placeholder="Choose a username"
+              placeholder="Create a username"
             />
             {handleError(error)}
           </div>
