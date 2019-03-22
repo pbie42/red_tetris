@@ -10,7 +10,7 @@ import * as actions from 'client/actions';
 import 'client/style/App.scss';
 
 const App = () => (
-  <div>
+  <div className="app">
     <Switch>
       <Route key="/login" path="/" exact component={Login} />
       <Route key="/lobby" path="/lobby" exact component={Lobby} />

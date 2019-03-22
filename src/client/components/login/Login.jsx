@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import composeWithLogic from 'client/components/login/withLogic';
 import checkForUsername from 'client/components/login/checkForUsername';
+import 'client/style/Login.scss';
+// import tetris from 'client/img/tetris.jpg';
 
 function handleError(error) {
   if (error) return <h3>{error}</h3>;
@@ -9,15 +11,37 @@ function handleError(error) {
 }
 
 function Login({
-  localUsername, onChangeTextArea, submitPlayer, resetTextArea, error,
+  localUsername, onChangeTextArea, resetTextArea, submitPlayer, error,
 }) {
   return (
-    <div>
-      <input type="text" value={localUsername} onChange={onChangeTextArea} />
-      <button type="submit" onClick={submitPlayer(localUsername, resetTextArea)}>
-        Join
-      </button>
-      {handleError(error)}
+    <div className="login-page">
+      <div className="login-container">
+        <div className="login-image-container">{/* <img src={tetris} alt="" /> */}</div>
+        <div className="login-form-container">
+          <div className="login-logo" />
+          <div className="login-input-container">
+            <input
+              className="login-input"
+              type="text"
+              value={localUsername}
+              onChange={onChangeTextArea}
+              placeholder="Choose a username"
+            />
+            {handleError(error)}
+          </div>
+          <div className="login-button-container">
+            <div>
+              <button
+                className="login-button"
+                type="submit"
+                onClick={submitPlayer(localUsername, resetTextArea)}
+              >
+                Join A Game
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

@@ -1,0 +1,96 @@
+$imgpath: '/client/img/tetris.jpg';
+$bright-red: #be0712;
+$light-red: #dc4d46;
+
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+
+  .login-container {
+    // background-color: #fff;
+    height: 75vh;
+    width: 23%;
+    min-width: 38rem;
+    display: flex;
+    flex-flow: column;
+
+    .login-image-container {
+      flex: 3;
+      // background-color: yellow;
+      border-top-right-radius: 25%;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: 49% 50%;
+      background-image: url(../img/tetris6.png);
+
+      img {
+        width: 100%;
+        height: 100%;
+        border-top-right-radius: 25%;
+      }
+    }
+
+    .login-form-container {
+      flex: 2;
+      background-color: #ffffff;
+      border-bottom-left-radius: 25%;
+      display: flex;
+      flex-flow: column;
+
+      .login-logo {
+        flex: 4;
+        background-size: 100% 101%;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-image: url(../img/red_tetris.png);
+        background-color: #fff;
+      }
+
+      .login-input-container {
+        flex: 3;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        // background-color: #fff;
+
+        .login-input {
+          border: 0;
+          outline: 0;
+          background: transparent;
+          width: 75%;
+          border-bottom: 3px solid $bright-red;
+          font-size: 1.8rem;
+          color: black;
+        }
+      }
+
+      .login-button-container {
+        flex: 3;
+        display: flex;
+        justify-content: center;
+
+        div {
+          width: 75.5%;
+          display: flex;
+          justify-content: flex-end;
+
+          button {
+            background-color: none;
+            border: 0;
+            height: 2.8rem;
+            font-size: 1.8rem;
+            color: $bright-red;
+            border-bottom: 3px solid $bright-red;
+            border-right: 3px solid $bright-red;
+            border-left: 3px solid $bright-red;
+            border-bottom-left-radius: 1.5rem;
+            // border-bottom-right-radius: 1.5rem;
+          }
+        }
+      }
+    }
+  }
+}
