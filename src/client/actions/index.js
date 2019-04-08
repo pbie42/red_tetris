@@ -20,6 +20,7 @@ import { lobbyGamesUpdate, lobbyGetGames } from 'client/actions/lobby/lobbyActio
 
 import {
   playerCreate,
+  playerErrorReset,
   playerExists,
   playerRemove,
   playerSet,
@@ -44,6 +45,7 @@ export {
   lobbyGamesUpdate,
   lobbyGetGames,
   playerCreate,
+  playerErrorReset,
   playerExists,
   playerRemove,
   playerSet,

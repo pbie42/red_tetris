@@ -28,4 +28,5 @@ export const PLAYER_CREATE = 'PLAYER_CREATE';
 export const PLAYER_REMOVE = 'PLAYER_REMOVE';
 export const PLAYER_SET = 'PLAYER_SET';
 export const PLAYER_RESET = 'PLAYER_RESET';
+export const PLAYER_ERROR_RESET = 'PLAYER_ERROR_RESET';
 export const PLAYER_EXISTS = 'PLAYER_EXISTS';

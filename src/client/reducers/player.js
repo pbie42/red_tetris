@@ -16,7 +16,10 @@ export default (state = initialState, { type, payload }) => {
         error: '',
       };
     case types.PLAYER_EXISTS:
-      return { ...state, error: `Sorry '${payload}' is taken` };
+      return { ...state, error: 'Sorry that username is taken' };
+
+    case types.PLAYER_ERROR_RESET:
+      return { ...state, error: '' };
 
     case types.PLAYER_RESET:
       return initialState;

@@ -23,6 +23,13 @@ export function playerRemove(username, id) {
   };
 }
 
+export function playerErrorReset() {
+  return {
+    type: types.PLAYER_ERROR_RESET,
+    payload: {},
+  };
+}
+
 export function playerSet({ username, id }) {
   return {
     type: types.PLAYER_SET,

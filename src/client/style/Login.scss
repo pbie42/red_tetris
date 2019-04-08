@@ -33,6 +33,7 @@ $login-container-height: 75vh;
       background-position: 49% 100%;
       height: 100%;
       background-image: url(../img/tetris6.png);
+      background-color: #9a413c;
 
       img {
         width: 100%;
@@ -81,7 +82,8 @@ $login-container-height: 75vh;
         justify-content: center;
 
         div {
-          width: 75.5%;
+          // width: 75.5%;
+          width: 37.6%;
           display: flex;
           justify-content: flex-end;
 
