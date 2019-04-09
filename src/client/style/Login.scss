@@ -81,24 +81,28 @@ $login-container-height: 75vh;
         display: flex;
         justify-content: center;
 
-        div {
-          // width: 75.5%;
-          width: 37.6%;
+        .login-error-button-container {
           display: flex;
-          justify-content: flex-end;
+          justify-content: space-between;
+          width: 75.5%;
 
-          button {
-            background-color: none;
-            border: 0;
-            height: 2.8rem;
-            font-size: 1.8rem;
-            color: $bright-red;
-            border-bottom: $border-thickness solid $bright-red;
-            border-right: $border-thickness solid $bright-red;
-            border-left: $border-thickness solid $bright-red;
-            border-bottom-left-radius: 1.5rem;
-            cursor: pointer;
-            // border-bottom-right-radius: borderRadiusCalc();
+          div {
+            display: flex;
+            justify-content: flex-end;
+
+            button {
+              background-color: none;
+              border: 0;
+              height: 2.8rem;
+              font-size: 1.8rem;
+              color: $bright-red;
+              border-bottom: $border-thickness solid $bright-red;
+              border-right: $border-thickness solid $bright-red;
+              border-left: $border-thickness solid $bright-red;
+              border-bottom-left-radius: 1.5rem;
+              cursor: pointer;
+              // border-bottom-right-radius: borderRadiusCalc();
+            }
           }
         }
       }

@@ -39,15 +39,17 @@ function Login({
             />
           </div>
           <div className="login-button-container">
-            {handleError(error)}
-            <div>
-              <button
-                className="login-button"
-                type="submit"
-                onClick={submitPlayer(localUsername, resetTextArea)}
-              >
-                Join A Game
-              </button>
+            <div className="login-error-button-container">
+              {handleError(error)}
+              <div>
+                <button
+                  className="login-button"
+                  type="submit"
+                  onClick={submitPlayer(localUsername, resetTextArea)}
+                >
+                  Join A Game
+                </button>
+              </div>
             </div>
           </div>
         </div>
