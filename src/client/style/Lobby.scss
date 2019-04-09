@@ -1,0 +1,99 @@
+$bright-red: #be0712;
+$light-red: #dc4d46;
+
+.lobby-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+  .lobby-container {
+    animation: moveInTop 2.5s;
+    // background: rgb(254, 252, 57);
+    // background: linear-gradient(
+    //   0deg,
+    //   rgba(254, 252, 57, 1) 0%,
+    //   rgba(230, 43, 25, 1) 45%,
+    //   rgba(52, 15, 7, 1) 90%
+    // );
+    // background: rgb(254, 252, 57);
+    // background: linear-gradient(
+    //   0deg,
+    //   rgba(254, 252, 57, 1) 0%,
+    //   rgba(220, 77, 70, 1) 29%,
+    //   rgba(154, 65, 60, 1) 82%,
+    //   rgba(0, 0, 0, 1) 95%
+    // );
+    // background: rgb(238, 188, 55);
+    // background: linear-gradient(
+    //   0deg,
+    //   rgba(238, 188, 55, 1) 0%,
+    //   rgba(220, 77, 70, 1) 29%,
+    //   rgba(154, 65, 60, 1) 82%,
+    //   rgba(0, 0, 0, 1) 98%
+    // );
+    background: rgb(238, 188, 55);
+    background: linear-gradient(
+      0deg,
+      rgba(238, 188, 55, 1) 0%,
+      rgba(220, 77, 70, 1) 29%,
+      rgba(154, 65, 60, 1) 71%,
+      rgba(48, 11, 3, 1) 90%
+    );
+    height: 75vh;
+    width: 25vw;
+    min-width: 37.5rem;
+    max-width: 45rem;
+    border-bottom-left-radius: 10vh;
+    border-top-right-radius: 10vh;
+    display: flex;
+    flex-flow: column;
+
+    .lobby-logo-container {
+      flex: 2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #fff;
+      border-top-right-radius: 10vh;
+      .lobby-logo {
+        width: 95%;
+        height: 70%;
+        // border-top-right-radius: 10vh;
+        background-size: 100% 96%;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-image: url(../img/tetris_soviet_mindgame3.png);
+      }
+    }
+
+    .lobby-create-list-container {
+      flex: 6;
+      // background-image: linear-gradient(yellow, red);
+      border-bottom-left-radius: 10vh;
+      display: flex;
+      flex-flow: column;
+
+      .lobby-create-container {
+        flex: 1;
+        // background-color: #300b03;
+      }
+
+      .lobby-list-container {
+        flex: 5;
+        border-bottom-left-radius: 10vh;
+      }
+    }
+  }
+}
+
+@keyframes moveInTop {
+  0% {
+    opacity: 0;
+    transform: translateY(-100rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0rem);
+  }
+}

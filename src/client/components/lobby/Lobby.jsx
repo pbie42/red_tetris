@@ -2,6 +2,7 @@ import React from 'react';
 import composeWithLogic from 'client/components/lobby/withLogic';
 import checkForGame from 'client/components/lobby/checkForGame';
 import PropTypes from 'prop-types';
+import 'client/style/Lobby.scss';
 
 export const renderGames = (games, gameCreate, playerID) => games.map(game => (
   <li className="game" key={game.id}>
@@ -20,17 +21,27 @@ function Lobby(props) {
     submitGame,
   } = props;
   return (
-    <div>
-      <h1>This is the lobby page</h1>
-      <input type="text" value={newRoomName} onChange={onChangeTextArea} />
-      <button
-        type="submit"
-        id="game-submit"
-        onClick={submitGame(newRoomName, playerID, resetTextArea)}
-      >
-        Create Room
-      </button>
-      {renderGames(games, gameCreate, playerID)}
+    <div className="lobby-page">
+      <div className="lobby-container">
+        <div className="lobby-logo-container">
+          <div className="lobby-logo" />
+        </div>
+        <div className="lobby-create-list-container">
+          <div className="lobby-create-container">
+            <input type="text" value={newRoomName} onChange={onChangeTextArea} />
+            <button
+              type="submit"
+              id="game-submit"
+              onClick={submitGame(newRoomName, playerID, resetTextArea)}
+            >
+              Create Room
+            </button>
+          </div>
+          <div className="lobby-list-container">
+            {renderGames(games, gameCreate, playerID)}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
