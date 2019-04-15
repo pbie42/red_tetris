@@ -8,46 +8,15 @@ import checkURL from 'client/components/game/checkURL';
 import Board from 'client/components/game/Board';
 import 'client/style/game/Game.scss';
 
-function handleKeyDown(props) {
-  const {
-    gameID,
-    playerID,
-    gameMovePieceRight,
-    gameMovePieceLeft,
-    gameMovePieceDown,
-    gameMovePieceRotate,
-  } = props;
-  return function keyDown(e) {
-    switch (e.keyCode) {
-      case keys.ARROW_UP:
-        console.log('ARROW_UP');
-        gameMovePieceRotate(gameID, playerID);
-        break;
-      case keys.ARROW_DOWN:
-        console.log('ARROW_DOWN');
-        gameMovePieceDown(gameID, playerID);
-        break;
-      case keys.ARROW_LEFT:
-        console.log('ARROW_LEFT');
-        gameMovePieceLeft(gameID, playerID);
-        break;
-      case keys.ARROW_RIGHT:
-        console.log('ARROW_RIGHT');
-        gameMovePieceRight(gameID, playerID);
-        break;
-      case keys.SPACE_BAR:
-        console.log('SPACE_BAR');
-        break;
-
-      default:
-        break;
-    }
-  };
-}
+let handleKeyDown;
 
 function Game(props) {
   const {
     gameID,
+    gameMovePieceRight,
+    gameMovePieceLeft,
+    gameMovePieceDown,
+    gameMovePieceRotate,
     gameIsActive,
     gameLeave,
     gameSetListener,
@@ -59,14 +28,39 @@ function Game(props) {
     players,
     username,
   } = props;
-  console.log('game rendered');
+
+  if (!handleKeyDown && gameID && playerID) {
+    handleKeyDown = function keyDown(e) {
+      switch (e.keyCode) {
+        case keys.ARROW_UP:
+          gameMovePieceRotate(gameID, playerID);
+          break;
+        case keys.ARROW_DOWN:
+          gameMovePieceDown(gameID, playerID);
+          break;
+        case keys.ARROW_LEFT:
+          gameMovePieceLeft(gameID, playerID);
+          break;
+        case keys.ARROW_RIGHT:
+          gameMovePieceRight(gameID, playerID);
+          break;
+        case keys.SPACE_BAR:
+          console.log('SPACE_BAR');
+          break;
+
+        default:
+          break;
+      }
+    };
+  }
 
   if (!listening && gameID && playerID) {
     gameSetListener(true);
-    document.addEventListener('keydown', handleKeyDown(props));
+    document.addEventListener('keydown', handleKeyDown, true);
   }
   window.addEventListener('beforeunload', (e) => {
-    document.removeEventListener('keydown', handleKeyDown(props));
+    document.removeEventListener('keydown', handleKeyDown, true);
+    handleKeyDown = undefined;
     e.preventDefault();
     gameLeave(playerID, gameID);
     playerRemove(username, playerID);
@@ -78,7 +72,8 @@ function Game(props) {
       <button
         type="submit"
         onClick={() => {
-          document.removeEventListener('keydown', handleKeyDown(props));
+          document.removeEventListener('keydown', handleKeyDown, true);
+          handleKeyDown = undefined;
           gameLeave(playerID, gameID);
         }}
       >
@@ -110,6 +105,10 @@ Game.propTypes = {
   gameID: PropTypes.string.isRequired,
   gameLeave: PropTypes.func.isRequired,
   gameSetListener: PropTypes.func.isRequired,
+  gameMovePieceDown: PropTypes.func.isRequired,
+  gameMovePieceRight: PropTypes.func.isRequired,
+  gameMovePieceRotate: PropTypes.func.isRequired,
+  gameMovePieceLeft: PropTypes.func.isRequired,
   gameStart: PropTypes.func.isRequired,
   leader: PropTypes.string.isRequired,
   listening: PropTypes.bool.isRequired,
