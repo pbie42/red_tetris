@@ -5,9 +5,30 @@ import PropTypes from 'prop-types';
 import 'client/style/Lobby.scss';
 
 export const renderGames = (games, gameCreate, playerID) => games.map(game => (
-  <li className="game" key={game.id}>
-    <button type="submit" className="game-button" onClick={() => gameCreate(game.roomName, playerID)}>{game.roomName}</button>
-  </li>
+  <div className="lobby-game" key={game.id}>
+    <div className="lobby-game-room-players">
+      <div className="lobby-players">
+        <h3>Players</h3>
+        <h4>
+          {`${game.players.length} / 5`}
+        </h4>
+      </div>
+      <div className="lobby-room-players-divider">
+        <div className="divider" />
+      </div>
+      <div className="lobby-room">
+        <h3>{game.roomName}</h3>
+      </div>
+    </div>
+    <div className="lobby-join">
+      <div className="lobby-status-container">
+        <div className="lobby-game-status">Pending</div>
+      </div>
+      <div className="lobby-join-container">
+        <button type="submit" className="lobby-join-button" onClick={() => gameCreate(game.roomName, playerID)}>Join</button>
+      </div>
+    </div>
+  </div>
 ));
 
 function Lobby(props) {
@@ -28,17 +49,23 @@ function Lobby(props) {
         </div>
         <div className="lobby-create-list-container">
           <div className="lobby-create-container">
-            <input type="text" value={newRoomName} onChange={onChangeTextArea} />
-            <button
-              type="submit"
-              id="game-submit"
-              onClick={submitGame(newRoomName, playerID, resetTextArea)}
-            >
-              Create Room
-            </button>
+            <div className="lobby-input-button-container">
+              <input className="lobby-input" placeholder="Enter New Game Name" type="text" value={newRoomName} onChange={onChangeTextArea} />
+              <div className="lobby-button">
+                <button
+                  type="submit"
+                  id="game-submit"
+                  onClick={submitGame(newRoomName, playerID, resetTextArea)}
+                >
+                  Add Game
+                </button>
+              </div>
+            </div>
           </div>
           <div className="lobby-list-container">
-            {renderGames(games, gameCreate, playerID)}
+            <div className="lobby-list">
+              {renderGames(games, gameCreate, playerID)}
+            </div>
           </div>
         </div>
       </div>

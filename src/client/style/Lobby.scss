@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Fenix|Kelly+Slab|Nova+Flat|Nova+Square|Overpass+Mono|Righteous|Voces');
+
 $bright-red: #be0712;
 $light-red: #dc4d46;
 
@@ -9,29 +11,6 @@ $light-red: #dc4d46;
 
   .lobby-container {
     animation: moveInTop 2.5s;
-    // background: rgb(254, 252, 57);
-    // background: linear-gradient(
-    //   0deg,
-    //   rgba(254, 252, 57, 1) 0%,
-    //   rgba(230, 43, 25, 1) 45%,
-    //   rgba(52, 15, 7, 1) 90%
-    // );
-    // background: rgb(254, 252, 57);
-    // background: linear-gradient(
-    //   0deg,
-    //   rgba(254, 252, 57, 1) 0%,
-    //   rgba(220, 77, 70, 1) 29%,
-    //   rgba(154, 65, 60, 1) 82%,
-    //   rgba(0, 0, 0, 1) 95%
-    // );
-    // background: rgb(238, 188, 55);
-    // background: linear-gradient(
-    //   0deg,
-    //   rgba(238, 188, 55, 1) 0%,
-    //   rgba(220, 77, 70, 1) 29%,
-    //   rgba(154, 65, 60, 1) 82%,
-    //   rgba(0, 0, 0, 1) 98%
-    // );
     background: rgb(238, 188, 55);
     background: linear-gradient(
       0deg,
@@ -54,34 +33,177 @@ $light-red: #dc4d46;
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: #fff;
       border-top-right-radius: 10vh;
       .lobby-logo {
         width: 95%;
         height: 70%;
-        // border-top-right-radius: 10vh;
         background-size: 100% 96%;
         background-repeat: no-repeat;
         background-position: center;
-        background-image: url(../img/tetris_soviet_mindgame3.png);
+        background-image: url(../img/tetris_soviet_mindgame2.png);
       }
     }
 
     .lobby-create-list-container {
       flex: 6;
-      // background-image: linear-gradient(yellow, red);
       border-bottom-left-radius: 10vh;
       display: flex;
       flex-flow: column;
 
       .lobby-create-container {
         flex: 1;
-        // background-color: #300b03;
+        color: white;
+        font-size: 1.3rem;
+        font-family: 'Nova Square', cursive;
+
+        .lobby-input-button-container {
+          display: flex;
+          flex-flow: column;
+          align-items: center;
+
+          .lobby-input {
+            border: 0;
+            outline: 0;
+            background: transparent;
+            width: 75%;
+            border-bottom: 0.2rem solid white;
+            font-size: 1.8rem;
+            color: yellow;
+          }
+          .lobby-input::placeholder {
+            color: #8f9cce;
+          }
+
+          .lobby-button {
+            width: 75.5%;
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-end;
+
+            #game-submit {
+              background-color: transparent;
+              border: 0;
+              height: 2.8rem;
+              font-size: 1.8rem;
+              color: white;
+              border-bottom: 0.2rem solid white;
+              border-right: 0.2rem solid white;
+              border-left: 0.2rem solid white;
+              border-bottom-left-radius: 1.5rem;
+              cursor: pointer;
+            }
+          }
+        }
       }
 
       .lobby-list-container {
         flex: 5;
         border-bottom-left-radius: 10vh;
+        background-size: 100% 96%;
+        background-repeat: no-repeat;
+        background-position: 100% 151%;
+        background-image: url(../img/tetris_kremlin.png);
+        display: flex;
+        justify-content: center;
+
+        .lobby-list {
+          overflow: hidden;
+          background-color: rgba(0, 0, 0, 0.35);
+          border: #fff solid 0.2rem;
+          width: 80%;
+          height: 87%;
+          border-bottom-left-radius: 5.5rem;
+          border-top-right-radius: 5.5rem;
+
+          .lobby-game {
+            display: flex;
+            flex-flow: column;
+
+            .lobby-game-room-players {
+              width: 100%;
+              border: 0;
+              color: white;
+              background-color: transparent;
+              // border-top: 0.2rem solid white;
+              border-top-right-radius: 1.5rem;
+              cursor: pointer;
+              display: flex;
+
+              .lobby-players {
+                display: flex;
+                flex-flow: column;
+                flex: 1;
+                align-items: center;
+                justify-content: center;
+
+                h4 {
+                  font-family: 'system-ui', cursive;
+                  font-size: 1.9rem;
+                  margin: 0;
+                  color: #f8b72b;
+                }
+
+                h3 {
+                  font-family: 'system-ui';
+                  color: #8f9cce;
+                  margin: 0;
+                }
+              }
+
+              .lobby-room-players-divider {
+                width: 0.2rem;
+                display: flex;
+                align-items: center;
+
+                .divider {
+                  width: 0.1rem;
+                  height: 70%;
+                  background-color: #8f9cce;
+                }
+              }
+
+              .lobby-room {
+                padding-left: 1rem;
+                flex: 5;
+                font-size: 1.5rem;
+                display: flex;
+                align-items: center;
+
+                h3 {
+                  font-family: 'system-ui';
+                  color: #f9f33a;
+                  margin: 0;
+                }
+              }
+            }
+
+            .lobby-join {
+              display: flex;
+              justify-content: space-between;
+              border-bottom: 0.2rem solid white;
+
+              .lobby-status-container {
+                flex: 1;
+              }
+
+              .lobby-join-container {
+                flex: 1;
+
+                .lobby-join-button {
+                  width: 20%;
+                  border: 0;
+                  color: white;
+                  background-color: transparent;
+                  border-bottom: 0.2rem solid white;
+                  border-right: 0.2rem solid white;
+                  border-left: 0.2rem solid white;
+                  border-top-left-radius: 1.5rem;
+                  cursor: pointer;
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
