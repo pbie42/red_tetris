@@ -16,7 +16,6 @@ $login-container-height: 75vh;
   width: 100%;
 
   .login-container {
-    // background-color: #fff;
     height: 75vh;
     width: 25vw;
     min-width: 37.5rem;
@@ -27,7 +26,6 @@ $login-container-height: 75vh;
 
     .login-image-container {
       flex: 5;
-      // background-color: yellow;
       border-top-right-radius: borderRadiusCalc();
       background-size: cover;
       background-repeat: no-repeat;
@@ -64,7 +62,6 @@ $login-container-height: 75vh;
         display: flex;
         justify-content: center;
         align-items: flex-end;
-        // background-color: #fff;
 
         .login-input {
           border: 0;
@@ -92,7 +89,7 @@ $login-container-height: 75vh;
             justify-content: flex-end;
 
             button {
-              background-color: none;
+              background-color: transparent;
               border: 0;
               height: 2.8rem;
               font-size: 1.8rem;
@@ -102,7 +99,6 @@ $login-container-height: 75vh;
               border-left: $border-thickness solid $bright-red;
               border-bottom-left-radius: 1.5rem;
               cursor: pointer;
-              // border-bottom-right-radius: borderRadiusCalc();
             }
           }
         }
