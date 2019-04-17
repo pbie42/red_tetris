@@ -10,7 +10,7 @@ export const renderGames = (games, gameCreate, playerID) => games.map(game => (
       <div className="lobby-players">
         <h3>Players</h3>
         <h4>
-          {`${game.players.length} / 5`}
+          {`${game.players.length}/5`}
         </h4>
       </div>
       <div className="lobby-room-players-divider">
@@ -18,14 +18,14 @@ export const renderGames = (games, gameCreate, playerID) => games.map(game => (
       </div>
       <div className="lobby-room">
         <h3>{game.roomName}</h3>
-      </div>
-    </div>
-    <div className="lobby-join">
-      <div className="lobby-status-container">
-        <div className="lobby-game-status">Pending</div>
-      </div>
-      <div className="lobby-join-container">
-        <button type="submit" className="lobby-join-button" onClick={() => gameCreate(game.roomName, playerID)}>Join</button>
+        <div className="lobby-join">
+          <div className="lobby-status-container">
+            <div className="lobby-game-status">Pending</div>
+          </div>
+          <div className="lobby-join-container">
+            <button type="submit" className="lobby-join-button" onClick={() => gameCreate(game.roomName, playerID)}>Join</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -40,6 +40,7 @@ function Lobby(props) {
     playerID,
     resetTextArea,
     submitGame,
+    submitGameEnter,
   } = props;
   return (
     <div className="lobby-page">
@@ -50,7 +51,14 @@ function Lobby(props) {
         <div className="lobby-create-list-container">
           <div className="lobby-create-container">
             <div className="lobby-input-button-container">
-              <input className="lobby-input" placeholder="Enter New Game Name" type="text" value={newRoomName} onChange={onChangeTextArea} />
+              <input
+                className="lobby-input"
+                placeholder="Enter New Game Name"
+                type="text"
+                value={newRoomName}
+                onChange={onChangeTextArea}
+                onKeyUp={submitGameEnter(newRoomName, playerID, resetTextArea)}
+              />
               <div className="lobby-button">
                 <button
                   type="submit"
@@ -81,6 +89,7 @@ Lobby.propTypes = {
   playerID: PropTypes.string.isRequired,
   resetTextArea: PropTypes.func.isRequired,
   submitGame: PropTypes.func.isRequired,
+  submitGameEnter: PropTypes.func.isRequired,
 };
 
 export default checkForGame(composeWithLogic(Lobby), '/');
