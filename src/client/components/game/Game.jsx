@@ -68,7 +68,7 @@ function Game(props) {
   const others = players.filter(player => player.id !== playerID);
   if (!gameID) return <Redirect to="/lobby" />;
   return (
-    <div>
+    <div className="game-page">
       <button
         type="submit"
         onClick={() => {
@@ -90,7 +90,14 @@ function Game(props) {
           {others.length > 0 && Board({ board: others[0].board, type: 'other' })}
           {others.length > 2 && Board({ board: others[2].board, type: 'other' })}
         </div>
-        {Board({ board: players.find(p => p.id === playerID).board, type: 'board' })}
+        <div className="player-board-container">
+          <div className="player-board-info">
+            <h1>test</h1>
+          </div>
+          <div className="player-board-background">
+            {Board({ board: players.find(p => p.id === playerID).board, type: 'board' })}
+          </div>
+        </div>
         <div className="boards-others">
           {others.length > 1 && Board({ board: others[1].board, type: 'other' })}
           {others.length > 3 && Board({ board: others[3].board, type: 'other' })}

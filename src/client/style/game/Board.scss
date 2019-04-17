@@ -1,24 +1,25 @@
 $board-height: 85vh;
-$tetris-purple: rgba(118, 71, 245, 1);
-$tetris-green: rgba(35, 214, 192, 1);
-$tetris-red: #fc1576;
-$tetris-blue: #0084ff;
-$tetris-cyan: #00ddef;
-$tetris-yellow: #fee800;
+$tetris-purple: #303235;
+$tetris-green: #7cb563;
+$tetris-red: #c8865f;
+$tetris-blue: #868cba;
+$tetris-cyan: #c7c2d6;
+$tetris-yellow: #8d6a5a;
 
 @function widthOfBoard() {
   @return $board-height / 2;
 }
 
 .board {
-  height: 86vh;
-  width: widthOfBoard();
-  min-width: 56rem;
+  height: 56vh;
+  width: 21vw;
+  // min-width: 56rem;
   display: flex;
   align-items: center;
   flex-flow: column;
-  border-top: 0.1rem solid black;
-  border-left: 0.1rem solid black;
+  border-top: 0.1rem solid white;
+  border-left: 0.1rem solid white;
+  background-color: rgba(0, 0, 0, 0.35);
 
   .board-row {
     width: 100%;
@@ -26,8 +27,8 @@ $tetris-yellow: #fee800;
     flex-flow: row;
     flex: 1;
     .board-column {
-      border-bottom: 0.1rem solid black;
-      border-right: 0.1rem solid black;
+      border-bottom: 0.1rem solid white;
+      border-right: 0.1rem solid white;
       flex: 1;
     }
   }

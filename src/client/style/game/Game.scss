@@ -3,38 +3,84 @@ $board-height: 41vh;
   @return $board-height / 2;
 }
 
-#game-title {
-  color: aqua;
-  background-color: black;
-  font-size: 1rem;
-}
+.game-page {
+  #game-title {
+    color: aqua;
+    background-color: black;
+    font-size: 1rem;
+  }
 
-#boards-container {
-  display: flex;
-  justify-content: space-evenly;
-
-  .boards-others {
+  #boards-container {
     display: flex;
-    flex-flow: column;
+    justify-content: space-evenly;
+    height: 100%;
 
-    .other {
-      height: 41vh;
-      width: widthOfBoard();
+    .player-board-container {
+      height: 75vh;
+      width: 25vw;
+      background-color: transparent;
+      background: linear-gradient(
+        180deg,
+        rgba(238, 188, 55, 1) 0%,
+        rgba(220, 77, 70, 1) 29%,
+        rgba(154, 65, 60, 1) 71%,
+        rgba(48, 11, 3, 1) 90%
+      );
       display: flex;
+      justify-content: center;
       align-items: center;
+      border-top-right-radius: 10vh;
+      border-bottom-left-radius: 10vh;
       flex-flow: column;
-      border-top: 0.1rem solid black;
-      border-left: 0.1rem solid black;
+      overflow: hidden;
 
-      .board-row {
+      .player-board-info {
+        margin-top: 3rem;
+        height: 12rem;
         width: 100%;
+        background-color: rgba(0, 0, 0, 0.35);
+        border-top: 0.2rem solid white;
+        border-bottom: 0.2rem solid white;
+        // border-top-right-radius: 10vh;
+        // border-bottom-left-radius: 10vh;
+      }
+
+      .player-board-background {
+        margin-top: 2rem;
+        background-size: 101% 76.6%;
+        background-repeat: no-repeat;
+        background-position: 45% 106%;
+        background-image: url(../../img/tetris_kremlin.png);
+        width: 100%;
+        height: 100%;
         display: flex;
-        flex-flow: row;
-        flex: 1;
-        .board-column {
-          border-bottom: 0.1rem solid black;
-          border-right: 0.1rem solid black;
+        justify-content: center;
+      }
+    }
+
+    .boards-others {
+      display: flex;
+      flex-flow: column;
+
+      .other {
+        height: 41vh;
+        width: widthOfBoard();
+        display: flex;
+        align-items: center;
+        flex-flow: column;
+        border-top: 0.2rem solid black;
+        border-left: 0.2rem solid black;
+
+        .board-row {
+          width: 100%;
+          display: flex;
+          flex-flow: row;
           flex: 1;
+          .board-column {
+            border-bottom: 0.2rem solid black;
+            border-right: 0.2rem solid black;
+            flex: 1;
+          }
         }
       }
     }
