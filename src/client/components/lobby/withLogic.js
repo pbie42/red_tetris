@@ -6,7 +6,12 @@ import withHandlers from 'client/components/lobby/withHandlers';
 import withState from 'client/components/lobby/withState';
 
 function mapStateToProps(state) {
-  return { error: state.game.error, playerID: state.player.id, games: state.lobby.games };
+  return {
+    error: state.game.error,
+    playerID: state.player.id,
+    games: state.lobby.games,
+    difficulty: state.game.difficulty,
+  };
 }
 
 export default compose(

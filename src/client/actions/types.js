@@ -22,6 +22,7 @@ export const GAME_SET_ACTIVE = 'GAME_SET_ACTIVE';
 export const GAME_SET_LISTENING = 'GAME_SET_LISTENING';
 export const GAME_SET_NEW_LEADER = 'GAME_SET_NEW_LEADER';
 export const GAME_START = 'GAME_START';
+export const GAME_SET_DIFFICULTY = 'GAME_SET_DIFFICULTY';
 
 // -----------------------------------------------------------------------Player
 export const PLAYER_CREATE = 'PLAYER_CREATE';

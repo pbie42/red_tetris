@@ -9,6 +9,7 @@ export const gameInitialState = {
   queue: [],
   roomName: '',
   leader: '',
+  difficulty: 0,
 };
 
 export default (state = gameInitialState, { type, payload }) => {
@@ -24,6 +25,7 @@ export default (state = gameInitialState, { type, payload }) => {
         players: payload.players,
         queue: payload.queue,
         roomName: payload.roomName,
+        difficulty: payload.difficulty,
       };
 
     case types.GAME_SET_ACTIVE:
@@ -67,6 +69,13 @@ export default (state = gameInitialState, { type, payload }) => {
     case types.GAME_RESET:
       console.log('reducer game reset');
       return gameInitialState;
+
+    case types.GAME_SET_DIFFICULTY:
+      console.log('Setting difficulty');
+      return {
+        ...state,
+        difficulty: payload.difficulty,
+      };
 
     default:
       return state;

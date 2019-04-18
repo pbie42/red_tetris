@@ -6,6 +6,7 @@ const {
 } = require('./handlers');
 
 function gameSocket(io, socket, games, players, { payload, type }) {
+  console.log("payload + type ", payload, type);
   let updatedGames = games;
   switch (type) {
     case 'GAME_CREATE':

@@ -41,6 +41,8 @@ function Lobby(props) {
     resetTextArea,
     submitGame,
     submitGameEnter,
+    gameSetDifficulty,
+    difficulty,
   } = props;
   return (
     <div className="lobby-page">
@@ -57,13 +59,22 @@ function Lobby(props) {
                 type="text"
                 value={newRoomName}
                 onChange={onChangeTextArea}
-                onKeyUp={submitGameEnter(newRoomName, playerID, resetTextArea)}
+                onKeyUp={submitGameEnter(newRoomName, playerID, resetTextArea, difficulty)}
               />
+              <div className="lobby-button">
+                <button
+                  type="button"
+                  id="game-difficulty"
+                  onClick={() => gameSetDifficulty(2)}
+                >
+                  Hard Mode
+                </button>
+              </div>
               <div className="lobby-button">
                 <button
                   type="submit"
                   id="game-submit"
-                  onClick={submitGame(newRoomName, playerID, resetTextArea)}
+                  onClick={submitGame(newRoomName, playerID, resetTextArea, difficulty)}
                 >
                   Add Game
                 </button>
@@ -90,6 +101,8 @@ Lobby.propTypes = {
   resetTextArea: PropTypes.func.isRequired,
   submitGame: PropTypes.func.isRequired,
   submitGameEnter: PropTypes.func.isRequired,
+  gameSetDifficulty: PropTypes.func.isRequired,
+  difficulty: PropTypes.number.isRequired,
 };
 
 export default checkForGame(composeWithLogic(Lobby), '/');

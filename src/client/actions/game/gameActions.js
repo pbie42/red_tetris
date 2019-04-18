@@ -1,11 +1,12 @@
 import * as types from 'client/actions/types';
 
-export function gameCreate(roomName, playerID) {
+export function gameCreate(roomName, playerID, difficulty) {
   return {
     type: types.GAME_CREATE,
     payload: {
       roomName,
       playerID,
+      difficulty,
     },
     channel: 'game',
   };
@@ -62,7 +63,7 @@ export function gameStart(gameID, playerID) {
 }
 
 export function gameSet({
-  active, id, leader, players, queue, roomName,
+  active, id, leader, players, queue, roomName, difficulty,
 }) {
   return {
     type: types.GAME_SET,
@@ -73,6 +74,7 @@ export function gameSet({
       players,
       queue,
       roomName,
+      difficulty,
     },
   };
 }
@@ -142,5 +144,14 @@ export function gameMovePieceRotate(gameID, playerID) {
       playerID,
     },
     channel: 'game',
+  };
+}
+
+export function gameSetDifficulty(difficulty) {
+  return {
+    type: types.GAME_SET_DIFFICULTY,
+    payload: {
+      difficulty,
+    },
   };
 }

@@ -14,6 +14,7 @@ import {
   gameSetListener,
   gameSetNewLeader,
   gameStart,
+  gameSetDifficulty,
 } from 'client/actions/game/gameActions';
 
 import { lobbyGamesUpdate, lobbyGetGames } from 'client/actions/lobby/lobbyActions';
@@ -42,6 +43,7 @@ export {
   gameSetListener,
   gameSetNewLeader,
   gameStart,
+  gameSetDifficulty,
   lobbyGamesUpdate,
   lobbyGetGames,
   playerCreate,
