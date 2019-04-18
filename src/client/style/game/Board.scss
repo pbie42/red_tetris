@@ -1,5 +1,5 @@
 $board-height: 85vh;
-$tetris-purple: #303235;
+$tetris-purple: #70757b;
 $tetris-green: #7cb563;
 $tetris-red: #c8865f;
 $tetris-blue: #868cba;
@@ -14,11 +14,13 @@ $tetris-yellow: #8d6a5a;
   height: 56vh;
   width: 21vw;
   // min-width: 56rem;
+  max-width: 35.6rem;
+  min-width: 32.3rem;
   display: flex;
   align-items: center;
   flex-flow: column;
-  border-top: 0.1rem solid white;
-  border-left: 0.1rem solid white;
+  border-top: 0.2rem solid white;
+  border-left: 0.2rem solid white;
   background-color: rgba(0, 0, 0, 0.35);
 
   .board-row {
@@ -27,8 +29,8 @@ $tetris-yellow: #8d6a5a;
     flex-flow: row;
     flex: 1;
     .board-column {
-      border-bottom: 0.1rem solid white;
-      border-right: 0.1rem solid white;
+      border-bottom: 0.2rem solid white;
+      border-right: 0.2rem solid white;
       flex: 1;
     }
   }
