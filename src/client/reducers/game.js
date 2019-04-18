@@ -9,7 +9,7 @@ export const gameInitialState = {
   queue: [],
   roomName: '',
   leader: '',
-  difficulty: 0,
+  difficulty: 1,
 };
 
 export default (state = gameInitialState, { type, payload }) => {

@@ -65,7 +65,7 @@ function Lobby(props) {
                 <button
                   type="button"
                   id="game-difficulty"
-                  onClick={() => gameSetDifficulty(2)}
+                  onClick={() => gameSetDifficulty(0.5)}
                 >
                   Hard Mode
                 </button>

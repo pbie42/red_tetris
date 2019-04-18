@@ -8,8 +8,8 @@ const {
   lobbyUpdateGamesEmit,
 } = require('../emits');
 
-function createNewGame(socket, games, roomName, player) {
-  const newGame = new Game(uniqid(), roomName, [player]);
+function createNewGame(socket, games, roomName, player, difficulty) {
+  const newGame = new Game(uniqid(), roomName, [player], difficulty);
   games.push(newGame);
   socket.join(newGame.getId());
   gameSetSocketEmit(socket, newGame);
@@ -29,9 +29,9 @@ function addNewPlayerToRoomQueue(io, socket, game, player) {
   gameQueueUpdateEmit(io, game);
 }
 
-function gameCreate(io, socket, roomName, player, games) {
+function gameCreate(io, socket, roomName, player, games, difficulty) {
   const foundGame = games.find(game => game.getRoomName() === roomName);
-  if (!foundGame) createNewGame(socket, games, roomName, player);
+  if (!foundGame) createNewGame(socket, games, roomName, player, difficulty);
   else {
     const foundPlayer = foundGame.getPlayer(player.getId());
     if (!foundPlayer && foundGame.getPlayersCount() < 5) {
@@ -43,10 +43,10 @@ function gameCreate(io, socket, roomName, player, games) {
   return games;
 }
 
-function handleGameCreate(io, socket, games, players, { roomName, playerID }) {
+function handleGameCreate(io, socket, games, players, { roomName, playerID, difficulty }) {
   const foundPlayer = players.find(player => player.getId() === playerID);
   let updatedGames = games;
-  if (foundPlayer) updatedGames = gameCreate(io, socket, roomName, foundPlayer, games);
+  if (foundPlayer) updatedGames = gameCreate(io, socket, roomName, foundPlayer, games, difficulty);
   lobbyUpdateGamesEmit(io, games);
   return updatedGames;
 }

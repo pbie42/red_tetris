@@ -52,7 +52,7 @@ function handleGameStart(io, socket, games, { gameID, playerID }) {
   gameSetActiveEmit(io, gameToStart);
   handleFirstPiece(io, gameToStart);
   lobbyUpdateGamesEmit(io, updatedGames);
-  gameToStart.setAutoDrop(setInterval(() => gamePieceMoveDownEmit(socket, gameToStart), 1000));
+  gameToStart.setAutoDrop(setInterval(() => gamePieceMoveDownEmit(socket, gameToStart), 1000 * gameToStart.difficulty));
   return updatedGames;
 }
 

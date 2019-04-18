@@ -1,7 +1,7 @@
 const pieceOrder = require('./utils/pieceOrder');
 
 module.exports = class Game {
-  constructor(id, roomName, players) {
+  constructor(id, roomName, players, difficulty) {
     this.id = id;
     this.roomName = roomName;
     this.players = players;
@@ -9,6 +9,7 @@ module.exports = class Game {
     this.pieces = pieceOrder();
     this.active = false;
     this.leader = this.setLeader();
+    this.difficulty = difficulty;
   }
 
   startGame() {
