@@ -100,25 +100,49 @@ $border-thickness: 0.2rem;
     .boards-others {
       display: flex;
       flex-flow: column;
+      justify-content: center;
+      align-items: center;
+      border-top-right-radius: 10vh;
+      border-bottom-left-radius: 10vh;
 
-      .other {
-        height: 41vh;
-        width: widthOfBoard();
+      .other-container {
         display: flex;
-        align-items: center;
         flex-flow: column;
-        border-top: 0.2rem solid black;
-        border-left: 0.2rem solid black;
+        justify-content: center;
+        align-items: center;
+        border-top-right-radius: 10vh;
+        border-bottom-left-radius: 10vh;
+        height: 41vh;
+        width: 20.5vh;
+        border: 0.2rem white solid;
+        margin-bottom: 4rem;
+        background: linear-gradient(
+          180deg,
+          rgba(238, 188, 55, 1) 0%,
+          rgba(220, 77, 70, 1) 29%,
+          rgba(154, 65, 60, 1) 71%,
+          rgba(48, 11, 3, 1) 90%
+        );
 
-        .board-row {
-          width: 100%;
+        .other {
+          height: 32vh;
+          width: 14.5vh;
           display: flex;
-          flex-flow: row;
-          flex: 1;
-          .board-column {
-            border-bottom: 0.2rem solid black;
-            border-right: 0.2rem solid black;
+          align-items: center;
+          flex-flow: column;
+          border-top: 0.2rem solid black;
+          border-left: 0.2rem solid black;
+
+          .board-row {
+            width: 100%;
+            display: flex;
+            flex-flow: row;
             flex: 1;
+            .board-column {
+              border-bottom: 0.2rem solid black;
+              border-right: 0.2rem solid black;
+              flex: 1;
+            }
           }
         }
       }

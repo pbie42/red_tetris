@@ -31,25 +31,27 @@ function Game(props) {
 
   if (!handleKeyDown && gameID && playerID) {
     handleKeyDown = function keyDown(e) {
-      switch (e.keyCode) {
-        case keys.ARROW_UP:
-          gameMovePieceRotate(gameID, playerID);
-          break;
-        case keys.ARROW_DOWN:
-          gameMovePieceDown(gameID, playerID);
-          break;
-        case keys.ARROW_LEFT:
-          gameMovePieceLeft(gameID, playerID);
-          break;
-        case keys.ARROW_RIGHT:
-          gameMovePieceRight(gameID, playerID);
-          break;
-        case keys.SPACE_BAR:
-          console.log('SPACE_BAR');
-          break;
-
-        default:
-          break;
+      console.log('e.repeat', e.repeat);
+      if (!e.repeat) {
+        switch (e.keyCode) {
+          case keys.ARROW_UP:
+            gameMovePieceRotate(gameID, playerID);
+            break;
+          case keys.ARROW_DOWN:
+            gameMovePieceDown(gameID, playerID);
+            break;
+          case keys.ARROW_LEFT:
+            gameMovePieceLeft(gameID, playerID);
+            break;
+          case keys.ARROW_RIGHT:
+            gameMovePieceRight(gameID, playerID);
+            break;
+          case keys.SPACE_BAR:
+            console.log('SPACE_BAR');
+            break;
+          default:
+            break;
+        }
       }
     };
   }
@@ -71,14 +73,24 @@ function Game(props) {
     <div className="game-page">
       <div id="boards-container">
         <div className="boards-others">
-          {others.length > 0 && Board({ board: others[0].board, type: 'other' })}
-          {others.length > 2 && Board({ board: others[2].board, type: 'other' })}
+          {others.length > 0 && (
+            <div className="other-container">
+              {Board({ board: others[0].board, type: 'other' })}
+            </div>
+          )}
+          {others.length > 2 && (
+            <div className="other-container">
+              {Board({ board: others[2].board, type: 'other' })}
+            </div>
+          )}
         </div>
         <div className="player-board-container">
           <div className="player-board-info">
             <div className="player-buttons-container">
               <button
-                className={`player-button-leave ${playerID !== leader || gameIsActive ? 'round-bottom-right' : ''}`}
+                className={`player-button-leave ${
+                  playerID !== leader || gameIsActive ? 'round-bottom-right' : ''
+                }`}
                 type="submit"
                 onClick={() => {
                   document.removeEventListener('keydown', handleKeyDown, true);
@@ -104,8 +116,16 @@ function Game(props) {
           </div>
         </div>
         <div className="boards-others">
-          {others.length > 1 && Board({ board: others[1].board, type: 'other' })}
-          {others.length > 3 && Board({ board: others[3].board, type: 'other' })}
+          {others.length > 1 && (
+            <div className="other-container">
+              {Board({ board: others[1].board, type: 'other' })}
+            </div>
+          )}
+          {others.length > 3 && (
+            <div className="other-container">
+              {Board({ board: others[3].board, type: 'other' })}
+            </div>
+          )}
         </div>
       </div>
     </div>
