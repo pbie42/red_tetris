@@ -1,9 +1,12 @@
 $board-height: 41vh;
+$border-thickness: 0.2rem;
 @function widthOfBoard() {
   @return $board-height / 2;
 }
 
 .game-page {
+  height: 100%;
+
   #game-title {
     color: aqua;
     background-color: black;
@@ -14,10 +17,13 @@ $board-height: 41vh;
     display: flex;
     justify-content: space-evenly;
     height: 100%;
+    align-items: center;
 
     .player-board-container {
       height: 75vh;
       width: 25vw;
+      max-width: 45rem;
+      min-width: 37.5rem;
       background-color: transparent;
       background: linear-gradient(
         180deg,
@@ -33,6 +39,8 @@ $board-height: 41vh;
       border-bottom-left-radius: 10vh;
       flex-flow: column;
       overflow: hidden;
+      border: 0.2rem solid white;
+      border: $border-thickness solid white;
 
       .player-board-info {
         margin-top: 3rem;
@@ -43,6 +51,37 @@ $board-height: 41vh;
         border-bottom: 0.2rem solid white;
         // border-top-right-radius: 10vh;
         // border-bottom-left-radius: 10vh;
+
+        .player-buttons-container {
+          .player-button-leave {
+            background-color: rgba(0, 0, 0, 0.35);
+            padding: 0 1.5rem;
+            border: 0;
+            height: 2.8rem;
+            font-size: 1.8rem;
+            color: white;
+            border-bottom: 0.2rem solid white;
+            border-right: 0.2rem solid white;
+            cursor: pointer;
+          }
+
+          .round-bottom-right {
+            border-bottom-right-radius: 1.5rem;
+          }
+
+          .player-button-start {
+            background-color: rgba(0, 0, 0, 0.35);
+            padding: 0 1.5rem;
+            border: 0;
+            height: 2.8rem;
+            font-size: 1.8rem;
+            color: white;
+            border-bottom: 0.2rem solid white;
+            border-right: 0.2rem solid white;
+            border-bottom-right-radius: 1.5rem;
+            cursor: pointer;
+          }
+        }
       }
 
       .player-board-background {

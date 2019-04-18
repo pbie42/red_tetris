@@ -69,22 +69,6 @@ function Game(props) {
   if (!gameID) return <Redirect to="/lobby" />;
   return (
     <div className="game-page">
-      <button
-        type="submit"
-        onClick={() => {
-          document.removeEventListener('keydown', handleKeyDown, true);
-          handleKeyDown = undefined;
-          gameLeave(playerID, gameID);
-        }}
-      >
-        Leave Game
-      </button>
-      {leader === playerID && !gameIsActive && (
-        <button type="submit" onClick={() => gameStart(gameID, playerID)}>
-          Start Game
-        </button>
-      )}
-      <h1 id="game-title">This is the game page</h1>
       <div id="boards-container">
         <div className="boards-others">
           {others.length > 0 && Board({ board: others[0].board, type: 'other' })}
@@ -92,7 +76,28 @@ function Game(props) {
         </div>
         <div className="player-board-container">
           <div className="player-board-info">
-            <h1>test</h1>
+            <div className="player-buttons-container">
+              <button
+                className={`player-button-leave ${playerID !== leader || gameIsActive ? 'round-bottom-right' : ''}`}
+                type="submit"
+                onClick={() => {
+                  document.removeEventListener('keydown', handleKeyDown, true);
+                  handleKeyDown = undefined;
+                  gameLeave(playerID, gameID);
+                }}
+              >
+                Leave Game
+              </button>
+              {leader === playerID && !gameIsActive && (
+                <button
+                  className="player-button-start"
+                  type="submit"
+                  onClick={() => gameStart(gameID, playerID)}
+                >
+                  Start Game
+                </button>
+              )}
+            </div>
           </div>
           <div className="player-board-background">
             {Board({ board: players.find(p => p.id === playerID).board, type: 'board' })}
