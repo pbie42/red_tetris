@@ -1,8 +1,10 @@
 import React from 'react';
+import Sound from 'react-sound';
 import composeWithLogic from 'client/components/lobby/withLogic';
 import checkForGame from 'client/components/lobby/checkForGame';
 import PropTypes from 'prop-types';
 import 'client/style/Lobby.scss';
+import soundtrack from '../../../assets/TetrisSoundtrack.mp3';
 
 export const renderGames = (games, gameCreate, playerID) => games.map(game => (
   <div className="lobby-game" key={game.id}>
@@ -69,6 +71,11 @@ function Lobby(props) {
                 </button>
               </div>
             </div>
+            <Sound
+              url={soundtrack}
+              playStatus={Sound.status.PLAYING}
+              loop="true"
+            />
           </div>
           <div className="lobby-list-container">
             <div className="lobby-list">
