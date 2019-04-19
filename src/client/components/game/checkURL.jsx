@@ -8,24 +8,25 @@ import { Redirect } from 'react-router-dom';
 
 const checkURL = (ChildComponent) => {
   function ComposedComponent(props) {
-    const { match, username } = props;
+    const { match, username, difficulty } = props;
     const url = match.params.game;
     if (!verifyUrl(url)) {
       if (username) return <Redirect from="/:game" exact to="/lobby" />;
       return <Redirect from="/:game" exact to="/" />;
     }
     const { player, room } = parseUrl(url);
-    if (!username) return <Redirect from="/:game" exact to={{ pathname: '/setup', state: { player, game: room } }} />;
+    if (!username) return <Redirect from="/:game" exact to={{ pathname: '/setup', state: { player, game: room, difficulty } }} />;
     return <ChildComponent {...props} />;
   }
 
   ComposedComponent.propTypes = {
     username: PropTypes.string.isRequired,
+    difficulty: PropTypes.number.isRequired,
     match: ReactRouterPropTypes.match.isRequired,
   };
 
   function mapStateToProps(state) {
-    return { username: state.player.username };
+    return { username: state.player.username, difficulty: state.game.difficulty };
   }
 
   return connect(

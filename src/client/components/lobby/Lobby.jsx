@@ -4,6 +4,32 @@ import checkForGame from 'client/components/lobby/checkForGame';
 import PropTypes from 'prop-types';
 import 'client/style/Lobby.scss';
 
+function difficultyClass(difficulty) {
+  switch (difficulty) {
+    case 1:
+      return 'session';
+    case 0.5:
+      return 'pending';
+    case 0.2:
+      return 'hard';
+    default:
+      return '';
+  }
+}
+
+function difficultyDisplay(difficulty) {
+  switch (difficulty) {
+    case 1:
+      return 'Easy';
+    case 0.5:
+      return 'Medium';
+    case 0.2:
+      return 'Hard';
+    default:
+      return '';
+  }
+}
+
 export const renderGames = (games, gameCreate, playerID) => games.map(game => (
   <div className="lobby-game" key={game.id}>
     <div className="lobby-game-room-players">
@@ -20,7 +46,13 @@ export const renderGames = (games, gameCreate, playerID) => games.map(game => (
         <h3>{game.roomName}</h3>
         <div className="lobby-join">
           <div className="lobby-status-container">
-            <div className="lobby-game-status">Pending</div>
+            <div className={`lobby-game-status ${game.active ? 'session' : 'pending'}`}>
+              {game.active ? 'In Session' : 'Waiting...'}
+            </div>
+            <div className={`lobby-game-status ${difficultyClass(game.difficulty)}`}>
+              <div className="lobby-game-difficulty">Difficulty: </div>
+              {difficultyDisplay(game.difficulty)}
+            </div>
           </div>
           <div className="lobby-join-container">
             <button type="submit" className="lobby-join-button" onClick={() => gameCreate(game.roomName, playerID)}>Join</button>
@@ -64,28 +96,25 @@ function Lobby(props) {
               <div className="lobby-buttons-container">
                 <button
                   type="button"
-                  className="game-difficulty"
-                  onClick={() => gameSetDifficulty(0.2)}
-                >
-                  Hard
-                </button>
-
-                <button
-                  type="button"
-                  className="game-difficulty"
-                  onClick={() => gameSetDifficulty(0.5)}
-                >
-                  Medium
-                </button>
-
-                <button
-                  type="button"
-                  className="game-difficulty"
+                  className={`game-difficulty ${difficulty === 1 ? 'easy' : ''}`}
                   onClick={() => gameSetDifficulty(1)}
                 >
                   Easy
                 </button>
-
+                <button
+                  type="button"
+                  className={`game-difficulty ${difficulty === 0.5 ? 'medium' : ''}`}
+                  onClick={() => gameSetDifficulty(0.5)}
+                >
+                  Medium
+                </button>
+                <button
+                  type="button"
+                  className={`game-difficulty ${difficulty === 0.2 ? 'hard' : ''}`}
+                  onClick={() => gameSetDifficulty(0.2)}
+                >
+                  Hard
+                </button>
                 <div className="lobby-button">
                   <button
                     type="submit"

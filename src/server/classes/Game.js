@@ -141,6 +141,7 @@ module.exports = class Game {
       players: this.getPlayersFront(),
       active: this.getActivity(),
       leader: this.getLeader(),
+      difficulty: this.difficulty,
     };
   }
 

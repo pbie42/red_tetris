@@ -32,6 +32,7 @@ function gameSetSocketEmit(socket, game) {
       players: game.getPlayersFront(),
       queue: game.getQueueFront(),
       roomName: game.getRoomName(),
+      difficulty: game.difficulty,
     },
     type: GAME_SET,
   });
