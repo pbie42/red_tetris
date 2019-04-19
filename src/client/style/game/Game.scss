@@ -1,9 +1,13 @@
 $board-height: 41vh;
+$border-thickness: 0.2rem;
+$lobby-font: 'Nova Square', cursive;
 @function widthOfBoard() {
   @return $board-height / 2;
 }
 
 .game-page {
+  height: 100%;
+
   #game-title {
     color: aqua;
     background-color: black;
@@ -14,10 +18,13 @@ $board-height: 41vh;
     display: flex;
     justify-content: space-evenly;
     height: 100%;
+    align-items: center;
 
     .player-board-container {
       height: 75vh;
       width: 25vw;
+      max-width: 45rem;
+      min-width: 37.5rem;
       background-color: transparent;
       background: linear-gradient(
         180deg,
@@ -33,20 +40,49 @@ $board-height: 41vh;
       border-bottom-left-radius: 10vh;
       flex-flow: column;
       overflow: hidden;
+      border: 0.2rem solid white;
+      border: $border-thickness solid white;
 
       .player-board-info {
-        margin-top: 3rem;
-        height: 12rem;
+        height: 10rem;
         width: 100%;
         background-color: rgba(0, 0, 0, 0.35);
-        border-top: 0.2rem solid white;
         border-bottom: 0.2rem solid white;
-        // border-top-right-radius: 10vh;
-        // border-bottom-left-radius: 10vh;
+
+        .player-buttons-container {
+          .player-button-leave {
+            background-color: rgba(0, 0, 0, 0.35);
+            padding: 0 1.5rem;
+            border: 0;
+            height: 2.8rem;
+            font-size: 1.8rem;
+            color: white;
+            border-bottom: 0.2rem solid white;
+            border-right: 0.2rem solid white;
+            cursor: pointer;
+          }
+
+          .round-bottom-right {
+            border-bottom-right-radius: 1.5rem;
+          }
+
+          .player-button-start {
+            background-color: rgba(0, 0, 0, 0.35);
+            padding: 0 1.5rem;
+            border: 0;
+            height: 2.8rem;
+            font-size: 1.8rem;
+            color: white;
+            border-bottom: 0.2rem solid white;
+            border-right: 0.2rem solid white;
+            border-bottom-right-radius: 1.5rem;
+            cursor: pointer;
+          }
+        }
       }
 
       .player-board-background {
-        margin-top: 2rem;
+        margin-top: 4rem;
         background-size: 101% 76.6%;
         background-repeat: no-repeat;
         background-position: 45% 106%;
@@ -61,26 +97,84 @@ $board-height: 41vh;
     .boards-others {
       display: flex;
       flex-flow: column;
+      justify-content: center;
+      align-items: center;
+      border-top-right-radius: 10vh;
+      border-bottom-left-radius: 10vh;
 
-      .other {
-        height: 41vh;
-        width: widthOfBoard();
+      .other-container {
         display: flex;
-        align-items: center;
         flex-flow: column;
-        border-top: 0.2rem solid black;
-        border-left: 0.2rem solid black;
+        overflow: hidden;
+        justify-content: flex-start;
+        align-items: center;
+        border-top-right-radius: 10vh;
+        border-bottom-left-radius: 10vh;
+        height: 41vh;
+        width: 20.5vh;
+        border: 0.2rem white solid;
+        margin-bottom: 4rem;
+        background: linear-gradient(
+          180deg,
+          rgba(238, 188, 55, 1) 0%,
+          rgba(220, 77, 70, 1) 29%,
+          rgba(154, 65, 60, 1) 71%,
+          rgba(48, 11, 3, 1) 90%
+        );
 
-        .board-row {
+        .other-name {
+          border-bottom: 0.2rem solid white;
+          width: 100%;
+          height: 7%;
+          margin-bottom: 1.3rem;
+          background-color: rgba(0, 0, 0, 0.35);
+          display: flex;
+          justify-content: flex-start;
+          padding-left: 1rem;
+          align-items: center;
+
+          div {
+            font-size: 1.5rem;
+            color: white;
+            font-family: $lobby-font;
+          }
+        }
+
+        .other {
+          height: 32vh;
+          width: 14.5vh;
+          display: flex;
+          align-items: center;
+          flex-flow: column;
+          border-top: 0.2rem solid black;
+          border-left: 0.2rem solid black;
+
+          .board-row {
+            width: 100%;
+            display: flex;
+            flex-flow: row;
+            flex: 1;
+            .board-column {
+              border-bottom: 0.2rem solid black;
+              border-right: 0.2rem solid black;
+              flex: 1;
+            }
+          }
+        }
+
+        .other-leader {
+          color: white;
+          height: 10%;
+          margin-top: 2rem;
           width: 100%;
           display: flex;
-          flex-flow: row;
-          flex: 1;
-          .board-column {
-            border-bottom: 0.2rem solid black;
-            border-right: 0.2rem solid black;
-            flex: 1;
-          }
+          justify-content: flex-end;
+          align-items: center;
+          font-size: 1.4rem;
+          background-color: rgba(0, 0, 0, 0.35);
+          border-top: 0.2rem solid white;
+          font-family: $lobby-font;
+          padding-right: 1rem;
         }
       }
     }

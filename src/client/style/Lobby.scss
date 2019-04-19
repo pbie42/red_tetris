@@ -6,6 +6,7 @@
 $bright-red: #be0712;
 $light-red: #dc4d46;
 $lobby-font: 'Nova Square', cursive;
+$border-thickness: 0.2rem;
 
 .lobby-page {
   display: flex;
@@ -31,6 +32,7 @@ $lobby-font: 'Nova Square', cursive;
     border-top-right-radius: 10vh;
     display: flex;
     flex-flow: column;
+    border: $border-thickness solid white;
 
     .lobby-logo-container {
       flex: 2;
@@ -219,7 +221,7 @@ $lobby-font: 'Nova Square', cursive;
                 justify-content: flex-end;
 
                 .lobby-join-button {
-                  width: 46%;
+                  width: 69%;
                   border: 0;
                   color: white;
                   background-color: transparent;

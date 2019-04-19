@@ -26,8 +26,6 @@ io.on('connection', (socket) => {
   });
 
   socket.on('lobby', ({ payload, type }) => {
-    console.log('lobby channel', payload, type);
-
     lobbySocket(socket, games, { payload, type });
   });
 });

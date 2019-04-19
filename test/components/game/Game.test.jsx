@@ -11,7 +11,7 @@ afterEach(() => {
   wrapped.unmount();
 });
 
-it('has one h1 if url is valid with player set and game set', () => {
+xit('has one h1 if url is valid with player set and game set', () => {
   const initialState = {
     player: {
       id: '1',

@@ -31,25 +31,26 @@ function Game(props) {
 
   if (!handleKeyDown && gameID && playerID) {
     handleKeyDown = function keyDown(e) {
-      switch (e.keyCode) {
-        case keys.ARROW_UP:
-          gameMovePieceRotate(gameID, playerID);
-          break;
-        case keys.ARROW_DOWN:
-          gameMovePieceDown(gameID, playerID);
-          break;
-        case keys.ARROW_LEFT:
-          gameMovePieceLeft(gameID, playerID);
-          break;
-        case keys.ARROW_RIGHT:
-          gameMovePieceRight(gameID, playerID);
-          break;
-        case keys.SPACE_BAR:
-          console.log('SPACE_BAR');
-          break;
-
-        default:
-          break;
+      if (!e.repeat) {
+        switch (e.keyCode) {
+          case keys.ARROW_UP:
+            gameMovePieceRotate(gameID, playerID);
+            break;
+          case keys.ARROW_DOWN:
+            gameMovePieceDown(gameID, playerID);
+            break;
+          case keys.ARROW_LEFT:
+            gameMovePieceLeft(gameID, playerID);
+            break;
+          case keys.ARROW_RIGHT:
+            gameMovePieceRight(gameID, playerID);
+            break;
+          case keys.SPACE_BAR:
+            console.log('SPACE_BAR');
+            break;
+          default:
+            break;
+        }
       }
     };
   }
@@ -69,38 +70,92 @@ function Game(props) {
   if (!gameID) return <Redirect to="/lobby" />;
   return (
     <div className="game-page">
-      <button
-        type="submit"
-        onClick={() => {
-          document.removeEventListener('keydown', handleKeyDown, true);
-          handleKeyDown = undefined;
-          gameLeave(playerID, gameID);
-        }}
-      >
-        Leave Game
-      </button>
-      {leader === playerID && !gameIsActive && (
-        <button type="submit" onClick={() => gameStart(gameID, playerID)}>
-          Start Game
-        </button>
-      )}
-      <h1 id="game-title">This is the game page</h1>
       <div id="boards-container">
         <div className="boards-others">
-          {others.length > 0 && Board({ board: others[0].board, type: 'other' })}
-          {others.length > 2 && Board({ board: others[2].board, type: 'other' })}
+          {others.length > 0 && (
+            <div className="other-container">
+              <div className="other-name">
+                <div>
+                  {others[0].username}
+                </div>
+              </div>
+              {Board({ board: others[0].board, type: 'other' })}
+              <div className="other-leader">
+                { others[0].id === leader ? (
+                  <div>
+                    Leader Points:
+                  </div>
+                ) : (
+                  <div>
+                    Points:
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+          {others.length > 2 && (
+            <div className="other-container">
+              <div className="other-name">
+                <div>
+                  {others[2].username}
+                </div>
+              </div>
+              {Board({ board: others[2].board, type: 'other' })}
+            </div>
+          )}
         </div>
         <div className="player-board-container">
           <div className="player-board-info">
-            <h1>test</h1>
+            <div className="player-buttons-container">
+              <button
+                className={`player-button-leave ${
+                  playerID !== leader || gameIsActive ? 'round-bottom-right' : ''
+                }`}
+                type="submit"
+                onClick={() => {
+                  document.removeEventListener('keydown', handleKeyDown, true);
+                  handleKeyDown = undefined;
+                  gameLeave(playerID, gameID);
+                }}
+              >
+                Leave Game
+              </button>
+              {leader === playerID && !gameIsActive && (
+                <button
+                  className="player-button-start"
+                  type="submit"
+                  onClick={() => gameStart(gameID, playerID)}
+                >
+                  Start Game
+                </button>
+              )}
+            </div>
           </div>
           <div className="player-board-background">
             {Board({ board: players.find(p => p.id === playerID).board, type: 'board' })}
           </div>
         </div>
         <div className="boards-others">
-          {others.length > 1 && Board({ board: others[1].board, type: 'other' })}
-          {others.length > 3 && Board({ board: others[3].board, type: 'other' })}
+          {others.length > 1 && (
+            <div className="other-container">
+              <div className="other-name">
+                <div>
+                  {others[1].username}
+                </div>
+              </div>
+              {Board({ board: others[1].board, type: 'other' })}
+            </div>
+          )}
+          {others.length > 3 && (
+            <div className="other-container">
+              <div className="other-name">
+                <div>
+                  {others[3].username}
+                </div>
+              </div>
+              {Board({ board: others[3].board, type: 'other' })}
+            </div>
+          )}
         </div>
       </div>
     </div>

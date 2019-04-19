@@ -23,6 +23,11 @@ $login-container-height: 75vh;
     display: flex;
     flex-flow: column;
     animation: moveInTop 2.5s;
+    border: 0.2rem solid white;
+    border-bottom-left-radius: 10vh;
+    border-top-right-radius: 10vh;
+    border: $border-thickness solid white;
+    background: white;
 
     .login-image-container {
       flex: 5;
