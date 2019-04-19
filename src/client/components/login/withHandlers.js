@@ -2,18 +2,10 @@ import { withHandlers } from 'recompose';
 
 const handleSubmitPlayer = (playerCreate, username, resetTextArea, event) => {
   event.preventDefault();
-  console.log('yuppp');
 
   playerCreate(username);
   resetTextArea();
 };
-
-// const handleSubmitPlayerEnter = (playerCreate, username, resetTextArea) => {
-//   console.log('yuppp');
-
-//   playerCreate(username);
-//   resetTextArea();
-// };
 
 const loginHandlers = withHandlers({
   submitPlayer: ({ playerCreate, lobbyGetGames }) => (username, resetTextArea) => (event) => {
@@ -23,7 +15,6 @@ const loginHandlers = withHandlers({
   submitPlayerEnter: ({ playerCreate, lobbyGetGames }) => (username, resetTextArea) => (event) => {
     if (event.key === 'Enter') {
       lobbyGetGames();
-      console.log('resetTextArea', resetTextArea);
       handleSubmitPlayer(playerCreate, username, resetTextArea, event);
     }
   },

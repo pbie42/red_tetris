@@ -31,7 +31,6 @@ function Game(props) {
 
   if (!handleKeyDown && gameID && playerID) {
     handleKeyDown = function keyDown(e) {
-      console.log('e.repeat', e.repeat);
       if (!e.repeat) {
         switch (e.keyCode) {
           case keys.ARROW_UP:

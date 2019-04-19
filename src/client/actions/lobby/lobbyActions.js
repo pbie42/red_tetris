@@ -8,7 +8,6 @@ export function lobbyGamesUpdate(games) {
 }
 
 export function lobbyGetGames() {
-  console.log('lobbyGetGames');
   return {
     type: types.LOBBY_GET_GAMES,
     payload: {},

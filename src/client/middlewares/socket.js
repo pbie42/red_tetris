@@ -39,27 +39,21 @@ socket.on('player', (event) => {
 socket.on('game', (event) => {
   switch (event.type) {
     case types.GAME_SET:
-      console.log('about to gameSet', event.payload);
       dispatchFunc(actions.gameSet(event.payload));
       break;
     case types.GAME_MOVE_PIECE_DOWN:
-      console.log('about to gameSet', event.payload);
       dispatchFunc(actions.gameMovePieceDown(event.payload.gameID, event.payload.playerID));
       break;
     case types.GAME_SET_ACTIVE:
-      console.log('about to gameSetactive', event.payload);
       dispatchFunc(actions.gameSetActive(event.payload));
       break;
     case types.GAME_SET_NEW_LEADER:
-      console.log('about to gameSetnewleader', event.payload);
       dispatchFunc(actions.gameSetNewLeader(event.payload));
       break;
     case types.GAME_PLAYERS_UPDATE:
-      console.log('about to gamePlayersUpdate', event.payload);
       dispatchFunc(actions.gamePlayersUpdate(event.payload));
       break;
     case types.GAME_QUEUE_UPDATE:
-      console.log('about to gameQueueUpdate', event.payload);
       dispatchFunc(actions.gameQueueUpdate(event.payload));
       break;
     case types.GAME_EXISTS:
@@ -75,10 +69,8 @@ socket.on('game', (event) => {
 });
 
 socket.on('lobby', (event) => {
-  console.log('lobby channel', event);
   switch (event.type) {
     case types.LOBBY_GAMES_UPDATE:
-      console.log('about to LOBBY_GAMES_UPDATE', event.payload);
       dispatchFunc(actions.lobbyGamesUpdate(event.payload));
       break;
 
