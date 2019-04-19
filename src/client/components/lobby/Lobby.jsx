@@ -65,11 +65,32 @@ function Lobby(props) {
                 <button
                   type="button"
                   id="game-difficulty"
-                  onClick={() => gameSetDifficulty(0.5)}
+                  onClick={() => gameSetDifficulty(0.2)}
                 >
-                  Hard Mode
+                  Pro
                 </button>
               </div>
+
+              <div className="lobby-button">
+                <button
+                  type="button"
+                  id="game-difficulty"
+                  onClick={() => gameSetDifficulty(0.5)}
+                >
+                  Intermediate
+                </button>
+              </div>
+
+              <div className="lobby-button">
+                <button
+                  type="button"
+                  id="game-difficulty"
+                  onClick={() => gameSetDifficulty(1)}
+                >
+                  Beginner
+                </button>
+              </div>
+
               <div className="lobby-button">
                 <button
                   type="submit"
