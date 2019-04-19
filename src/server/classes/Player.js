@@ -10,6 +10,7 @@ module.exports = class Player {
     this.current = 0;
     this.active = false;
     this.piece = {};
+    this.points = 0;
   }
 
   updateBoard(updatedBoard) {
@@ -72,5 +73,26 @@ module.exports = class Player {
 
   updateCurrent() {
     this.current += 1;
+  }
+
+  addPoints(rows) {
+    switch (rows) {
+      case 1:
+        this.points += 40;
+        break;
+      case 2:
+        this.points += 100;
+        break;
+      case 3:
+        this.points += 300;
+        break;
+      case 4:
+        this.points += 1200;
+        break;
+      default:
+        break;
+    }
+    console.log("We just destroyed " + rows + " rows");
+    console.log("The player has " + this.points + " points");
   }
 };

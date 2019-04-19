@@ -54,6 +54,7 @@ module.exports = class Game {
       id: p.getId(),
       username: p.getUsername(),
       board: p.getDisplayBoard(),
+      points: p.points,
     }));
   }
 
