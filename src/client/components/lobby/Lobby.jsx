@@ -61,44 +61,40 @@ function Lobby(props) {
                 onChange={onChangeTextArea}
                 onKeyUp={submitGameEnter(newRoomName, playerID, resetTextArea, difficulty)}
               />
-              <div className="lobby-button">
+              <div className="lobby-buttons-container">
                 <button
                   type="button"
-                  id="game-difficulty"
+                  className="game-difficulty"
                   onClick={() => gameSetDifficulty(0.2)}
                 >
-                  Pro
+                  Hard
                 </button>
-              </div>
 
-              <div className="lobby-button">
                 <button
                   type="button"
-                  id="game-difficulty"
+                  className="game-difficulty"
                   onClick={() => gameSetDifficulty(0.5)}
                 >
-                  Intermediate
+                  Medium
                 </button>
-              </div>
 
-              <div className="lobby-button">
                 <button
                   type="button"
-                  id="game-difficulty"
+                  className="game-difficulty"
                   onClick={() => gameSetDifficulty(1)}
                 >
-                  Beginner
+                  Easy
                 </button>
-              </div>
 
-              <div className="lobby-button">
-                <button
-                  type="submit"
-                  id="game-submit"
-                  onClick={submitGame(newRoomName, playerID, resetTextArea, difficulty)}
-                >
-                  Add Game
-                </button>
+                <div className="lobby-button">
+                  <button
+                    type="submit"
+                    id="game-submit"
+                    onClick={submitGame(newRoomName, playerID, resetTextArea, difficulty)}
+                  >
+                    Add Game
+                  </button>
+                </div>
               </div>
             </div>
           </div>
