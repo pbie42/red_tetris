@@ -1,5 +1,6 @@
 $board-height: 41vh;
 $border-thickness: 0.2rem;
+$lobby-font: 'Nova Square', cursive;
 @function widthOfBoard() {
   @return $board-height / 2;
 }
@@ -43,14 +44,10 @@ $border-thickness: 0.2rem;
       border: $border-thickness solid white;
 
       .player-board-info {
-        margin-top: 3rem;
-        height: 12rem;
+        height: 10rem;
         width: 100%;
         background-color: rgba(0, 0, 0, 0.35);
-        border-top: 0.2rem solid white;
         border-bottom: 0.2rem solid white;
-        // border-top-right-radius: 10vh;
-        // border-bottom-left-radius: 10vh;
 
         .player-buttons-container {
           .player-button-leave {
@@ -85,7 +82,7 @@ $border-thickness: 0.2rem;
       }
 
       .player-board-background {
-        margin-top: 2rem;
+        margin-top: 4rem;
         background-size: 101% 76.6%;
         background-repeat: no-repeat;
         background-position: 45% 106%;
@@ -108,7 +105,8 @@ $border-thickness: 0.2rem;
       .other-container {
         display: flex;
         flex-flow: column;
-        justify-content: center;
+        overflow: hidden;
+        justify-content: flex-start;
         align-items: center;
         border-top-right-radius: 10vh;
         border-bottom-left-radius: 10vh;
@@ -123,6 +121,24 @@ $border-thickness: 0.2rem;
           rgba(154, 65, 60, 1) 71%,
           rgba(48, 11, 3, 1) 90%
         );
+
+        .other-name {
+          border-bottom: 0.2rem solid white;
+          width: 100%;
+          height: 7%;
+          margin-bottom: 1.3rem;
+          background-color: rgba(0, 0, 0, 0.35);
+          display: flex;
+          justify-content: flex-start;
+          padding-left: 1rem;
+          align-items: center;
+
+          div {
+            font-size: 1.5rem;
+            color: white;
+            font-family: $lobby-font;
+          }
+        }
 
         .other {
           height: 32vh;
@@ -144,6 +160,21 @@ $border-thickness: 0.2rem;
               flex: 1;
             }
           }
+        }
+
+        .other-leader {
+          color: white;
+          height: 10%;
+          margin-top: 2rem;
+          width: 100%;
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+          font-size: 1.4rem;
+          background-color: rgba(0, 0, 0, 0.35);
+          border-top: 0.2rem solid white;
+          font-family: $lobby-font;
+          padding-right: 1rem;
         }
       }
     }

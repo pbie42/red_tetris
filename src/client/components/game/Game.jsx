@@ -75,11 +75,32 @@ function Game(props) {
         <div className="boards-others">
           {others.length > 0 && (
             <div className="other-container">
+              <div className="other-name">
+                <div>
+                  {others[0].username}
+                </div>
+              </div>
               {Board({ board: others[0].board, type: 'other' })}
+              <div className="other-leader">
+                { others[0].id === leader ? (
+                  <div>
+                    Leader Points:
+                  </div>
+                ) : (
+                  <div>
+                    Points:
+                  </div>
+                )}
+              </div>
             </div>
           )}
           {others.length > 2 && (
             <div className="other-container">
+              <div className="other-name">
+                <div>
+                  {others[2].username}
+                </div>
+              </div>
               {Board({ board: others[2].board, type: 'other' })}
             </div>
           )}
@@ -118,11 +139,21 @@ function Game(props) {
         <div className="boards-others">
           {others.length > 1 && (
             <div className="other-container">
+              <div className="other-name">
+                <div>
+                  {others[1].username}
+                </div>
+              </div>
               {Board({ board: others[1].board, type: 'other' })}
             </div>
           )}
           {others.length > 3 && (
             <div className="other-container">
+              <div className="other-name">
+                <div>
+                  {others[3].username}
+                </div>
+              </div>
               {Board({ board: others[3].board, type: 'other' })}
             </div>
           )}
