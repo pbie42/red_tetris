@@ -92,6 +92,7 @@ function handleMovePieceDown(io, games, gameID, playerID) {
       if (fullRows.length > 0) {
         const cleanedBoard = removeFullRows(player.getDisplayBoard(), fullRows);
         player.updateDisplayBoard(cleanedBoard);
+        player.addPoints(fullRows.length);
         const rowsToAdd = fullRows.length - 1;
         if (rowsToAdd > 0) handleAddSolidRows(game, playerID, rowsToAdd);
       }

@@ -81,15 +81,17 @@ function Game(props) {
               </div>
               {Board({ board: others[0].board, type: 'other' })}
               <div className="other-leader">
-                { others[0].id === leader ? (
-                  <div>
-                    Leader Points:
-                  </div>
-                ) : (
-                  <div>
-                    Points:
-                  </div>
-                )}
+                {others[0].id === leader
+                  ? (
+                    <div>
+                      {`Leader Points: ${others[0].points}`}
+                    </div>
+                  ) : (
+                    <div>
+                      {`Points: ${others[0].points}`}
+                    </div>
+                  )
+                }
               </div>
             </div>
           )}
@@ -108,9 +110,7 @@ function Game(props) {
           <div className="player-board-info">
             <div className="player-buttons-container">
               <button
-                className={`player-button-leave ${
-                  playerID !== leader || gameIsActive ? 'round-bottom-right' : ''
-                }`}
+                className={`player-button-leave ${playerID !== leader || gameIsActive ? 'round-bottom-right' : ''}`}
                 type="submit"
                 onClick={() => {
                   document.removeEventListener('keydown', handleKeyDown, true);
