@@ -92,7 +92,5 @@ module.exports = class Player {
       default:
         break;
     }
-    console.log("We just destroyed " + rows + " rows");
-    console.log("The player has " + this.points + " points");
   }
 };

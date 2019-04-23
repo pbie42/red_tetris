@@ -166,6 +166,10 @@ function handleGamePieceMove(io, games, { gameID, playerID }, type) {
 }
 
 module.exports = {
+  findGamePlayerPiece,
   handleAddSolidRows,
   handleGamePieceMove,
+  handleMovePieceDown,
+  movePiece,
+  verifyGamePlayerPiece,
 };

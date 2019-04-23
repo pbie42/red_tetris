@@ -192,20 +192,4 @@ describe('Game Selection', () => {
     expect(wrapped.find('.game').length).toEqual(2);
     expect(wrapped.find('.game-button').length).toEqual(2);
   });
-
-  // it('should redirect if the games button is clicked', () => {
-  //   wrapped = mount(
-  //     <Root initialState={initialState}>
-  //       <MemoryRouter>
-  //         <Lobby props={gameCreate} />
-  //       </MemoryRouter>
-  //     </Root>,
-  //   );
-  //   wrapped
-  //     .find('.game-button')
-  //     .at(0)
-  //     .simulate('click');
-  //   wrapped.update();
-  //   expect(wrapped.find(Redirect).length).toEqual(1);
-  // });
 });
