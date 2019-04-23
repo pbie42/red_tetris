@@ -1,10 +1,10 @@
 $board-height: 85vh;
-$tetris-purple: #70757b;
-$tetris-green: #7cb563;
-$tetris-red: #c8865f;
-$tetris-blue: #868cba;
-$tetris-cyan: #c7c2d6;
-$tetris-yellow: #8d6a5a;
+$tetris-purple: #ac7ddc;
+$tetris-green: #3c7b4a;
+$tetris-red: #dc4d46;
+$tetris-blue: #3e4598;
+$tetris-cyan: #a0b3df;
+$tetris-yellow: #f7df80;
 
 @function widthOfBoard() {
   @return $board-height / 2;

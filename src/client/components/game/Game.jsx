@@ -16,6 +16,7 @@ function Game(props) {
     gameMovePieceRight,
     gameMovePieceLeft,
     gameMovePieceDown,
+    gameMovePieceDrop,
     gameMovePieceRotate,
     gameIsActive,
     gameLeave,
@@ -46,7 +47,7 @@ function Game(props) {
             gameMovePieceRight(gameID, playerID);
             break;
           case keys.SPACE_BAR:
-            console.log('SPACE_BAR');
+            gameMovePieceDrop(gameID, playerID);
             break;
           default:
             break;
@@ -172,6 +173,7 @@ Game.propTypes = {
   gameLeave: PropTypes.func.isRequired,
   gameSetListener: PropTypes.func.isRequired,
   gameMovePieceDown: PropTypes.func.isRequired,
+  gameMovePieceDrop: PropTypes.func.isRequired,
   gameMovePieceRight: PropTypes.func.isRequired,
   gameMovePieceRotate: PropTypes.func.isRequired,
   gameMovePieceLeft: PropTypes.func.isRequired,

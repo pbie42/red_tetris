@@ -24,8 +24,18 @@ function movePieceDown(board, piece) {
   return location;
 }
 
+function movePieceDrop(board, piece) {
+  const { letter, shape, location } = piece.getInfo();
+  let newY = location.y;
+  while (verifyPlacement({ x: location.x, y: newY }, shape, board, letter)) {
+    newY += 1;
+  }
+  return { ...location, y: newY - 1 };
+}
+
 module.exports = {
   movePieceDown,
+  movePieceDrop,
   movePieceLeft,
   movePieceRight,
 };

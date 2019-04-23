@@ -136,6 +136,16 @@ export function gameMovePieceDown(gameID, playerID) {
     channel: 'game',
   };
 }
+export function gameMovePieceDrop(gameID, playerID) {
+  return {
+    type: types.GAME_MOVE_PIECE_DROP,
+    payload: {
+      gameID,
+      playerID,
+    },
+    channel: 'game',
+  };
+}
 export function gameMovePieceRotate(gameID, playerID) {
   return {
     type: types.GAME_MOVE_PIECE_ROTATE,

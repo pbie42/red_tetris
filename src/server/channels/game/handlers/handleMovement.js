@@ -1,4 +1,9 @@
-const { movePieceDown, movePieceLeft, movePieceRight } = require('../movement/movement');
+const {
+  movePieceDown,
+  movePieceDrop,
+  movePieceLeft,
+  movePieceRight,
+} = require('../movement/movement');
 const { addSolidRows, checkBoardForFullRows, removeFullRows } = require('../movement/utils');
 const { verifyNotInSolid, verifyPlacement, verifyRow } = require('../movement/verify');
 const { rotatePiece } = require('../movement/rotation');
@@ -109,6 +114,26 @@ function handleMovePieceDown(io, games, gameID, playerID) {
   return games;
 }
 
+function handleMovePieceDrop(io, games, gameID, playerID) {
+  const { game, player, piece } = findGamePlayerPiece(games, gameID, playerID);
+  if (!verifyGamePlayerPiece(io, game, player, piece)) return games;
+  const newPieceLocation = movePieceDrop(player.getBoard(), piece);
+  piece.setActivity(false);
+  piece.setLocation(newPieceLocation);
+  emitPieceNewLocation(io, game, player, piece);
+  const fullRows = checkBoardForFullRows(player.getDisplayBoard());
+  if (fullRows.length > 0) {
+    const cleanedBoard = removeFullRows(player.getDisplayBoard(), fullRows);
+    player.updateDisplayBoard(cleanedBoard);
+    player.addPoints(fullRows.length);
+    const rowsToAdd = fullRows.length - 1;
+    if (rowsToAdd > 0) handleAddSolidRows(game, playerID, rowsToAdd);
+  }
+  setNextPiece(io, game, player);
+  gamePlayersUpdateEmit(io, game);
+  return games;
+}
+
 function handleRotatePiece(io, games, gameID, playerID) {
   const { game, player, piece } = findGamePlayerPiece(games, gameID, playerID);
   if (!verifyGamePlayerPiece(io, game, player, piece)) return games;
@@ -130,6 +155,8 @@ function handleGamePieceMove(io, games, { gameID, playerID }, type) {
       return movePiece(io, games, gameID, playerID, movePieceLeft);
     case 'down':
       return handleMovePieceDown(io, games, gameID, playerID);
+    case 'drop':
+      return handleMovePieceDrop(io, games, gameID, playerID);
     case 'rotate':
       return handleRotatePiece(io, games, gameID, playerID);
     default:
