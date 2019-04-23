@@ -17,6 +17,7 @@ describe('The View', () => {
         games: [],
       },
       game: {
+        difficulty: 1,
         roomName: '',
       },
       player: {
@@ -42,6 +43,7 @@ describe('The View', () => {
         games: [],
       },
       game: {
+        difficulty: 1,
         roomName: '',
       },
       player: {
@@ -67,6 +69,7 @@ describe('The View', () => {
         games: [],
       },
       game: {
+        difficulty: 1,
         roomName: 'Fun',
       },
       player: {
@@ -95,6 +98,7 @@ describe('the input', () => {
       games: [],
     },
     game: {
+      difficulty: 1,
       roomName: '',
     },
     player: {
@@ -155,16 +159,19 @@ describe('Game Selection', () => {
   const game1 = {
     roomName: 'Fun',
     id: '1',
+    difficulty: 1,
   };
   const game2 = {
     roomName: 'Funner',
     id: '2',
+    difficulty: 1,
   };
   const initialState = {
     lobby: {
       games: [game1, game2],
     },
     game: {
+      difficulty: 1,
       roomName: '',
     },
     player: {

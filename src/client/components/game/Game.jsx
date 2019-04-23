@@ -67,6 +67,7 @@ function Game(props) {
     playerRemove(username, playerID);
   });
   const others = players.filter(player => player.id !== playerID);
+  const player = players.find(p => p.id === playerID);
   if (!gameID) return <Redirect to="/lobby" />;
   return (
     <div className="game-page">
@@ -129,6 +130,9 @@ function Game(props) {
                   Start Game
                 </button>
               )}
+            </div>
+            <div className="player-info-container">
+              <div className="player-points">{`Points: ${player.points}`}</div>
             </div>
           </div>
           <div className="player-board-background">

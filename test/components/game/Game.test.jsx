@@ -20,6 +20,7 @@ xit('has one h1 if url is valid with player set and game set', () => {
     },
     game: {
       active: false,
+      difficulty: 1,
       listening: false,
       leader: '',
       roomName: 'Fun',
@@ -54,6 +55,7 @@ it('redirects to lobby if url param is invalid for a game but username is set', 
     },
     game: {
       active: false,
+      difficulty: 1,
       listening: false,
       leader: '',
       players: [],
@@ -88,6 +90,7 @@ it('redirects to login if url param is invalid for a game and no username is set
     },
     game: {
       active: false,
+      difficulty: 1,
       listening: false,
       leader: '',
       players: [],
@@ -122,6 +125,7 @@ it('redirects to setup with player and room name if url is invalid but no userna
     },
     game: {
       active: false,
+      difficulty: 1,
       listening: false,
       leader: '',
       players: [],
@@ -146,7 +150,7 @@ it('redirects to setup with player and room name if url is invalid but no userna
   expect(wrapped.find(Redirect).length).toEqual(1);
   expect(wrapped.find(Redirect).prop('to')).toEqual({
     pathname: '/setup',
-    state: { player: 'Paul', game: 'testing' },
+    state: { player: 'Paul', game: 'testing', difficulty: 1 },
   });
 });
 
@@ -159,6 +163,7 @@ it('redirects to lobby if game id is not set', () => {
     },
     game: {
       active: false,
+      difficulty: 1,
       listening: false,
       leader: '',
       players: [],
