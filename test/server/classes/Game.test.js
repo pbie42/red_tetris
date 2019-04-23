@@ -60,6 +60,7 @@ describe('Game Class', () => {
         id: player.getId(),
         username: player.getUsername(),
         board: player.getDisplayBoard(),
+        points: player.points,
       },
     ]);
   });
