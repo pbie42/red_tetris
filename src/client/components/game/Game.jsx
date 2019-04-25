@@ -31,7 +31,7 @@ function Game(props) {
     queue,
   } = props;
 
-  if (!handleKeyDown && gameID && playerID) {
+  if (!handleKeyDown && gameID && playerID && players.findIndex(p => p.id === playerID) >= 0) {
     handleKeyDown = function keyDown(e) {
       if (!e.repeat && players.findIndex(p => p.id === playerID) >= 0) {
         switch (e.keyCode) {
@@ -57,7 +57,7 @@ function Game(props) {
     };
   }
 
-  if (!listening && gameID && playerID) {
+  if (!listening && gameID && playerID && players.findIndex(p => p.id === playerID) >= 0) {
     gameSetListener(true);
     document.addEventListener('keydown', handleKeyDown, true);
   }
@@ -69,7 +69,6 @@ function Game(props) {
     playerRemove(username, playerID);
   });
   const others = players.filter(player => player.id !== playerID);
-  console.log('others', others);
   const player = players.find(p => p.id === playerID);
   if (!gameID) return <Redirect to="/lobby" />;
   return (
