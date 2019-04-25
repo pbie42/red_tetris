@@ -19,6 +19,7 @@ xit('has one h1 if url is valid with player set and game set', () => {
       error: '',
     },
     game: {
+      queue: [],
       active: false,
       difficulty: 1,
       listening: false,
@@ -54,6 +55,7 @@ it('redirects to lobby if url param is invalid for a game but username is set', 
       error: '',
     },
     game: {
+      queue: [],
       active: false,
       difficulty: 1,
       listening: false,
@@ -89,6 +91,7 @@ it('redirects to login if url param is invalid for a game and no username is set
       error: '',
     },
     game: {
+      queue: [],
       active: false,
       difficulty: 1,
       listening: false,
@@ -124,6 +127,7 @@ it('redirects to setup with player and room name if url is invalid but no userna
       error: '',
     },
     game: {
+      queue: [],
       active: false,
       difficulty: 1,
       listening: false,
@@ -162,6 +166,7 @@ it('redirects to lobby if game id is not set', () => {
       error: '',
     },
     game: {
+      queue: [],
       active: false,
       difficulty: 1,
       listening: false,
