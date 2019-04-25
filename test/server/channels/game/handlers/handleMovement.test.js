@@ -69,7 +69,7 @@ describe('handleMovement', () => {
 
     it('should return true if game player piece exist, game and player are active, and piece is not in solid area', () => {
       player2.setActivity(true);
-      const result = verifyGamePlayerPiece(mockIO, games[0], player2, player2.getPiece());
+      const result = verifyGamePlayerPiece(mockIO, games, games[0], player2, player2.getPiece());
       expect(result).toBeTruthy();
     });
   });
