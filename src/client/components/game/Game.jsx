@@ -28,11 +28,12 @@ function Game(props) {
     playerRemove,
     players,
     username,
+    queue,
   } = props;
 
   if (!handleKeyDown && gameID && playerID) {
     handleKeyDown = function keyDown(e) {
-      if (!e.repeat) {
+      if (!e.repeat && players.findIndex(p => p.id === playerID) >= 0) {
         switch (e.keyCode) {
           case keys.ARROW_UP:
             gameMovePieceRotate(gameID, playerID);
@@ -68,6 +69,7 @@ function Game(props) {
     playerRemove(username, playerID);
   });
   const others = players.filter(player => player.id !== playerID);
+  console.log('others', others);
   const player = players.find(p => p.id === playerID);
   if (!gameID) return <Redirect to="/lobby" />;
   return (
@@ -105,6 +107,19 @@ function Game(props) {
                 </div>
               </div>
               {Board({ board: others[2].board, type: 'other' })}
+              <div className="other-leader">
+                {others[2].id === leader
+                  ? (
+                    <div>
+                      {`Leader Points: ${others[2].points}`}
+                    </div>
+                  ) : (
+                    <div>
+                      {`Points: ${others[2].points}`}
+                    </div>
+                  )
+                }
+              </div>
             </div>
           )}
         </div>
@@ -133,11 +148,15 @@ function Game(props) {
               )}
             </div>
             <div className="player-info-container">
-              <div className="player-points">{`Points: ${player.points}`}</div>
+              <div className="player-points">{player ? `Points: ${player.points}` : `You are in position ${queue.findIndex(q => q.id === playerID) + 1} of the queue`}</div>
             </div>
           </div>
           <div className="player-board-background">
-            {Board({ board: players.find(p => p.id === playerID).board, type: 'board' })}
+            {
+              players.findIndex(p => p.id === playerID) >= 0
+                ? Board({ board: players.find(p => p.id === playerID).board, type: 'board' })
+                : Board({ board: others[4].board, type: 'board' })
+            }
           </div>
         </div>
         <div className="boards-others">
@@ -149,6 +168,19 @@ function Game(props) {
                 </div>
               </div>
               {Board({ board: others[1].board, type: 'other' })}
+              <div className="other-leader">
+                {others[1].id === leader
+                  ? (
+                    <div>
+                      {`Leader Points: ${others[1].points}`}
+                    </div>
+                  ) : (
+                    <div>
+                      {`Points: ${others[1].points}`}
+                    </div>
+                  )
+                }
+              </div>
             </div>
           )}
           {others.length > 3 && (
@@ -159,6 +191,19 @@ function Game(props) {
                 </div>
               </div>
               {Board({ board: others[3].board, type: 'other' })}
+              <div className="other-leader">
+                {others[3].id === leader
+                  ? (
+                    <div>
+                      {`Leader Points: ${others[3].points}`}
+                    </div>
+                  ) : (
+                    <div>
+                      {`Points: ${others[3].points}`}
+                    </div>
+                  )
+                }
+              </div>
             </div>
           )}
         </div>
@@ -191,6 +236,15 @@ Game.propTypes = {
       ),
     }),
   ).isRequired,
+  queue: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      username: PropTypes.string,
+      board: PropTypes.arrayOf(
+        PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])),
+      ),
+    }),
+  ).isRequired,
   username: PropTypes.string.isRequired,
 };
 
@@ -203,6 +257,7 @@ function mapStateToProps(state) {
     playerID: state.player.id,
     players: state.game.players,
     username: state.player.username,
+    queue: state.game.queue,
   };
 }
 

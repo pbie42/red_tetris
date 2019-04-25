@@ -41,6 +41,7 @@ function setNextPiece(io, game, player) {
     if (game.getActivePlayers().length === 0) {
       game.endGame();
       gameSetActiveEmit(io, game);
+      // lobbyUpdateGamesEmit(io, games);
     }
   }
 }
