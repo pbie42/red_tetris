@@ -4,9 +4,9 @@ import * as actions from 'client/actions';
 
 const socket = io('http://localhost:7000');
 
-socket.on('connect', () => console.log('client connected'));
+// socket.on('connect', () => console.log('client connected'));
 
-socket.on('disconnect', () => console.log('disconnected from socket'));
+// socket.on('disconnect', () => console.log('disconnected from socket'));
 
 socket.emit('player', 'testing');
 

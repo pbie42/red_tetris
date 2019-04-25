@@ -49,10 +49,6 @@ function setNextPiece(io, games, game, player) {
 function findGamePlayerPiece(games, gameID, playerID) {
   const foundGame = games.find(game => game.getId() === gameID);
   const foundPlayer = foundGame.getPlayers().find(player => player.getId() === playerID);
-  if (!foundPlayer) {
-    console.log('playerID', playerID);
-    console.log('foundGame.getPlayers()', foundGame.getPlayers());
-  }
   const foundPiece = foundPlayer.getPiece();
   return { game: foundGame, player: foundPlayer, piece: foundPiece };
 }
