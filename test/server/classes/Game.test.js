@@ -57,6 +57,7 @@ describe('Game Class', () => {
   it('can return the players with only relevant information to the front', () => {
     expect(game.getPlayersFront()).toEqual([
       {
+        active: false,
         id: player.getId(),
         username: player.getUsername(),
         board: player.getDisplayBoard(),
