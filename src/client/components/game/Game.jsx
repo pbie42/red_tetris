@@ -6,6 +6,7 @@ import * as actions from 'client/actions';
 import * as keys from 'client/components/game/keyCodes';
 import checkURL from 'client/components/game/checkURL';
 import Board from 'client/components/game/Board';
+import OtherPlayer from 'client/components/game/OtherPlayer';
 import 'client/style/game/Game.scss';
 
 let handleKeyDown;
@@ -31,9 +32,11 @@ function Game(props) {
     queue,
   } = props;
 
-  if (!handleKeyDown && gameID && playerID && players.findIndex(p => p.id === playerID) >= 0) {
+  const playerIndex = players.findIndex(p => p.id === playerID) >= 0;
+
+  if (!handleKeyDown && gameID && playerID && playerIndex) {
     handleKeyDown = function keyDown(e) {
-      if (!e.repeat && players.findIndex(p => p.id === playerID) >= 0) {
+      if (!e.repeat && playerIndex) {
         switch (e.keyCode) {
           case keys.ARROW_UP:
             gameMovePieceRotate(gameID, playerID);
@@ -57,7 +60,7 @@ function Game(props) {
     };
   }
 
-  if (!listening && gameID && playerID && players.findIndex(p => p.id === playerID) >= 0) {
+  if (!listening && gameID && playerID && playerIndex) {
     gameSetListener(true);
     document.addEventListener('keydown', handleKeyDown, true);
   }
@@ -75,52 +78,8 @@ function Game(props) {
     <div className="game-page">
       <div id="boards-container">
         <div className="boards-others">
-          {others.length > 0 && (
-            <div className="other-container">
-              <div className="other-name">
-                <div>
-                  {others[0].username}
-                </div>
-              </div>
-              {Board({ board: others[0].board, type: 'other' })}
-              <div className="other-leader">
-                {others[0].id === leader
-                  ? (
-                    <div>
-                      {`Leader Points: ${others[0].points}`}
-                    </div>
-                  ) : (
-                    <div>
-                      {`Points: ${others[0].points}`}
-                    </div>
-                  )
-                }
-              </div>
-            </div>
-          )}
-          {others.length > 2 && (
-            <div className="other-container">
-              <div className="other-name">
-                <div>
-                  {others[2].username}
-                </div>
-              </div>
-              {Board({ board: others[2].board, type: 'other' })}
-              <div className="other-leader">
-                {others[2].id === leader
-                  ? (
-                    <div>
-                      {`Leader Points: ${others[2].points}`}
-                    </div>
-                  ) : (
-                    <div>
-                      {`Points: ${others[2].points}`}
-                    </div>
-                  )
-                }
-              </div>
-            </div>
-          )}
+          {others.length > 0 && (OtherPlayer({ player: others[0], leader }))}
+          {others.length > 2 && (OtherPlayer({ player: others[2], leader }))}
         </div>
         <div className="player-board-container">
           <div className="player-board-info">
@@ -152,59 +111,15 @@ function Game(props) {
           </div>
           <div className="player-board-background">
             {
-              players.findIndex(p => p.id === playerID) >= 0
+              playerIndex
                 ? Board({ board: players.find(p => p.id === playerID).board, type: 'board' })
                 : Board({ board: others[4].board, type: 'board' })
             }
           </div>
         </div>
         <div className="boards-others">
-          {others.length > 1 && (
-            <div className="other-container">
-              <div className="other-name">
-                <div>
-                  {others[1].username}
-                </div>
-              </div>
-              {Board({ board: others[1].board, type: 'other' })}
-              <div className="other-leader">
-                {others[1].id === leader
-                  ? (
-                    <div>
-                      {`Leader Points: ${others[1].points}`}
-                    </div>
-                  ) : (
-                    <div>
-                      {`Points: ${others[1].points}`}
-                    </div>
-                  )
-                }
-              </div>
-            </div>
-          )}
-          {others.length > 3 && (
-            <div className="other-container">
-              <div className="other-name">
-                <div>
-                  {others[3].username}
-                </div>
-              </div>
-              {Board({ board: others[3].board, type: 'other' })}
-              <div className="other-leader">
-                {others[3].id === leader
-                  ? (
-                    <div>
-                      {`Leader Points: ${others[3].points}`}
-                    </div>
-                  ) : (
-                    <div>
-                      {`Points: ${others[3].points}`}
-                    </div>
-                  )
-                }
-              </div>
-            </div>
-          )}
+          {others.length > 1 && (OtherPlayer({ player: others[1], leader }))}
+          {others.length > 3 && (OtherPlayer({ player: others[3], leader }))}
         </div>
       </div>
     </div>
