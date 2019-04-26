@@ -52,10 +52,11 @@ module.exports = class Game {
 
   getPlayersFront() {
     return this.players.map(p => ({
-      id: p.getId(),
-      username: p.getUsername(),
+      active: p.getActivity(),
       board: p.getDisplayBoard(),
+      id: p.getId(),
       points: p.points,
+      username: p.getUsername(),
     }));
   }
 

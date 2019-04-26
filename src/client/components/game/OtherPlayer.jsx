@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Board from 'client/components/game/Board';
+import { handleUsername } from 'client/components/game/utils';
 
 function OtherPlayer({ player, leader }) {
   return (
     <div className="other-container">
       <div className="other-name">
-        <div>{player.username}</div>
+        <div>{handleUsername(player.username)}</div>
       </div>
       {Board({ board: player.board, type: 'other' })}
       <div className="other-leader">

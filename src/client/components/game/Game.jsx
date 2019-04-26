@@ -8,6 +8,7 @@ import checkURL from 'client/components/game/checkURL';
 import Board from 'client/components/game/Board';
 import OtherPlayer from 'client/components/game/OtherPlayer';
 import 'client/style/game/Game.scss';
+import { handleStatus, handleUsername } from 'client/components/game/utils';
 
 let handleKeyDown;
 
@@ -73,7 +74,15 @@ function Game(props) {
   });
   const others = players.filter(player => player.id !== playerID);
   const player = players.find(p => p.id === playerID);
+
   if (!gameID) return <Redirect to="/lobby" />;
+
+  let winner = '';
+  if (players.length > 1 && players.filter(p => p.active).length === 1) {
+    winner = players.find(p => p.active).id;
+  }
+
+  const status = handleStatus(player, others, winner, leader, gameIsActive);
   return (
     <div className="game-page">
       <div id="boards-container">
@@ -106,7 +115,15 @@ function Game(props) {
               )}
             </div>
             <div className="player-info-container">
-              <div className="player-points">{player ? `Points: ${player.points}` : `You are in position ${queue.findIndex(q => q.id === playerID) + 1} of the queue`}</div>
+              <div className="player-name-status-container">
+                <div className="player-name">
+                  { player ? handleUsername(player.username) : handleUsername(others[4].username) }
+                </div>
+                <div className="player-status">
+                  { status }
+                </div>
+              </div>
+              <div className="player-points">{player ? `Points: ${player.points}` : `You are in queue position ${queue.findIndex(q => q.id === playerID) + 1}`}</div>
             </div>
           </div>
           <div className="player-board-background">

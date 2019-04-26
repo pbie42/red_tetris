@@ -91,6 +91,21 @@ $lobby-font: 'Nova Square', cursive;
           justify-content: flex-end;
           padding-left: 1rem;
 
+          .player-name-status-container {
+            display: flex;
+            color: white;
+            font-size: 2rem;
+
+            .player-name {
+              flex: 1;
+              overflow: hidden;
+            }
+
+            .player-status {
+              flex: 1;
+            }
+          }
+
           .player-points {
             font-size: 1.5rem;
             color: white;
