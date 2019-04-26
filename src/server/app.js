@@ -1,4 +1,5 @@
-const io = require('socket.io')();
+const config = { pingTimeout: 60000, pingInterval: 2000 };
+const io = require('socket.io')(null, config);
 const { playerSocket } = require('./channels/player/playerSocket');
 const { gameSocket } = require('./channels/game/gameSocket');
 const { lobbySocket } = require('./channels/lobby/lobbySocket');
