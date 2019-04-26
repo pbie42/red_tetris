@@ -96,4 +96,17 @@ describe('Player Class', () => {
     player.updateDisplayBoard(updatedBoard);
     expect(player.getDisplayBoard()).toEqual(updatedBoard);
   });
+
+  it('can add points based on number of lines cleared', () => {
+    player.addPoints(1);
+    expect(player.points).toEqual(40);
+    player.addPoints(2);
+    expect(player.points).toEqual(140);
+    player.addPoints(3);
+    expect(player.points).toEqual(440);
+    player.addPoints(4);
+    expect(player.points).toEqual(1640);
+    player.addPoints(5);
+    expect(player.points).toEqual(1640);
+  });
 });
