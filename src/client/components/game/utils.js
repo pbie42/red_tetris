@@ -48,3 +48,14 @@ export function handleStatus(player, others, winner, leader, gameIsActive) {
   }
   return status;
 }
+
+export function handleStatusOther(player, winner, gameIsActive) {
+  console.log('handleStatusOther', player.active, winner, gameIsActive);
+  let status = '';
+  if (player && winner === player.id) {
+    status = 'is The Winner!';
+  } else if (player && gameIsActive && !player.active) {
+    status = 'is a Loser!';
+  }
+  return status;
+}

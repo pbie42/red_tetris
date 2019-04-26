@@ -87,8 +87,12 @@ function Game(props) {
     <div className="game-page">
       <div id="boards-container">
         <div className="boards-others">
-          {others.length > 0 && (OtherPlayer({ player: others[0], leader }))}
-          {others.length > 2 && (OtherPlayer({ player: others[2], leader }))}
+          {others.length > 0 && (OtherPlayer({
+            player: others[0], leader, winner, gameIsActive,
+          }))}
+          {others.length > 2 && (OtherPlayer({
+            player: others[2], leader, winner, gameIsActive,
+          }))}
         </div>
         <div className="player-board-container">
           <div className="player-board-info">
@@ -135,8 +139,12 @@ function Game(props) {
           </div>
         </div>
         <div className="boards-others">
-          {others.length > 1 && (OtherPlayer({ player: others[1], leader }))}
-          {others.length > 3 && (OtherPlayer({ player: others[3], leader }))}
+          {others.length > 1 && (OtherPlayer({
+            player: others[1], leader, winner, gameIsActive,
+          }))}
+          {others.length > 3 && (OtherPlayer({
+            player: others[3], leader, winner, gameIsActive,
+          }))}
         </div>
       </div>
     </div>
