@@ -38,6 +38,7 @@ function handleGameLeave(io, socket, games, payload) {
 function setupPlayer(player) {
   player.setActivity(true);
   player.resetCurrent();
+  player.resetPoints();
   player.updateDisplayBoard(newBoard());
   player.updateBoard(newBoard());
 }

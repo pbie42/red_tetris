@@ -34,6 +34,10 @@ module.exports = class Player {
     this.displayBoard = newBoard();
   }
 
+  resetPoints() {
+    this.points = 0;
+  }
+
   getInfo() {
     const { id, username, board } = this;
     return { id, username, board };
