@@ -15,6 +15,7 @@ it('handles actions of type GAME_SET', () => {
   const payload = {
     active: false,
     id: '1',
+    difficulty: 1,
     leader: player.getId(),
     players: [player],
     queue: [],
@@ -27,6 +28,7 @@ it('handles actions of type GAME_SET', () => {
   const newState = gameReducer(gameInitialState, action);
   expect(newState).toEqual({
     active: false,
+    difficulty: 1,
     error: '',
     id: '1',
     leader: '1',
@@ -48,6 +50,7 @@ it('handles actions of type GAME_SET_ACTIVE', () => {
   const newState = gameReducer(gameInitialState, action);
   expect(newState).toEqual({
     active: true,
+    difficulty: 1,
     error: '',
     listening: false,
     id: '',
@@ -66,6 +69,7 @@ it('handles actions of type GAME_RESET', () => {
   const newState = gameReducer(gameInitialState, action);
   expect(newState).toEqual({
     active: false,
+    difficulty: 1,
     error: '',
     listening: false,
     id: '',
@@ -86,6 +90,7 @@ it('handles actions of type GAME_PLAYERS_UPDATE', () => {
   const newState = gameReducer(gameInitialState, action);
   expect(newState).toEqual({
     active: false,
+    difficulty: 1,
     error: '',
     listening: false,
     id: '',
@@ -106,6 +111,7 @@ it('handles actions of type GAME_QUEUE_UPDATE', () => {
   const newState = gameReducer(gameInitialState, action);
   expect(newState).toEqual({
     active: false,
+    difficulty: 1,
     error: '',
     listening: false,
     id: '',
@@ -126,6 +132,7 @@ it('handles actions of type GAME_SET_NEW_LEADER', () => {
   const newState = gameReducer(gameInitialState, action);
   expect(newState).toEqual({
     active: false,
+    difficulty: 1,
     error: '',
     listening: false,
     id: '',
@@ -146,6 +153,7 @@ it('handles actions of type GAME_SET_LISTENING', () => {
   const newState = gameReducer(gameInitialState, action);
   expect(newState).toEqual({
     active: false,
+    difficulty: 1,
     error: '',
     listening: true,
     id: '',

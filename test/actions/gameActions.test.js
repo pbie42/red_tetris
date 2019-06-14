@@ -7,12 +7,15 @@ import {
   gameMovePieceRight,
   gameMovePieceLeft,
   gameMovePieceDown,
+  gameMovePieceDrop,
   gameMovePieceRotate,
   gamePlayersUpdate,
   gameQueueUpdate,
   gameReset,
   gameSet,
   gameSetActive,
+  gameSetDifficulty,
+  gameSetListener,
   gameSetNewLeader,
   gameStart,
 } from 'client/actions';
@@ -24,11 +27,14 @@ import {
   GAME_MOVE_PIECE_RIGHT,
   GAME_MOVE_PIECE_LEFT,
   GAME_MOVE_PIECE_DOWN,
+  GAME_MOVE_PIECE_DROP,
   GAME_MOVE_PIECE_ROTATE,
   GAME_PLAYERS_UPDATE,
   GAME_QUEUE_UPDATE,
   GAME_RESET,
   GAME_SET_ACTIVE,
+  GAME_SET_DIFFICULTY,
+  GAME_SET_LISTENING,
   GAME_SET_NEW_LEADER,
   GAME_SET,
   GAME_START,
@@ -261,5 +267,48 @@ describe('gameMovePieceRotate', () => {
   it('has the correct channel', () => {
     const action = gameMovePieceRotate(gameID, playerID);
     expect(action.channel).toEqual('game');
+  });
+});
+
+describe('gameMovePieceDrop', () => {
+  const gameID = 'game1';
+  const playerID = 'player1';
+  it('has the correct type', () => {
+    const action = gameMovePieceDrop(gameID, playerID);
+    expect(action.type).toEqual(GAME_MOVE_PIECE_DROP);
+  });
+
+  it('has the correct payload', () => {
+    const action = gameMovePieceDrop(gameID, playerID);
+    expect(action.payload).toEqual({ gameID, playerID });
+  });
+
+  it('has the correct channel', () => {
+    const action = gameMovePieceDrop(gameID, playerID);
+    expect(action.channel).toEqual('game');
+  });
+});
+
+describe('gameSetListener', () => {
+  it('has the correct type', () => {
+    const action = gameSetListener(true);
+    expect(action.type).toEqual(GAME_SET_LISTENING);
+  });
+
+  it('has the correct payload', () => {
+    const action = gameSetListener(true);
+    expect(action.payload).toEqual({ listening: true });
+  });
+});
+
+describe('gameSetDifficulty', () => {
+  it('has the correct type', () => {
+    const action = gameSetDifficulty(1);
+    expect(action.type).toEqual(GAME_SET_DIFFICULTY);
+  });
+
+  it('has the correct payload', () => {
+    const action = gameSetDifficulty(1);
+    expect(action.payload).toEqual({ difficulty: 1 });
   });
 });

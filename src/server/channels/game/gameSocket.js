@@ -26,6 +26,9 @@ function gameSocket(io, socket, games, players, { payload, type }) {
     case 'GAME_MOVE_PIECE_DOWN':
       updatedGames = handleGamePieceMove(io, games, payload, 'down');
       break;
+    case 'GAME_MOVE_PIECE_DROP':
+      updatedGames = handleGamePieceMove(io, games, payload, 'drop');
+      break;
     case 'GAME_MOVE_PIECE_ROTATE':
       updatedGames = handleGamePieceMove(io, games, payload, 'rotate');
       break;

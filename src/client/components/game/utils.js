@@ -25,3 +25,37 @@ export function verifyUrl(url) {
   if (url.indexOf('[') < 0 || url.indexOf(']') < 0 || url[url.length - 1] !== ']') return false;
   return true;
 }
+
+export function handleUsername(username) {
+  if (username.length > 17) {
+    return `${username.substring(0, 16)}...`;
+  }
+  return username;
+}
+
+export function handleStatus(player, others, winner, leader, gameIsActive) {
+  let status = '';
+  if (player && winner === player.id) {
+    status = 'is The Winner!';
+  } else if (player && gameIsActive && !player.active) {
+    status = 'is a Loser!';
+  } else if (!player) {
+    status = `Points: ${others[4].points}`;
+  } else if (player && !player.active && player.id === leader && !gameIsActive) {
+    status = 'start the game!';
+  } else if (player && !player.active && !gameIsActive) {
+    status = 'is waiting';
+  }
+  return status;
+}
+
+export function handleStatusOther(player, winner, gameIsActive) {
+  console.log('handleStatusOther', player.active, winner, gameIsActive);
+  let status = '';
+  if (player && winner === player.id) {
+    status = 'is The Winner!';
+  } else if (player && gameIsActive && !player.active) {
+    status = 'is a Loser!';
+  }
+  return status;
+}

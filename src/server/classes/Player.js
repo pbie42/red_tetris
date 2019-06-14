@@ -34,6 +34,10 @@ module.exports = class Player {
     this.displayBoard = newBoard();
   }
 
+  resetPoints() {
+    this.points = 0;
+  }
+
   getInfo() {
     const { id, username, board } = this;
     return { id, username, board };
@@ -92,7 +96,5 @@ module.exports = class Player {
       default:
         break;
     }
-    console.log("We just destroyed " + rows + " rows");
-    console.log("The player has " + this.points + " points");
   }
 };

@@ -25,6 +25,7 @@ $border-thickness: 0.2rem;
       rgba(48, 11, 3, 1) 90%
     );
     height: 75vh;
+    min-height: 76rem;
     width: 25vw;
     min-width: 37.5rem;
     max-width: 45rem;
@@ -86,25 +87,68 @@ $border-thickness: 0.2rem;
             color: #8f9cce;
           }
 
-          .lobby-button {
-            width: 75.5%;
+          .lobby-buttons-container {
             display: flex;
-            align-items: flex-end;
-            justify-content: flex-end;
+            width: 75.4%;
 
-            #game-submit {
+            button:focus {
+              outline: 0;
+            }
+
+            .game-difficulty {
               font-family: $lobby-font;
               background-color: rgba(0, 0, 0, 0.35);
-              padding: 0 1.5rem;
+              padding: 0 1rem;
               border: 0;
-              height: 2.8rem;
-              font-size: 1.8rem;
+              height: 2rem;
+              font-size: 1rem;
               color: white;
               border-bottom: 0.2rem solid white;
-              border-right: 0.2rem solid white;
               border-left: 0.2rem solid white;
-              border-bottom-left-radius: 1.5rem;
+              // border-bottom-left-radius: 1.5rem;
               cursor: pointer;
+            }
+
+            .game-difficulty:first-of-type {
+              border-left: 0.2rem solid white;
+              border-bottom-left-radius: 1rem;
+            }
+
+            .game-difficulty:last-of-type {
+              border-right: 0.2rem solid white;
+              border-bottom-right-radius: 1rem;
+            }
+
+            .easy {
+              color: #7cb563;
+            }
+            .medium {
+              color: #f9f33a;
+            }
+            .hard {
+              color: #dc4d46;
+            }
+
+            .lobby-button {
+              width: 75.5%;
+              display: flex;
+              align-items: flex-end;
+              justify-content: flex-end;
+
+              #game-submit {
+                font-family: $lobby-font;
+                background-color: rgba(0, 0, 0, 0.35);
+                padding: 0 1.5rem;
+                border: 0;
+                height: 2.8rem;
+                font-size: 1.8rem;
+                color: white;
+                border-bottom: 0.2rem solid white;
+                border-right: 0.2rem solid white;
+                border-left: 0.2rem solid white;
+                border-bottom-left-radius: 1.5rem;
+                cursor: pointer;
+              }
             }
           }
         }
@@ -195,7 +239,7 @@ $border-thickness: 0.2rem;
 
                 h3 {
                   font-family: $lobby-font;
-                  color: #f9f33a;
+                  color: #f8b72b;
                   margin: 0;
                 }
               }
@@ -207,11 +251,31 @@ $border-thickness: 0.2rem;
 
               .lobby-status-container {
                 flex: 1;
+                display: flex;
+                justify-content: space-around;
+                flex-flow: column;
+
+                .lobby-game-difficulty {
+                  color: white;
+                  padding-right: 0.6rem;
+                }
 
                 .lobby-game-status {
-                  color: #7cb563;
                   font-family: $lobby-font;
-                  font-size: 1.6rem;
+                  font-size: 1.3rem;
+                  display: flex;
+                }
+
+                .session {
+                  color: #7cb563;
+                }
+
+                .pending {
+                  color: #f9f33a;
+                }
+
+                .hard {
+                  color: #dc4d46;
                 }
               }
 
@@ -222,6 +286,7 @@ $border-thickness: 0.2rem;
 
                 .lobby-join-button {
                   width: 69%;
+                  height: 79%;
                   border: 0;
                   color: white;
                   background-color: transparent;

@@ -6,7 +6,9 @@ import * as actions from 'client/actions';
 import * as keys from 'client/components/game/keyCodes';
 import checkURL from 'client/components/game/checkURL';
 import Board from 'client/components/game/Board';
+import OtherPlayer from 'client/components/game/OtherPlayer';
 import 'client/style/game/Game.scss';
+import { handleStatus, handleUsername } from 'client/components/game/utils';
 
 let handleKeyDown;
 
@@ -16,6 +18,7 @@ function Game(props) {
     gameMovePieceRight,
     gameMovePieceLeft,
     gameMovePieceDown,
+    gameMovePieceDrop,
     gameMovePieceRotate,
     gameIsActive,
     gameLeave,
@@ -27,11 +30,14 @@ function Game(props) {
     playerRemove,
     players,
     username,
+    queue,
   } = props;
 
-  if (!handleKeyDown && gameID && playerID) {
+  const playerIndex = players.findIndex(p => p.id === playerID) >= 0;
+
+  if (!handleKeyDown && gameID && playerID && playerIndex) {
     handleKeyDown = function keyDown(e) {
-      if (!e.repeat) {
+      if (!e.repeat && playerIndex) {
         switch (e.keyCode) {
           case keys.ARROW_UP:
             gameMovePieceRotate(gameID, playerID);
@@ -46,7 +52,7 @@ function Game(props) {
             gameMovePieceRight(gameID, playerID);
             break;
           case keys.SPACE_BAR:
-            console.log('SPACE_BAR');
+            gameMovePieceDrop(gameID, playerID);
             break;
           default:
             break;
@@ -55,7 +61,7 @@ function Game(props) {
     };
   }
 
-  if (!listening && gameID && playerID) {
+  if (!listening && gameID && playerID && playerIndex) {
     gameSetListener(true);
     document.addEventListener('keydown', handleKeyDown, true);
   }
@@ -67,44 +73,26 @@ function Game(props) {
     playerRemove(username, playerID);
   });
   const others = players.filter(player => player.id !== playerID);
+  const player = players.find(p => p.id === playerID);
+
   if (!gameID) return <Redirect to="/lobby" />;
+
+  let winner = '';
+  if (players.length > 1 && players.filter(p => p.active).length === 1) {
+    winner = players.find(p => p.active).id;
+  }
+
+  const status = handleStatus(player, others, winner, leader, gameIsActive);
   return (
     <div className="game-page">
       <div id="boards-container">
         <div className="boards-others">
-          {others.length > 0 && (
-            <div className="other-container">
-              <div className="other-name">
-                <div>
-                  {others[0].username}
-                </div>
-              </div>
-              {Board({ board: others[0].board, type: 'other' })}
-              <div className="other-leader">
-                {others[0].id === leader
-                  ? (
-                    <div>
-                      {`Leader Points: ${others[0].points}`}
-                    </div>
-                  ) : (
-                    <div>
-                      {`Points: ${others[0].points}`}
-                    </div>
-                  )
-                }
-              </div>
-            </div>
-          )}
-          {others.length > 2 && (
-            <div className="other-container">
-              <div className="other-name">
-                <div>
-                  {others[2].username}
-                </div>
-              </div>
-              {Board({ board: others[2].board, type: 'other' })}
-            </div>
-          )}
+          {others.length > 0 && (OtherPlayer({
+            player: others[0], leader, winner, gameIsActive,
+          }))}
+          {others.length > 2 && (OtherPlayer({
+            player: others[2], leader, winner, gameIsActive,
+          }))}
         </div>
         <div className="player-board-container">
           <div className="player-board-info">
@@ -130,32 +118,33 @@ function Game(props) {
                 </button>
               )}
             </div>
+            <div className="player-info-container">
+              <div className="player-name-status-container">
+                <div className="player-name">
+                  { player ? handleUsername(player.username) : handleUsername(others[4].username) }
+                </div>
+                <div className="player-status">
+                  { status }
+                </div>
+              </div>
+              <div className="player-points">{player ? `Points: ${player.points}` : `You are in queue position ${queue.findIndex(q => q.id === playerID) + 1}`}</div>
+            </div>
           </div>
           <div className="player-board-background">
-            {Board({ board: players.find(p => p.id === playerID).board, type: 'board' })}
+            {
+              playerIndex
+                ? Board({ board: players.find(p => p.id === playerID).board, type: 'board' })
+                : Board({ board: others[4].board, type: 'board' })
+            }
           </div>
         </div>
         <div className="boards-others">
-          {others.length > 1 && (
-            <div className="other-container">
-              <div className="other-name">
-                <div>
-                  {others[1].username}
-                </div>
-              </div>
-              {Board({ board: others[1].board, type: 'other' })}
-            </div>
-          )}
-          {others.length > 3 && (
-            <div className="other-container">
-              <div className="other-name">
-                <div>
-                  {others[3].username}
-                </div>
-              </div>
-              {Board({ board: others[3].board, type: 'other' })}
-            </div>
-          )}
+          {others.length > 1 && (OtherPlayer({
+            player: others[1], leader, winner, gameIsActive,
+          }))}
+          {others.length > 3 && (OtherPlayer({
+            player: others[3], leader, winner, gameIsActive,
+          }))}
         </div>
       </div>
     </div>
@@ -168,6 +157,7 @@ Game.propTypes = {
   gameLeave: PropTypes.func.isRequired,
   gameSetListener: PropTypes.func.isRequired,
   gameMovePieceDown: PropTypes.func.isRequired,
+  gameMovePieceDrop: PropTypes.func.isRequired,
   gameMovePieceRight: PropTypes.func.isRequired,
   gameMovePieceRotate: PropTypes.func.isRequired,
   gameMovePieceLeft: PropTypes.func.isRequired,
@@ -177,6 +167,15 @@ Game.propTypes = {
   playerID: PropTypes.string.isRequired,
   playerRemove: PropTypes.func.isRequired,
   players: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      username: PropTypes.string,
+      board: PropTypes.arrayOf(
+        PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])),
+      ),
+    }),
+  ).isRequired,
+  queue: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
       username: PropTypes.string,
@@ -197,6 +196,7 @@ function mapStateToProps(state) {
     playerID: state.player.id,
     players: state.game.players,
     username: state.player.username,
+    queue: state.game.queue,
   };
 }
 

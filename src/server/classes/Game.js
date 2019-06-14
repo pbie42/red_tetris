@@ -1,7 +1,7 @@
 const pieceOrder = require('./utils/pieceOrder');
 
 module.exports = class Game {
-  constructor(id, roomName, players) {
+  constructor(id, roomName, players, difficulty) {
     this.id = id;
     this.roomName = roomName;
     this.players = players;
@@ -9,6 +9,7 @@ module.exports = class Game {
     this.pieces = pieceOrder();
     this.active = false;
     this.leader = this.setLeader();
+    this.difficulty = difficulty;
   }
 
   startGame() {
@@ -51,10 +52,11 @@ module.exports = class Game {
 
   getPlayersFront() {
     return this.players.map(p => ({
-      id: p.getId(),
-      username: p.getUsername(),
+      active: p.getActivity(),
       board: p.getDisplayBoard(),
+      id: p.getId(),
       points: p.points,
+      username: p.getUsername(),
     }));
   }
 
@@ -141,6 +143,7 @@ module.exports = class Game {
       players: this.getPlayersFront(),
       active: this.getActivity(),
       leader: this.getLeader(),
+      difficulty: this.difficulty,
     };
   }
 

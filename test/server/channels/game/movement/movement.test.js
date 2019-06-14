@@ -1,6 +1,7 @@
 import Piece from 'server/classes/Piece';
 import {
   movePieceDown,
+  movePieceDrop,
   movePieceLeft,
   movePieceRight,
 } from 'server/channels/game/movement/movement';
@@ -140,12 +141,6 @@ describe('movePieceDown', () => {
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     ];
     const location = pieceO.currentLocation();
     const newLocation = movePieceDown(board, pieceO);
@@ -159,5 +154,15 @@ describe('movePieceDown', () => {
     const location = pieceI.currentLocation();
     const newPosition = movePieceDown(board, pieceI);
     expect(newPosition).toEqual(location);
+  });
+});
+
+describe('movePieceDrop', () => {
+  const pieceO = new Piece('o', 0);
+  it('should return new location of the piece at the bottom of board', () => {
+    const board = newBoard();
+    const location = pieceO.currentLocation();
+    const newLocation = movePieceDrop(board, pieceO);
+    expect(newLocation).toEqual({ x: location.x, y: 18 });
   });
 });

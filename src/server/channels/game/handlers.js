@@ -38,6 +38,7 @@ function handleGameLeave(io, socket, games, payload) {
 function setupPlayer(player) {
   player.setActivity(true);
   player.resetCurrent();
+  player.resetPoints();
   player.updateDisplayBoard(newBoard());
   player.updateBoard(newBoard());
 }
@@ -52,7 +53,9 @@ function handleGameStart(io, socket, games, { gameID, playerID }) {
   gameSetActiveEmit(io, gameToStart);
   handleFirstPiece(io, gameToStart);
   lobbyUpdateGamesEmit(io, updatedGames);
-  gameToStart.setAutoDrop(setInterval(() => gamePieceMoveDownEmit(socket, gameToStart), 1000));
+  gameToStart.setAutoDrop(
+    setInterval(() => gamePieceMoveDownEmit(socket, gameToStart), 1000 * gameToStart.difficulty),
+  );
   return updatedGames;
 }
 
